@@ -1,0 +1,32 @@
+# 🔹 1. API 키 및 환경 변수 보호 (.env 파일 무시)
+.env
+config.py
+
+# 🔹 2. Python 캐시 파일 제거 (__pycache__)
+__pycache__/
+*.pyc
+*.pyo
+
+# 🔹 3. 데이터베이스 파일 방지
+*.sqlite3
+*.db
+
+# 🔹 4. FastAPI 관련 로그 & 실행 파일 제외
+*.log
+*.pid
+*.sock
+
+# 🔹 5. Virtual Environment (venv) 폴더 무시
+venv/
+env/
+
+# 🔹 6. Jupyter Notebook 체크포인트 제거
+.ipynb_checkpoints/
+
+# 🔹 7. IDE 및 OS 관련 불필요한 파일 무시
+.vscode/
+.idea/
+.DS_Store
+
+# 🔹 8. VectorDB, 캐시 데이터 제외
+backend/data/vector_db
