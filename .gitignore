@@ -1,32 +1,46 @@
-# 🔹 1. API 키 및 환경 변수 보호 (.env 파일 무시)
+# ⚡ Node.js (프론트엔드)
+node_modules/
 .env
-config.py
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+dist/
+build/
+.cache/
+.vscode/
+.DS_Store
 
-# 🔹 2. Python 캐시 파일 제거 (__pycache__)
+# ⚡ Python (백엔드)
 __pycache__/
 *.pyc
 *.pyo
-
-# 🔹 3. 데이터베이스 파일 방지
+*.pyd
+.env
 *.sqlite3
-*.db
-
-# 🔹 4. FastAPI 관련 로그 & 실행 파일 제외
-*.log
-*.pid
-*.sock
-
-# 🔹 5. Virtual Environment (venv) 폴더 무시
+instance/
+db.sqlite3
 venv/
-env/
-
-# 🔹 6. Jupyter Notebook 체크포인트 제거
-.ipynb_checkpoints/
-
-# 🔹 7. IDE 및 OS 관련 불필요한 파일 무시
-.vscode/
+virtualenv/
+*.egg-info/
+logs/
+*.log
 .idea/
+.vscode/
 .DS_Store
 
-# 🔹 8. VectorDB, 캐시 데이터 제외
-backend/data/vector_db
+# ⚡ 환경 변수 및 인증 관련
+.env.local
+.env.production
+.env.development
+config.json
+secrets.json
+
+# ⚡ React 빌드 관련
+build/
+public/*.cache
+coverage/
+
+# ⚡ Jupyter Notebook (만약 사용하는 경우)
+.ipynb_checkpoints/
