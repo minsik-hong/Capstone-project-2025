@@ -1,63 +1,67 @@
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000'; // 백엔드 API 기본 URL 설정
+const API_URL = "http://localhost:8000";  // 백엔드 FastAPI 서버 주소
 
-// 챗봇 응답 받기
-export const fetchChatResponse = async (message) => {
+const api = axios.create({
+  baseURL: API_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+
+// 회원가입 API
+export const registerUser = async (email, password) => {
   try {
-    // 백엔드의 /chat 엔드포인트로 메시지를 전송하여 응답 받기
-    const response = await axios.post(`${API_URL}/chat`, { message });
-    return response.data.reply; // 응답 데이터에서 봇의 답변 반환
+    const response = await api.post("/users/register", {
+      email,
+      password,
+    });
+    return response.data;  // 성공적인 응답
   } catch (error) {
-    console.error('Chatbot API error:', error); // 에러 로그 출력
-    return 'Sorry, something went wrong.'; // 에러 발생 시 기본 메시지 반환
+    console.error("회원가입 실패:", error);
+    throw error;
   }
 };
 
-// 뉴스 가져오기
-export const fetchNews = async () => {
+// 로그인 API
+export const loginUser = async (email, password) => {
   try {
-    // 백엔드의 /news 엔드포인트에서 뉴스 데이터 가져오기
-    const response = await axios.get(`${API_URL}/news`);
-    return response.data.articles; // 응답 데이터에서 뉴스 기사 배열 반환
+    const response = await api.post("/users/login", {
+      username: email,
+      password,
+    });
+    const { access_token } = response.data;
+    // 로그인 성공 시 JWT 토큰을 로컬 스토리지에 저장
+    localStorage.setItem("token", access_token);
+    return response.data;
   } catch (error) {
-    console.error('News API error:', error); // 에러 로그 출력
-    return []; // 에러 발생 시 빈 배열 반환
+    console.error("로그인 실패:", error);
+    throw error;
+  }
+};
+// ../services/api.js
+
+export const fetchChatResponse = async (userMessage) => {
+  try {
+    const response = await fetch('http://localhost:8000/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ message: userMessage }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch chat response');
+    }
+
+    const data = await response.json();
+    return data.response;  // 챗봇의 응답을 반환
+  } catch (error) {
+    console.error("Error fetching chat response:", error);
+    return 'Error: Unable to fetch response'; // 에러 발생 시 기본 응답
   }
 };
 
-// 퀴즈 데이터 가져오기
-export const fetchQuiz = async () => {
-  try {
-    // 백엔드의 /quiz 엔드포인트에서 퀴즈 데이터 가져오기
-    const response = await axios.get(`${API_URL}/quiz`);
-    return response.data; // 응답 데이터 반환
-  } catch (error) {
-    console.error('Quiz API error:', error); // 에러 로그 출력
-    return []; // 에러 발생 시 빈 배열 반환
-  }
-};
-
-// 사용자 로그인
-export const loginUser = async (username, password) => {
-  try {
-    // 백엔드의 /users/login 엔드포인트로 로그인 요청
-    const response = await axios.post(`${API_URL}/users/login`, { username, password });
-    return response.data; // 응답 데이터 반환
-  } catch (error) {
-    console.error('Login API error:', error); // 에러 로그 출력
-    return { success: false }; // 에러 발생 시 실패 상태 반환
-  }
-};
-
-// 사용자 회원가입
-export const registerUser = async (userData) => {
-  try {
-    // 백엔드의 /users/register 엔드포인트로 회원가입 요청
-    const response = await axios.post(`${API_URL}/users/register`, userData);
-    return response.data; // 응답 데이터 반환
-  } catch (error) {
-    console.error('Register API error:', error); // 에러 로그 출력
-    return { success: false }; // 에러 발생 시 실패 상태 반환
-  }
-};
+// 기존 함수들 (로그인, 회원가입 등)
+// (중복된 함수 선언 제거)

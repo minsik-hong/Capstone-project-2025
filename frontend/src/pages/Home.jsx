@@ -1,15 +1,35 @@
-import React from 'react';
-import { Link } from 'react-router-dom'; // 페이지 간 이동을 위한 Link 컴포넌트 가져오기
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";  // 페이지 이동을 위해
 
-// Home 컴포넌트 정의
-const Home = () => (
-  <div>
-    <h1>Welcome to the News Learning Platform</h1> {/* 플랫폼의 메인 제목 */}
-    <nav> {/* 내비게이션 영역 */}
-      <Link to="/news">News Learning</Link> {/* 뉴스 학습 페이지로 이동하는 링크 */}
-      <Link to="/chatbot">AI Chatbot</Link> {/* AI 챗봇 페이지로 이동하는 링크 */}
-    </nav>
-  </div>
-);
+const Home = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
-export default Home; // Home 컴포넌트 내보내기
+  useEffect(() => {
+    // 로컬 스토리지에서 JWT 토큰 확인
+    const token = localStorage.getItem("token");
+    if (!token) {
+      // 토큰이 없으면 로그인 페이지로 리다이렉트
+      navigate("/login");
+    } else {
+      // 토큰이 있으면 사용자 정보 요청 (예: /me 엔드포인트)
+      setUser({ email: "user@example.com" });  // 예시로 사용자 이메일을 표시
+    }
+  }, [navigate]);
+
+  return (
+    <div>
+      <h2>홈 페이지</h2>
+      {user ? (
+        <div>
+          <p>환영합니다, {user.email}</p>
+          <button onClick={() => { localStorage.removeItem("token"); navigate("/login"); }}>로그아웃</button>
+        </div>
+      ) : (
+        <p>로그인 중...</p>
+      )}
+    </div>
+  );
+};
+
+export default Home;

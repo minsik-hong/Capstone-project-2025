@@ -1,35 +1,38 @@
-from fastapi import APIRouter, Request, Form
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from pydantic import BaseModel
-from fastapi import Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from db import get_db
+from services.auth import hash_password, verify_password
+from services.user_service import create_user, create_access_token
+from ..database.user_infoDB import SessionLocal
+from schemas.user import UserCreate
 from models.user import User
-from schemas.user import UserCreate, UserLogin
+from datetime import timedelta
 
 router = APIRouter()
-templates = Jinja2Templates(directory="backend/templates")
 
-@router.get("/", response_class=HTMLResponse)
-def read_users(request: Request):
-    return templates.TemplateResponse("login.html", {"request": request})
+# 데이터베이스 세션 생성
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
-@router.get("/signup", response_class=HTMLResponse)
-def get_signup(request: Request):
-    return templates.TemplateResponse("signup.html", {"request": request})
-
-@router.post("/signup")
-def post_signup(request: Request, username: str = Form(...), email: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
-    user = User(username=username, email=email, hashed_password=password)
-    db.add(user)
-    db.commit()
-    db.refresh(user)
-    return templates.TemplateResponse("login.html", {"request": request, "message": "회원가입이 완료되었습니다."})
+@router.post("/register")
+def register(user: UserCreate, db: Session = Depends(get_db)):
+    # 비밀번호 해싱
+    hashed_password = hash_password(user.password)
+    db_user = create_user(db, email=user.email, password=hashed_password, full_name=user.full_name)
+    if db_user:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    return {"message": "User created successfully!"}
 
 @router.post("/login")
-def post_login(request: Request, username: str = Form(...), password: str = Form(...), db: Session = Depends(get_db)):
-    user = db.query(User).filter(User.username == username).first()
-    if user and user.hashed_password == password:
-        return templates.TemplateResponse("login.html", {"request": request, "message": "로그인 성공!"})
-    return templates.TemplateResponse("login.html", {"request": request, "error": "아이디 또는 비밀번호가 잘못되었습니다."})
+def login(user: UserCreate, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.email == user.email).first()
+    if not db_user or not verify_password(user.password, db_user.hashed_password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+    
+    access_token_expires = timedelta(minutes=30)
+    access_token = create_access_token(data={"sub": db_user.email}, expires_delta=access_token_expires)
+    
+    return {"access_token": access_token, "token_type": "bearer"}
