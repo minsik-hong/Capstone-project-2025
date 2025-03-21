@@ -42,11 +42,26 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     return {"message": "User created successfully"}
 
 # 로그인 API
-@router.post("/users/login")
-def login(user: UserLogin, db: Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.username == user.username).first()
-    if not db_user or not verify_password(user.password, db_user.password):
-        raise HTTPException(status_code=400, detail="Invalid username or password")
+# @router.post("/users/login")
+# def login(user: UserLogin, db: Session = Depends(get_db)):
+#     db_user = db.query(User).filter(User.username == user.username).first()
+#     if not db_user or not verify_password(user.password, db_user.password):
+#         raise HTTPException(status_code=400, detail="Invalid username or password")
 
-    access_token = create_access_token({"sub": db_user.username}, expires_delta=timedelta(minutes=30))
-    return {"access_token": access_token, "token_type": "bearer"}
+#     access_token = create_access_token({"sub": db_user.username}, expires_delta=timedelta(minutes=30))
+#     return {"access_token": access_token, "token_type": "bearer"}
+
+#임시 로그인 처리 API
+@router.post("/users/login")
+def login(user: UserLogin):
+    
+    print("Received login:", user.username, user.password)
+    # 예를 들어, "testuser"와 "1234"가 입력되면 로그인 성공
+    if user.username == "testuser" and user.password == "1234":
+        access_token = create_access_token(
+            {"sub": user.username},
+            expires_delta=timedelta(minutes=30)
+        )
+        return {"access_token": access_token, "token_type": "bearer"}
+    else:
+        raise HTTPException(status_code=400, detail="Invalid username or password")

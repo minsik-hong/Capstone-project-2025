@@ -1,36 +1,18 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import LoginUI from '../components/LoginUI';
+import './LoginPage.css';
 
 const LoginPage = ({ setIsAuthenticated }) => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-
-  const handleLogin = () => {
-    if (id === 'test@example.com' && password === 'password') {
-      setIsAuthenticated(true);
-      navigate('/');
-    } else {
-      alert('Invalid id or password');
-    }
-  };
-
   return (
-    <div>
-      <h2>Login</h2>
-      <input
-        type="id"
-        value={id}
-        onChange={(e) => setId(e.target.value)}
-        placeholder="id"
-      />
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        placeholder="Password"
-      />
-      <button onClick={handleLogin}>Login</button>
+    <div className="login-page">
+      <div className="login-left">
+        <h1>Welcome!</h1>
+        <p>Here is 어쩌구저쩌구. 배경에 이미지를 넣을지</p>
+      </div>
+      
+      <div className="login-right">
+        <LoginUI setIsAuthenticated={setIsAuthenticated} />
+      </div>
     </div>
   );
 };
