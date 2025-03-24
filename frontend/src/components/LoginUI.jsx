@@ -3,7 +3,7 @@ import useLogin from '../hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
 import './LoginUI.css';
 
-const LoginUI = ({ setIsAuthenticated }) => {
+const LoginUI = ({ setIsAuthenticated, setIsSignup }) => {
   // 아이디/비밀번호 상태
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -56,9 +56,9 @@ const LoginUI = ({ setIsAuthenticated }) => {
       {/* 로그인 버튼 */}
       <button onClick={onLoginClick}>Login</button>
 
-      {/* 회원가입 링크 (임시) */}
+      {/* 회원가입 링크 */}
       <div className="signup-link">
-        <a href="#signup">Sign up</a>
+        <a onClick={() => setIsSignup(true)}>Sign up</a>
       </div>
     </div>
   );
