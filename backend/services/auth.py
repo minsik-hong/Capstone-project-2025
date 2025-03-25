@@ -9,7 +9,6 @@ from db.models.user import User
 from db.schemas.user import UserCreate, UserLogin
 
 
-
 # JWT 토큰 설정
 SECRET_KEY = "your_secret_key" # 보안상 환경 변수로 저장 추천
 ALGORITHM = "HS256"
