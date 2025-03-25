@@ -1,6 +1,10 @@
 from fastapi import FastAPI
-from routes import users
+from api import users
 from fastapi.middleware.cors import CORSMiddleware
+from db import Base, engine
+
+# 새로운 DB 파일(users.db)에 테이블 생성
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
