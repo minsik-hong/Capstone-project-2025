@@ -4,7 +4,7 @@ import SignupUI from '../components/SignupUI';
 import './LoginPage.css';
 
 const LoginPage = ({ setIsAuthenticated }) => {
-  const [isSignup, setIsSignup] = useState(false); // signup 상태 추가
+  const [isSignup, setIsSignup] = useState(false);
 
   return (
     <div className="login-page">

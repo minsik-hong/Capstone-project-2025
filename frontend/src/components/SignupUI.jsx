@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import { registerUser } from '../services/api';
+import InputField from './common/InputField';
+import MessageDisplay from './common/MessageDisplay';
 import './LoginUI.css';
 
 const SignupUI = ({ setIsSignup }) => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false);
+  const [message, setMessage] = useState('');
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const onSignupClick = async () => {
     if (username.trim() && email.trim() && password.trim()) {
-      const result = await registerUser({ username, email, password });
-      if (result.success) {
-        setSuccess(true);
-        setError(null);
+      const response = await registerUser({ username, email, password });
+      if (response.success === false) {
+        setMessage(response.message);
+        setIsSuccess(false);
       } else {
-        setError(result.message);
+        setMessage('User created successfully');
+        setIsSuccess(true);
       }
     }
   };
@@ -24,38 +27,35 @@ const SignupUI = ({ setIsSignup }) => {
   return (
     <div className="login-container">
       <h2>Sign Up</h2>
-      {success ? (
-        <div>
-          <p>Signup successful!</p>
-          <a onClick={() => setIsSignup(false)}>Go to Login</a>
-        </div>
-      ) : (
-        <>
-          <input
-            type="text"
-            placeholder="Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          {error && <div className="login-error">{error}</div>}
-          <button onClick={onSignupClick}>Sign Up</button>
-          <div className="signup-link">
-            <a onClick={() => setIsSignup(false)}>Back to Login</a>
-          </div>
-        </>
-      )}
+
+      <InputField
+        type="text"
+        placeholder="Id"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+
+      <InputField
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+      />
+
+      <InputField
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <MessageDisplay message={message} isSuccess={isSuccess} />
+
+      <button onClick={onSignupClick}>Sign Up</button>
+
+      <div className="signup-link">
+        <a onClick={() => setIsSignup(false)}>Back to Login</a>
+      </div>
     </div>
   );
 };

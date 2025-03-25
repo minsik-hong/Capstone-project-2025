@@ -8,7 +8,6 @@ const useLogin = () => {
     try {
       const result = await loginUser(username, password);
       if (result.access_token) {
-        console.log('로그인 성공!', result);
         setError(null);
         return true;
       } else {
