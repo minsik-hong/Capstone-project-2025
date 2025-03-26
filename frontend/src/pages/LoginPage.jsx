@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import LoginUI from '../components/LoginUI';
+import SignupUI from '../components/SignupUI';
 import './LoginPage.css';
 
 const LoginPage = ({ setIsAuthenticated }) => {
+  const [isSignup, setIsSignup] = useState(false);
+
   return (
     <div className="login-page">
       <div className="login-left">
@@ -11,7 +14,11 @@ const LoginPage = ({ setIsAuthenticated }) => {
       </div>
       
       <div className="login-right">
-        <LoginUI setIsAuthenticated={setIsAuthenticated} />
+        {isSignup ? (
+          <SignupUI setIsSignup={setIsSignup} />
+        ) : (
+          <LoginUI setIsAuthenticated={setIsAuthenticated} setIsSignup={setIsSignup} />
+        )}
       </div>
     </div>
   );

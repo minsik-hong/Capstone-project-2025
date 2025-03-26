@@ -21,9 +21,15 @@ def get_db():
 # 회원가입 API
 @router.post("/users/register")
 def register(user: UserCreate, db: Session = Depends(get_db)): #get_db() 함수를 통해 DB 세션을 가져옴
-    db_user = db.query(User).filter(User.username == user.username).first() #DB에서 중복된 username 체크크
+    # DB에서 중복된 username 체크
+    db_user = db.query(User).filter(User.username == user.username).first() 
     if db_user:
         raise HTTPException(status_code=400, detail="Username already registered")
+    
+    # DB에서 중복된 email 체크 
+    db_email = db.query(User).filter(User.email == user.email).first()  
+    if db_email:
+        raise HTTPException(status_code=400, detail="Email already registered")
 
     hashed_password = hash_password(user.password)
     new_user = User(username=user.username, email=user.email, password=hashed_password)
@@ -33,7 +39,8 @@ def register(user: UserCreate, db: Session = Depends(get_db)): #get_db() 함수�
     db.commit()
     db.refresh(new_user)
 
-    return {"message": "User created successfully"}
+    # **회원가입 후 사용자 정보 반환 개선**
+    return {"message": "User created successfully", "user": {"username": new_user.username, "email": new_user.email}}
 
 #로그인 API
 @router.post("/users/login")

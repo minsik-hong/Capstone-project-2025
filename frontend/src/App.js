@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Home from './pages/Home';
 import ChatbotPage from './pages/ChatbotPage';
-import NewsPage from './pages/NewsPage';
 import LoginPage from './pages/LoginPage';
 
 const App = () => {
@@ -11,17 +9,15 @@ const App = () => {
   return (
     <Router basename="/">
       <Routes>
-      <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
-
-        {
-          isAuthenticated ? (
-            <>
-              <Route path="/" element={<Home />} />
-              <Route path="/chatbot" element={<ChatbotPage />} />
-              <Route path="/news" element={<NewsPage />} />
-            </>
-          ) : (<Route path="*" element={<Navigate to="/login" />} />)
-        }
+        <Route path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated} />} />
+        {isAuthenticated ? (
+          <>
+            <Route path="/chatbot" element={<ChatbotPage />} />
+            <Route path="*" element={<Navigate to="/chatbot" />} />
+          </>
+        ) : (
+          <Route path="*" element={<Navigate to="/login" />} />
+        )}
       </Routes>
     </Router>
   );

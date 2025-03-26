@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import useLogin from '../hooks/useLogin';
 import { useNavigate } from 'react-router-dom';
+import InputField from './common/InputField';
+import MessageDisplay from './common/MessageDisplay';
 import './LoginUI.css';
 
-const LoginUI = ({ setIsAuthenticated }) => {
+const LoginUI = ({ setIsAuthenticated, setIsSignup }) => {
   // 아이디/비밀번호 상태
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -32,17 +34,15 @@ const LoginUI = ({ setIsAuthenticated }) => {
     <div className="login-container">
       <h2>Login</h2>
 
-      {/* 아이디 입력 */}
-      <input
+      <InputField
         type="text"
-        placeholder="Username"
+        placeholder="Id"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
         onKeyDown={handleKeyDown}
       />
 
-      {/* 비밀번호 입력 */}
-      <input
+      <InputField
         type="password"
         placeholder="Password"
         value={password}
@@ -50,15 +50,12 @@ const LoginUI = ({ setIsAuthenticated }) => {
         onKeyDown={handleKeyDown}
       />
 
-      {/* 에러 메시지 표시 */}
-      {error && <div className="login-error">{error}</div>}
+      <MessageDisplay message={error} isSuccess={false} />
 
-      {/* 로그인 버튼 */}
       <button onClick={onLoginClick}>Login</button>
 
-      {/* 회원가입 링크 (임시) */}
       <div className="signup-link">
-        <a href="#signup">Sign up</a>
+        <a onClick={() => setIsSignup(true)}>Sign up</a>
       </div>
     </div>
   );
