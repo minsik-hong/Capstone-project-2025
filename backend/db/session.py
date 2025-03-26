@@ -1,7 +1,7 @@
 
 from sqlalchemy import create_engine # 데이터베이스 엔진 생성을 위한 모듈
 from sqlalchemy.orm import sessionmaker # 세션 및 베이스 클래스 생성 모듈
-from sqlalchemy.ext.declarative import declarative_base
+from db.base import Base
 
 DATABASE_URL = "sqlite:///./users.db"
 
@@ -10,9 +10,6 @@ engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
 
 # 세션 로컬 생성
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
-# Base 클래스는 테이블을 정의할 때 사용됨
-Base = declarative_base()
 
 # 데이터베이스 세션을 가져오는 함수
 def get_db():
