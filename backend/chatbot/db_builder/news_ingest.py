@@ -3,18 +3,30 @@ import json
 import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
-from datetime import datetime, timedelta
-from langchain.vectorstores import Chroma
+from datetime import datetime, timedelta, timezone
+from langchain_weaviate.vectorstores import WeaviateVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.schema import Document
+from weaviate import WeaviateClient
+from weaviate.connect import ConnectionParams
 
 load_dotenv()
 
-# ====================== 설정 ===========================
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
-VECTOR_DB_DIR = "data/vector_db"
 
-# ====================== 반복 뉴스 필터링 ===========================
+# ✅ Weaviate 연결 설정
+connection_params = ConnectionParams.from_params(
+    http_host="localhost",
+    http_port=8080,
+    http_secure=False,
+    grpc_host="localhost",
+    grpc_port=50051,
+    grpc_secure=False
+)
+client = WeaviateClient(connection_params=connection_params)
+client.connect()
+
+# ✅ 중복 뉴스 필터
 def is_repetitive_news(title: str, description: str = "") -> bool:
     title = title.strip().lower()
     repetitive_titles = [
@@ -36,7 +48,7 @@ def is_repetitive_news(title: str, description: str = "") -> bool:
             return True
     return False
 
-# ====================== 본문 스크래핑 ===========================
+# ✅ 기사 본문 스크래핑
 def scrape_full_content(url: str) -> str:
     try:
         response = requests.get(url)
@@ -48,16 +60,16 @@ def scrape_full_content(url: str) -> str:
         print(f"⚠️ 스크래핑 실패: {url} ({str(e)})")
     return None
 
-# ====================== 뉴스 수집 ===========================
+# ✅ 뉴스 수집
 def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
     url = "https://newsapi.org/v2/everything"
     all_results = []
     api_call_count = 0
 
-    start_dt = datetime.strptime(start_date, "%Y-%m-%d")
-    end_dt = datetime.strptime(end_date, "%Y-%m-%d")
+    start_dt = datetime.strptime(start_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
+    end_dt = datetime.strptime(end_date, "%Y-%m-%d").replace(tzinfo=timezone.utc)
     delta = timedelta(days=5)
-    cutoff_date = datetime.utcnow() - timedelta(days=30)
+    cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)
     if start_dt < cutoff_date:
         print(f"⚠️ 시작일 {start_date}은 무료 플랜 범위를 초과함. {cutoff_date.date()} 이후로 설정하세요.")
         return []
@@ -106,7 +118,7 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
                 "description": description,
                 "url": article.get("url"),
                 "source": article.get("source", {}).get("name", "Unknown"),
-                "publishedAt": article.get("publishedAt", datetime.utcnow().isoformat())
+                "publishedAt": article.get("publishedAt", datetime.now(timezone.utc).isoformat())
             })
         start_dt = to_dt
 
@@ -114,7 +126,7 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
     print(f"📰 최종 수집된 유효 기사 수: {len(all_results)}개")
     return all_results
 
-# ====================== 저장 + 벡터화 (LangChain) ===========================
+# ✅ 저장 및 벡터화
 def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
     save_dir = "data/news_articles"
     os.makedirs(save_dir, exist_ok=True)
@@ -137,7 +149,6 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
 
     print(f"💾 저장 완료: {filename} — 새 기사 {len(new_articles)}개 추가됨")
 
-    # ✅ 벡터화 (LangChain)
     print(f"⚙️ LangChain 벡터화 시작: {source_name}")
     embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
@@ -145,39 +156,85 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
         Document(
             page_content=article["content"],
             metadata={k: article[k] for k in article if k != "content"}
-        ) 
+        )
         for article in new_articles
-        if article.get("content", "").strip()  # ✅ 비어있는 content 제거
+        if article.get("content", "").strip()
     ]
 
-    vector_store = Chroma.from_documents(
+    vector_store = WeaviateVectorStore.from_documents(
         documents=docs,
         embedding=embedding_model,
-        persist_directory=os.path.join(VECTOR_DB_DIR, source_name)
+        client=client,
+        index_name=f"news_{source_name}".lower(),
+        text_key="text"
     )
-    vector_store.persist()
+
     print(f"✅ LangChain 벡터화 완료: {source_name}, 총 {len(new_articles)}개 추가")
 
-# ====================== 실행 ===========================
+# ✅ 저장된 기사 파일 불러오기 및 벡터화(api 호출 없이 기존 파일을 벡터로)
+def load_and_vectorize_from_file(source_name, start_date, end_date):
+    filepath = os.path.join("data/news_articles", f"{source_name}_{start_date}~{end_date}.json")
+    if not os.path.exists(filepath):
+        print(f"❌ 파일이 존재하지 않습니다: {filepath}")
+        return
+
+    with open(filepath, "r", encoding="utf-8") as f:
+        articles = json.load(f)
+
+    print(f"⚙️ LangChain 벡터화 시작: {source_name} ({len(articles)}개)")
+    embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+
+    docs = [
+        Document(
+            page_content=article["content"],
+            metadata={k: article[k] for k in article if k != "content"}
+        )
+        for article in articles
+        if article.get("content", "").strip()
+    ]
+
+    vector_store = WeaviateVectorStore.from_documents(
+        documents=docs,
+        embedding=embedding_model,
+        client=client,
+        index_name=f"news_{source_name}".lower(),
+        text_key="text"
+    )
+
+
+
+# ✅ 실행
 if __name__ == "__main__":
-    start_date = "2025-03-26"
+    start_date = "2025-03-06"
     end_date = "2025-03-27"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
         {"api_name": "cnn", "name": "cnn"}
     ]
 
+    # api 호출 벡터화 동시
+    # for source in sources:
+    #     print(f"\n🌐 {source['name'].upper()} 뉴스 수집 중...")
+    #     articles = fetch_news_from_to(
+    #         query="",
+    #         start_date=start_date,
+    #         end_date=end_date,
+    #         source=source["api_name"]
+    #     )
+    #     save_and_vectorize_langchain(
+    #         articles,
+    #         source_name=source["name"],
+    #         start_date=start_date,
+    #         end_date=end_date
+    #     )
+
+    # api 호출 없이 파일 벡터화
     for source in sources:
-        print(f"\n🌐 {source['name'].upper()} 뉴스 수집 중...")
-        articles = fetch_news_from_to(
-            query="",
-            start_date=start_date,
-            end_date=end_date,
-            source=source["api_name"]
-        )
-        save_and_vectorize_langchain(
-            articles,
+        print(f"\n🌐 {source['name'].upper()} 벡터화 실행 중...")
+        load_and_vectorize_from_file(
             source_name=source["name"],
             start_date=start_date,
             end_date=end_date
         )
+
+    client.close()
