@@ -24,13 +24,36 @@ export const loginUser = async (username, password) => {
   }
 };
 
-// 챗봇 응답 받기
+// // 챗봇 응답 받기
+// export const fetchChatResponse = async (message) => {
+//   try {
+//     const response = await axios.post(`${API_URL}/chat`, { message });
+//     return response.data.reply;
+//   } catch (error) {
+//     console.error('Chatbot API error:', error);
+//     return 'Sorry, something went wrong.';
+//   }
+// };
+
+// 챗봇 응답 임시 구현
 export const fetchChatResponse = async (message) => {
   try {
-    const response = await axios.post(`${API_URL}/chat`, { message });
-    return response.data.reply;
+    // ...existing code for actual API call (if needed)...
+    throw new Error("Backend is not connected"); // 임시로 오류 발생
   } catch (error) {
     console.error('Chatbot API error:', error);
-    return 'Sorry, something went wrong.';
+    return `Error: ${error.message || 'Something went wrong.'}`; // 오류 메시지 반환
   }
+};
+
+// 뉴스 요약 임시 구현
+// topic: 사용자가 입력한 주제, source: "CNN" 또는 "BBC"
+export const fetchNewsSummary = async (topic, source) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(
+        `News summary from ${source} about "${topic}" - Blah Blah.`
+      );
+    }, 800);
+  });
 };

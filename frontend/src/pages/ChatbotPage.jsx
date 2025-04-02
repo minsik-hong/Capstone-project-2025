@@ -4,7 +4,6 @@ import ChatbotUI from '../components/ChatbotUI'; // Chatbot UI 컴포넌트 가�
 // ChatbotPage 컴포넌트 정의
 const ChatbotPage = () => (
   <div>
-    <h2>AI Chatbot</h2> {/* 페이지 제목 */}
     <ChatbotUI /> {/* Chatbot UI 컴포넌트 렌더링 */}
   </div>
 );
