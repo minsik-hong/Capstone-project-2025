@@ -1,7 +1,7 @@
 # 뉴스 데이터 모델 
 
 from sqlalchemy import Column, Integer, String, DateTime
-from db import Base
+from backend.db import Base
 from datetime import datetime
 
 # 뉴스 기사 모델 정의

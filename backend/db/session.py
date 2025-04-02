@@ -1,7 +1,7 @@
 
 from sqlalchemy import create_engine # 데이터베이스 엔진 생성을 위한 모듈
 from sqlalchemy.orm import sessionmaker # 세션 및 베이스 클래스 생성 모듈
-from db.base import Base
+from backend.db.base import Base
 
 DATABASE_URL = "sqlite:///./users.db"
 

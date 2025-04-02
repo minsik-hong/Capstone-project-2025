@@ -1,5 +1,5 @@
 from fastapi import APIRouter  # FastAPI의 라우터를 생성하기 위한 APIRouter 가져오기
-from services.quiz_generator import generate_quiz  # 퀴즈를 생성하는 서비스 함수 가져오기
+from backend.services.quiz_generator import generate_quiz  # 퀴즈를 생성하는 서비스 함수 가져오기
 
 router = APIRouter()  # 새로운 라우터 인스턴스 생성
 

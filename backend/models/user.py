@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, DateTime, Enum  # SQLAlchemy에서 필요한 클래스 가져오기
 from datetime import datetime  # 날짜 및 시간 처리를 위한 datetime 모듈
-from db import Base  # SQLAlchemy Base 클래스 가져오기
+from backend.db import Base  # SQLAlchemy Base 클래스 가져오기
 import enum  # 열거형(enum) 지원을 위한 모듈
 
 # 사용자 레벨을 정의하는 열거형 클래스
