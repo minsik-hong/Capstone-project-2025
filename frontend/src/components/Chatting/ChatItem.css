@@ -1,0 +1,19 @@
+.chat-item {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  padding: 1px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.chat-item:hover {
+  background-color: #f1f1f1;
+}
+
+.chat-icon {
+  width: 29px;
+  height: 31px;
+  margin-right: 10px; /* 이미지와 제목 간 간격 */
+}

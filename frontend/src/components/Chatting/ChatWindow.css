@@ -1,0 +1,128 @@
+.chat-window {
+    width: 100vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: #e6e6e6;
+}
+
+.chat-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    overflow-y: auto;
+    width: 100%;
+    scrollbar-width: none;
+    transition: width 0.3s ease;
+}
+
+.chat-body.reduced {
+    width: calc(100% - 40vw); /* Canvas 창 크기만큼 줄어듦 */
+}
+
+.canvas-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 40vw; /* 브라우저 화면의 40% */
+    height: 100%;
+    background-color: white;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.close-btn {
+    display: block;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    background-color: #d32f2f;
+}
+
+.chat-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    background-color: #e6e6e6;
+    width: 100%;
+    margin-bottom: 16px;
+    transition: width 0.3s ease;
+}
+
+.chat-footer.reduced {
+    width: calc(100% - 40vw); /* Canvas 창 크기만큼 줄어듦 */
+}
+
+.footer-buttons {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.footer-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    color: #3369ff;
+    background-color: #fff;
+    border: 2px solid #3369ff;
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.footer-button:hover {
+    background-color: #254db3;
+    color: #fff;
+}
+
+.input-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.chat-input {
+    height: 44px;
+    padding: 10px 40px 10px 16px; /* 오른쪽 여백 추가 */
+    font-size: 14px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    width: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.send-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.send-icon {
+    width: 24px;
+    height: 24px;
+}
