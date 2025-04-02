@@ -1,17 +1,19 @@
 from fastapi import FastAPI  # FastAPI 애플리케이션 생성 및 관리
 from routes import news, users, chat, quiz  # 라우트 모듈 가져오기
 
-app = FastAPI(title="RAG 기반 영어 학습 서비스")  # FastAPI 애플리케이션 생성 및 제목 설정
+app = FastAPI()
 
-# 라우트 등록
-app.include_router(news.router, prefix="/news", tags=["News"])  # 뉴스 관련 라우트 등록
-app.include_router(users.router, prefix="/users", tags=["Users"])  # 사용자 관련 라우트 등록
-app.include_router(chat.router, prefix="/chat", tags=["Chatbot"])  # 챗봇 관련 라우트 등록
-app.include_router(quiz.router, prefix="/quiz", tags=["Quiz"])  # 퀴즈 관련 라우트 등록
+# CORS 설정 (프론트엔드와 통신 가능하도록)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/")  # 루트 엔드포인트 정의
-async def root():
-    return {"message": "RAG 기반 영어 학습 API"}  # 기본 메시지 반환
+# API 라우터 등록
+app.include_router(users.router)
 
 def initialize_database():
     """DB 구축을 위한 초기화 함수"""

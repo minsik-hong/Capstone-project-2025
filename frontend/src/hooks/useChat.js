@@ -1,26 +1,56 @@
-import { useState } from 'react';
-import { fetchChatResponse } from '../services/api'; // API 호출 함수 가져오기
+import { useState, useEffect, useRef } from 'react';
+import { fetchChatResponse } from '../services/api';
 
-// 채팅 관련 로직을 관리하는 커스텀 훅
 const useChat = () => {
-  // 메시지 상태 관리 (사용자와 봇의 메시지 저장)
-  const [messages, setMessages] = useState([]);
+  const [source, setSource] = useState(null);
+  const [mode, setMode] = useState(null);
+  const [userInput, setUserInput] = useState('');
+  const [messages, setMessages] = useState([
+    { id: 1, sender: 'assistant', text: "Hello, I'm your English Assistant! How can I help you?" },
+    { id: 2, sender: 'user', text: "~~~User's Chat~~~" },
+    { id: 3, sender: 'assistant', text: "Here is ~~~NEWS~~~" },
+    { id: 4, sender: 'assistant', type: 'canvas', text: "NEW CANVAS" },
+  ]); // 초기 메시지 유지
+  const messageEndRef = useRef(null);
 
-  // 메시지 전송 함수
-  const sendMessage = async (text) => {
-    // 사용자 메시지 객체 생성
-    const userMessage = { text, sender: 'user' };
-    // 기존 메시지 배열에 사용자 메시지 추가
-    setMessages((msgs) => [...msgs, userMessage]);
-
-    // API를 통해 봇의 응답 가져오기
-    const botResponse = await fetchChatResponse(text);
-    // 봇의 응답 메시지를 기존 메시지 배열에 추가
-    setMessages((msgs) => [...msgs, { text: botResponse, sender: 'bot' }]);
+  const selectSource = (selectedSource) => {
+    setSource(selectedSource);
   };
 
-  // 메시지 배열과 메시지 전송 함수를 반환
-  return { messages, sendMessage };
+  const selectMode = (selectedMode) => {
+    setMode(selectedMode);
+  };
+
+  const sendMessage = async (text) => {
+    if (text.trim()) {
+      const userMsg = { id: Date.now(), text, sender: 'user' };
+      setMessages((msgs) => [...msgs, userMsg]);
+      setUserInput(''); // 입력창 초기화
+      const botReply = await fetchChatResponse(text);
+      const botMsg = { id: Date.now() + 1, text: botReply, sender: 'assistant' };
+      setMessages((msgs) => [...msgs, botMsg]);
+      messageEndRef.current?.scrollIntoView({ behavior: 'smooth' }); // 스크롤 이동
+    }
+  };
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
+
+  return {
+    source,
+    mode,
+    userInput,
+    messages,
+    messageEndRef,
+    setUserInput,
+    selectSource,
+    selectMode,
+    sendMessage,
+    setMessages,
+    setSource,
+    setMode,
+  };
 };
 
-export default useChat; // 커스텀 훅 내보내기
+export default useChat;
