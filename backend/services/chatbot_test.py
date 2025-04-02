@@ -10,13 +10,13 @@ from weaviate.connect import ConnectionParams
 
 load_dotenv()
 
-# ✅ LLM 설정 (OpenAI API Key 필요)
+# LLM 설정 (OpenAI API Key 필요)
 llm = ChatOpenAI(
     model_name="gpt-3.5-turbo",  # 또는 "gpt-4"
     temperature=0,
 )
 
-# ✅ Weaviate 연결
+# Weaviate 연결
 connection_params = ConnectionParams.from_params(
     http_host="localhost",
     http_port=8080,
@@ -28,7 +28,7 @@ connection_params = ConnectionParams.from_params(
 client = WeaviateClient(connection_params=connection_params)
 client.connect()
 
-# ✅ VectorStore 불러오기 (뉴스 소스명에 따라 바꿔주세요)
+# VectorStore 불러오기 (뉴스 소스명에 따라 바꿔주세요)
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 vectorstore = WeaviateVectorStore(
     client=client,
@@ -37,7 +37,7 @@ vectorstore = WeaviateVectorStore(
     text_key="text"
 )
 
-# ✅ 대화 메모리 & QA 체인 생성
+# 대화 메모리 & QA 체인 생성
 memory = ConversationBufferMemory(
     memory_key="chat_history",
     return_messages=True,
@@ -51,7 +51,7 @@ qa_chain = ConversationalRetrievalChain.from_llm(
     output_key="answer"
 )
 
-# ✅ 대화 루프 시작
+# 대화 루프 시작
 def chat():
     print("🗞️ 뉴스 기반 RAG 챗봇에 오신 걸 환영합니다!")
     print("종료하려면 'exit'을 입력하세요.\n")
