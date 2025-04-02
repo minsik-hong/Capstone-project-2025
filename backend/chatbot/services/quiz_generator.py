@@ -1,5 +1,5 @@
 import openai  # OpenAI API를 사용하기 위한 라이브러리 가져오기
-from config import OPENAI_API_KEY  # OpenAI API 키 가져오기
+from backend.config import OPENAI_API_KEY  # OpenAI API 키 가져오기
 
 openai.api_key = OPENAI_API_KEY  # OpenAI API 키 설정
 
