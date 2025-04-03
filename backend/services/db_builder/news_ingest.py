@@ -14,7 +14,7 @@ load_dotenv()
 
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
-# ✅ Weaviate 연결 설정
+# Weaviate 연결 설정
 connection_params = ConnectionParams.from_params(
     http_host="localhost",
     http_port=8080,
@@ -26,7 +26,7 @@ connection_params = ConnectionParams.from_params(
 client = WeaviateClient(connection_params=connection_params)
 client.connect()
 
-# ✅ 중복 뉴스 필터
+# 중복 뉴스 필터
 def is_repetitive_news(title: str, description: str = "") -> bool:
     title = title.strip().lower()
     repetitive_titles = [
@@ -48,7 +48,7 @@ def is_repetitive_news(title: str, description: str = "") -> bool:
             return True
     return False
 
-# ✅ 기사 본문 스크래핑
+# 기사 본문 스크래핑
 def scrape_full_content(url: str) -> str:
     try:
         response = requests.get(url)
@@ -60,7 +60,7 @@ def scrape_full_content(url: str) -> str:
         print(f"⚠️ 스크래핑 실패: {url} ({str(e)})")
     return None
 
-# ✅ 뉴스 수집
+# 뉴스 수집
 def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
     url = "https://newsapi.org/v2/everything"
     all_results = []
@@ -126,7 +126,7 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
     print(f"📰 최종 수집된 유효 기사 수: {len(all_results)}개")
     return all_results
 
-# ✅ 저장 및 벡터화
+# 저장 및 벡터화
 def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
     save_dir = "data/news_articles"
     os.makedirs(save_dir, exist_ok=True)
@@ -166,14 +166,14 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
         embedding=embedding_model,
         client=client,
         index_name=f"news_{source_name}".lower(),
-        text_key="text"
+        text_key="content"
     )
 
     print(f"✅ LangChain 벡터화 완료: {source_name}, 총 {len(new_articles)}개 추가")
 
-# ✅ 저장된 기사 파일 불러오기 및 벡터화(api 호출 없이 기존 파일을 벡터로)
+# 저장된 기사 파일 불러오기 및 벡터화(api 호출 없이 기존 파일을 벡터로)
 def load_and_vectorize_from_file(source_name, start_date, end_date):
-    filepath = os.path.join("data/news_articles", f"{source_name}_{start_date}~{end_date}.json")
+    filepath = os.path.join("backend/data/news_articles", f"{source_name}_{start_date}~{end_date}.json")
     if not os.path.exists(filepath):
         print(f"❌ 파일이 존재하지 않습니다: {filepath}")
         return
@@ -203,7 +203,7 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 
 
-# ✅ 실행
+# 실행
 if __name__ == "__main__":
     start_date = "2025-03-06"
     end_date = "2025-03-27"
