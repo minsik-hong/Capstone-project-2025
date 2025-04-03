@@ -1,5 +1,5 @@
 from fastapi import APIRouter  # FastAPI의 라우터를 생성하기 위한 APIRouter 가져오기
-from backend.services.chatbot import chatbot_response  # 챗봇 응답을 처리하는 서비스 함수 가져오기
+from backend.services.chatbot_test import chatbot_response  # 챗봇 응답을 처리하는 서비스 함수 가져오기
 
 router = APIRouter()  # 새로운 라우터 인스턴스 생성
 
