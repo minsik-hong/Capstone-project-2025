@@ -2,13 +2,16 @@ import os
 from dotenv import load_dotenv
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from langchain_weaviate.vectorstores import WeaviateVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
 
-load_dotenv()
+# ✅ 루트 디렉토리의 .env 로드
+# chatbot_test.py → backend/services/chatbot_test.py 기준
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+load_dotenv(dotenv_path=os.path.join(ROOT_DIR, ".env"))
 
 # ✅ 환경변수에서 정보 가져오기
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
@@ -54,13 +57,25 @@ qa_chain = ConversationalRetrievalChain.from_llm(
     output_key="answer"
 )
 
+def clean_text(text: str) -> str:
+    """UTF-8 인코딩 불가능한 문자를 제거하는 유틸 함수"""
+    return text.encode("utf-8", "ignore").decode("utf-8")
+
 def run_qa(question: str):
-    """질문을 받아서 RAG 기반 응답을 반환하는 함수"""
+    """질문을 받아서 RAG 기반 응답을 반환하는 함수 (입력 정리 포함)"""
+    question = clean_text(question)
     response = qa_chain.invoke({"question": question})
+    
+    sources = []
+    for doc in response.get("source_documents", []):
+        url = doc.metadata.get("url", "출처 없음")
+        sources.append(clean_text(url))
+
     return {
-        "answer": response["answer"],
-        "sources": [doc.metadata.get("url", "출처 없음") for doc in response.get("source_documents", [])]
+        "answer": clean_text(response["answer"]),
+        "sources": sources
     }
+
 
 def close_client():
     client.close()

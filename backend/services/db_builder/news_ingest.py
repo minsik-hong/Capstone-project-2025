@@ -166,14 +166,14 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
         embedding=embedding_model,
         client=client,
         index_name=f"news_{source_name}".lower(),
-        text_key="text"
+        text_key="content"
     )
 
     print(f"✅ LangChain 벡터화 완료: {source_name}, 총 {len(new_articles)}개 추가")
 
 # 저장된 기사 파일 불러오기 및 벡터화(api 호출 없이 기존 파일을 벡터로)
 def load_and_vectorize_from_file(source_name, start_date, end_date):
-    filepath = os.path.join("data/news_articles", f"{source_name}_{start_date}~{end_date}.json")
+    filepath = os.path.join("backend/data/news_articles", f"{source_name}_{start_date}~{end_date}.json")
     if not os.path.exists(filepath):
         print(f"❌ 파일이 존재하지 않습니다: {filepath}")
         return
