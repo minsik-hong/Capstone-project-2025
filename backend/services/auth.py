@@ -4,9 +4,9 @@ from typing import Optional
 from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from backend.db.session import SessionLocal
-from backend.db.models.user import User
-from backend.db.schemas.user import UserCreate, UserLogin
+from db.session import SessionLocal
+from db.models.user import User
+from db.schemas.user import UserCreate, UserLogin
 
 
 # JWT 토큰 설정

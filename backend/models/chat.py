@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from datetime import datetime
-from backend.db import Base
+from db import Base
 
 # 채팅 세션 모델 정의
 class ChatSession(Base):

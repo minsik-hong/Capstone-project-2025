@@ -1,9 +1,9 @@
 # 뉴스 API 엔드포인트
 
 from fastapi import APIRouter, Depends  # FastAPI 라우터와 의존성 주입을 위한 Depends 가져오기
-from backend.db_builder.news_fetcher import fetch_news  # 뉴스 데이터를 가져오는 서비스 함수 가져오기
-from backend.services.text_summarizer import summarize_text  # 텍스트 요약을 위한 서비스 함수 가져오기
-from backend.db import get_db  # 데이터베이스 세션을 가져오는 함수 가져오기
+from db_builder.news_fetcher import fetch_news  # 뉴스 데이터를 가져오는 서비스 함수 가져오기
+from services.text_summarizer import summarize_text  # 텍스트 요약을 위한 서비스 함수 가져오기
+from db import get_db  # 데이터베이스 세션을 가져오는 함수 가져오기
 from sqlalchemy.orm import Session  # SQLAlchemy 세션 클래스 가져오기
 from models.news import NewsArticle  # 뉴스 기사 모델 가져오기
 

@@ -6,3 +6,5 @@ langchain-community
 langchain-openai
 langchain-weaviate
 weaviate-client
+python-jose[cryptography]
+passlib[bcrypt]

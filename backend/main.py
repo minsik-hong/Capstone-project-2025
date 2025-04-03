@@ -1,7 +1,7 @@
 from fastapi import FastAPI
-from backend.api import users
+from api import users
 from fastapi.middleware.cors import CORSMiddleware
-from backend.db.session import Base, engine
+from db.session import Base, engine
 
 # 새로운 DB 파일(users.db)에 테이블 생성
 Base.metadata.create_all(bind=engine)
