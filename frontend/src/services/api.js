@@ -5,7 +5,7 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 // 회원가입
 export const registerUser = async (userData) => {
   try {
-    const response = await axios.post(`${API_URL}/users/register`, userData);
+    const response = await axios.post(`${API_URL}/api/users/register`, userData);
     return response.data;
   } catch (error) {
     console.error('Register API error:', error);
@@ -16,7 +16,7 @@ export const registerUser = async (userData) => {
 // 로그인
 export const loginUser = async (username, password) => {
   try {
-    const response = await axios.post(`${API_URL}/users/login`, { username, password });
+    const response = await axios.post(`${API_URL}/api/users/login`, { username, password });
     return response.data;
   } catch (error) {
     console.error('Login API error:', error);
@@ -24,27 +24,21 @@ export const loginUser = async (username, password) => {
   }
 };
 
-// // 챗봇 응답 받기
-// export const fetchChatResponse = async (message) => {
-//   try {
-//     const response = await axios.post(`${API_URL}/chat`, { message });
-//     return response.data.reply;
-//   } catch (error) {
-//     console.error('Chatbot API error:', error);
-//     return 'Sorry, something went wrong.';
-//   }
-// };
 
-// 챗봇 응답 임시 구현
-export const fetchChatResponse = async (message) => {
+// ✅ 실제 FastAPI 챗봇 API 연결 함수 추가
+export const askQuestion = async (question) => {
   try {
-    // ...existing code for actual API call (if needed)...
-    throw new Error("Backend is not connected"); // 임시로 오류 발생
+    const response = await axios.post(`${API_URL}/api/chat`, { question });
+    return response.data; // { answer, source }
   } catch (error) {
     console.error('Chatbot API error:', error);
-    return `Error: ${error.message || 'Something went wrong.'}`; // 오류 메시지 반환
+    return {
+      answer: "오류가 발생했습니다. 다시 시도해주세요.",
+      source: "출처 없음",
+    };
   }
 };
+
 
 // 뉴스 요약 임시 구현
 // topic: 사용자가 입력한 주제, source: "CNN" 또는 "BBC"

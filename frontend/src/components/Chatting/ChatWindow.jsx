@@ -13,6 +13,23 @@ function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
     messageEndRef, // 추가
   } = useChat(); // useChat 훅 사용
 
+  // ✅ 메시지 전송 후 canvas 열기
+  const handleSend = async () => {
+    if (!userInput.trim()) return;
+    const botResponse = await sendMessage(userInput);
+
+    // 출처와 요약이 있으면 캔버스 열기
+    if (
+      botResponse &&
+      botResponse.sender === "assistant" &&
+      botResponse.text &&
+      botResponse.source &&
+      onCanvasOpen
+    ) {
+      onCanvasOpen(botResponse);
+    }
+  };
+
   return (
     <div className="chat-window">
       {/* 채팅 메시지 표시 영역 */}
