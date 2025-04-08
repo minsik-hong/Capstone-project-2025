@@ -1,13 +1,16 @@
 #데이터베이스 테이블을 정의하는 파일
 
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, String, Boolean
+from sqlalchemy.dialects.postgresql import UUID
+import uuid
 from db.base import Base
 
-#users 테이블에 해당하는 구조를 정의
 class User(Base):
     __tablename__ = "users"
-     # 자동 증가하는 id 컬럼을 Primary Key로 설정
-    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    username = Column(String, unique=True, index=True)
-    email = Column(String, unique=True, index=True)
-    password = Column(String)
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, index=True)
+    username = Column(String(50), unique=True, index=True, nullable=False)
+    email = Column(String(100), unique=True, index=True, nullable=False)
+    password = Column(String, nullable=False)
+    is_active = Column(Boolean, default=True)
+    provider = Column(String(20), default="local")  # local, google 등

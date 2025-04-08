@@ -29,6 +29,8 @@ logs/
 .idea/
 .vscode/
 .DS_Store
+*.whl
+
 
 # ⚡ 환경 변수 및 인증 관련
 .env.local

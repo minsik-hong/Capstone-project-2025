@@ -4,13 +4,26 @@ services:
   weaviate:
     image: semitechnologies/weaviate:1.24.8
     ports:
-      - "8080:8080"       # REST API
-      - "50051:50051"     # gRPC
+      - "8080:8080"
+      - "50051:50051"
     environment:
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
       PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
       DEFAULT_VECTORIZER_MODULE: 'none'
       CLUSTER_HOSTNAME: 'node1'
+
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: users
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
 
   backend:
     build: ./backend
@@ -18,9 +31,10 @@ services:
       - "8000:8000"
     depends_on:
       - weaviate
+      - db
     env_file:
       - .env  
-    
+
   frontend:
     build: ./frontend
     ports:
@@ -30,3 +44,5 @@ services:
     env_file:
       - .env
 
+volumes:
+  postgres_data:

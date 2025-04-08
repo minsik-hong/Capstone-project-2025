@@ -2,8 +2,13 @@ FROM python:3.10
 
 WORKDIR /app
 
-# 의존성 설치
+
 COPY requirements.txt .
+
+# pip 최신화
+RUN pip install --upgrade pip
+
+# 의존성 설치
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 앱 코드 복사
