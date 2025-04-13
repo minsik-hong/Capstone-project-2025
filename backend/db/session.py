@@ -2,11 +2,16 @@
 from sqlalchemy import create_engine # 데이터베이스 엔진 생성을 위한 모듈
 from sqlalchemy.orm import sessionmaker # 세션 및 베이스 클래스 생성 모듈
 from db.base import Base
+import os
+from dotenv import load_dotenv
 
-DATABASE_URL = "sqlite:///./users.db"
+load_dotenv()  # .env 파일에서 환경변수 로드
 
-# SQLite 엔진 생성 (멀티 스레드 허용 설정)
-engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
+# PostgreSQL용 DATABASE_URL
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# PostgreSQL 엔진 생성 (connect_args 제거)
+engine = create_engine(DATABASE_URL)
 
 # 세션 로컬 생성
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -19,4 +24,6 @@ def get_db():
     finally:
         db.close() # 작업 완료 후 세션 닫기
 
-        
+# ✅ DB 초기화 함수 추가
+def init_db():
+    Base.metadata.create_all(bind=engine)       
