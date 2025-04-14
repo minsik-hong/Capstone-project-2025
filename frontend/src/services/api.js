@@ -57,3 +57,14 @@ export const fetchNewsSummary = async (topic, source) => {
     }, 800);
   });
 };
+
+// 카카오 로그인 (인가 코드로 로그인 요청)
+export const kakaoLogin = async (code) => {
+  try {
+    const response = await axios.get(`${API_URL}/oauth/kakao?code=${code}`);
+    return response.data;
+  } catch (error) {
+    console.error('Kakao Login API error:', error);
+    throw error;
+  }
+};

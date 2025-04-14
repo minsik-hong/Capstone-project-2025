@@ -12,3 +12,4 @@ langchain-huggingface
 openai
 sentence-transformers==4.0.1       # ✅ 추가
 transformers==4.50.3                 # ✅ 추가
+psycopg2-binary
