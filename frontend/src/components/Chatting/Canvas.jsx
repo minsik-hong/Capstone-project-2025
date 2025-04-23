@@ -1,3 +1,4 @@
+// ✅ Canvas.jsx
 import React from "react";
 import "./Canvas.css";
 

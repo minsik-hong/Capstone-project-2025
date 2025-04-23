@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import Sidebar from "./Chatting/SideBar";
-import ChatWindow from "./Chatting/ChatWindow";
-import Canvas from "./Chatting/Canvas";
-import "./ChatbotUI.css";
+// ✅ ChatbotUI.jsx
+import React, { useState } from 'react';
+import Sidebar from './Chatting/SideBar';
+import ChatWindow from './Chatting/ChatWindow';
+import './ChatbotUI.css';
 
 function ChatbotUI() {
   const [selectedCanvas, setSelectedCanvas] = useState(null);
@@ -15,16 +15,18 @@ function ChatbotUI() {
   return (
     <div className="chat-container">
       <Sidebar />
-      <ChatWindow
-        onCanvasOpen={handleCanvasOpen}
-        isCanvasOpen={isCanvasOpen}
-      />
+      <ChatWindow onCanvasOpen={handleCanvasOpen} isCanvasOpen={isCanvasOpen} />
       {isCanvasOpen && (
         <div className="canvas-panel">
           <button className="close-btn" onClick={handleCanvasClose}>
             ✖
           </button>
           <p>{selectedCanvas?.text}</p>
+          {selectedCanvas?.source && (
+            <a href={selectedCanvas.source} target="_blank" rel="noreferrer">
+              🔗 출처 보기
+            </a>
+          )}
         </div>
       )}
     </div>
