@@ -22,3 +22,21 @@
   font-weight: 400;
   color: #000000;
 }
+
+.canvas-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px; /* 텍스트와 링크 간 간격 */
+}
+
+.canvas-link {
+  font-size: 13px;
+  color: #3369ff;
+  text-decoration: none;
+  padding-left: 2px;
+}
+
+.canvas-link:hover {
+  text-decoration: underline;
+}
+

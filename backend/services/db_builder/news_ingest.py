@@ -57,7 +57,7 @@ def scrape_full_content(url: str) -> str:
             paragraphs = soup.find_all('p')
             return ' '.join(p.get_text() for p in paragraphs)
     except Exception as e:
-        print(f"⚠️ 스크래핑 실패: {url} ({str(e)})")
+        print(f" 스크래핑 실패: {url} ({str(e)})")
     return None
 
 # 뉴스 수집
@@ -71,14 +71,14 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
     delta = timedelta(days=5)
     cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)
     if start_dt < cutoff_date:
-        print(f"⚠️ 시작일 {start_date}은 무료 플랜 범위를 초과함. {cutoff_date.date()} 이후로 설정하세요.")
+        print(f" 시작일 {start_date}은 무료 플랜 범위를 초과함. {cutoff_date.date()} 이후로 설정하세요.")
         return []
 
     while start_dt < end_dt:
         from_str = start_dt.strftime("%Y-%m-%d")
         to_dt = min(start_dt + delta, end_dt)
         to_str = to_dt.strftime("%Y-%m-%d")
-        print(f"\n📅 수집 중: {from_str} ~ {to_str}")
+        print(f"\n 수집 중: {from_str} ~ {to_str}")
 
         params = {
             "q": query,
@@ -122,8 +122,8 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
             })
         start_dt = to_dt
 
-    print(f"\n📡 총 API 호출 횟수: {api_call_count}회")
-    print(f"📰 최종 수집된 유효 기사 수: {len(all_results)}개")
+    print(f"\n 총 API 호출 횟수: {api_call_count}회")
+    print(f" 최종 수집된 유효 기사 수: {len(all_results)}개")
     return all_results
 
 # 저장 및 벡터화
@@ -147,9 +147,9 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(combined, f, ensure_ascii=False, indent=4)
 
-    print(f"💾 저장 완료: {filename} — 새 기사 {len(new_articles)}개 추가됨")
+    print(f" 저장 완료: {filename} — 새 기사 {len(new_articles)}개 추가됨")
 
-    print(f"⚙️ LangChain 벡터화 시작: {source_name}")
+    print(f" LangChain 벡터화 시작: {source_name}")
     embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
     docs = [
@@ -169,19 +169,19 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
         text_key="content"
     )
 
-    print(f"✅ LangChain 벡터화 완료: {source_name}, 총 {len(new_articles)}개 추가")
+    print(f" LangChain 벡터화 완료: {source_name}, 총 {len(new_articles)}개 추가")
 
 # 저장된 기사 파일 불러오기 및 벡터화(api 호출 없이 기존 파일을 벡터로)
 def load_and_vectorize_from_file(source_name, start_date, end_date):
     filepath = os.path.join("backend/data/news_articles", f"{source_name}_{start_date}~{end_date}.json")
     if not os.path.exists(filepath):
-        print(f"❌ 파일이 존재하지 않습니다: {filepath}")
+        print(f" 파일이 존재하지 않습니다: {filepath}")
         return
 
     with open(filepath, "r", encoding="utf-8") as f:
         articles = json.load(f)
 
-    print(f"⚙️ LangChain 벡터화 시작: {source_name} ({len(articles)}개)")
+    print(f" LangChain 벡터화 시작: {source_name} ({len(articles)}개)")
     embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
     docs = [
@@ -205,16 +205,16 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 # 실행
 if __name__ == "__main__":
-    start_date = "2025-03-06"
-    end_date = "2025-03-27"
+    start_date = "2025-03-25"
+    end_date = "2025-04-24"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
-        {"api_name": "cnn", "name": "cnn"}
+        # {"api_name": "cnn", "name": "cnn"}
     ]
 
     # api 호출 벡터화 동시
     # for source in sources:
-    #     print(f"\n🌐 {source['name'].upper()} 뉴스 수집 중...")
+    #     print(f"\n {source['name'].upper()} 뉴스 수집 중...")
     #     articles = fetch_news_from_to(
     #         query="",
     #         start_date=start_date,
@@ -230,7 +230,7 @@ if __name__ == "__main__":
 
     # api 호출 없이 파일 벡터화
     for source in sources:
-        print(f"\n🌐 {source['name'].upper()} 벡터화 실행 중...")
+        print(f"\n {source['name'].upper()} 벡터화 실행 중...")
         load_and_vectorize_from_file(
             source_name=source["name"],
             start_date=start_date,

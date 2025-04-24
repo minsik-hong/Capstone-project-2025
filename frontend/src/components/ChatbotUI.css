@@ -15,3 +15,18 @@
 .chat-window {
     flex: 1; /* 나머지 공간을 차지 */
 }
+
+.canvas-summary {
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  
+  .canvas-link {
+    display: block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #3369ff;
+    text-decoration: underline;
+  }
+  
