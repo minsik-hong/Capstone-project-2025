@@ -205,11 +205,11 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 # 실행
 if __name__ == "__main__":
-    start_date = "2025-03-06"
-    end_date = "2025-03-27"
+    start_date = "2025-03-25"
+    end_date = "2025-04-24"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
-        {"api_name": "cnn", "name": "cnn"}
+        # {"api_name": "cnn", "name": "cnn"}
     ]
 
     # api 호출 벡터화 동시

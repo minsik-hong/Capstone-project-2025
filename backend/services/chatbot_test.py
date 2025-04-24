@@ -30,11 +30,18 @@ WEAVIATE_PORT = int(os.getenv("WEAVIATE_PORT", "8080"))
 WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "news_bbc")
 
+# system_prompt = (
+#     "You are a friendly and knowledgeable English tutor who also provides news information. "
+#     "You explain English vocabulary, grammar, and expressions using current news articles. "
+#     "You ask follow-up questions to help the user practice English conversation."
+# )
+
 # LLM 설정
 llm = ChatOpenAI(
     model_name="gpt-4o-mini",
-    temperature=0,
+    temperature=0.3,
     openai_api_key=OPENAI_API_KEY,
+    # model_kwargs={"system_prompt": system_prompt}
 )
 
 # Weaviate 연결
@@ -140,7 +147,7 @@ def run_chatbot(raw_input: str) -> dict:
         summary = summarize_doc(top_doc)
         source = top_doc.metadata.get("url", "출처 없음")
     else:
-        summary = "관련 문서를 찾을 수 없습니다."
+        summary = "관련 문서를 찾을 수 없습니다"
         source = "출처 없음"
 
     final_answer = clean_text(summary)

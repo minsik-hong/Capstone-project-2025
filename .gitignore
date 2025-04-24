@@ -1,46 +1,36 @@
-# ⚡ Node.js (프론트엔드)
+# Node.js
 node_modules/
-.env
-*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
+
+# Lock file → Git에 포함 필요 (※ 주석 처리 또는 제거)
+# package-lock.json
+
+# Build outputs
 dist/
 build/
 .cache/
+coverage/
+
+# VSCode, system
 .vscode/
 .DS_Store
 
-# ⚡ Python (백엔드)
+# Python
 __pycache__/
-*.pyc
-*.pyo
-*.pyd
-.env
-*.sqlite3
+*.py[cod]
+*.egg-info/
+venv/
+logs/
 instance/
 db.sqlite3
-venv/
-virtualenv/
-*.egg-info/
-logs/
-*.log
-.idea/
-.vscode/
-.DS_Store
 
-# ⚡ 환경 변수 및 인증 관련
-.env.local
-.env.production
-.env.development
+# Secrets
+.env
+.env.*
 config.json
 secrets.json
 
-# ⚡ React 빌드 관련
-build/
+# Public cache (확실하다면 유지)
 public/*.cache
-coverage/
-
-# ⚡ Jupyter Notebook (만약 사용하는 경우)
-.ipynb_checkpoints/
