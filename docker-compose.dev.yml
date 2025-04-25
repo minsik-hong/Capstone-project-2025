@@ -1,10 +1,11 @@
 
+
 services:
   weaviate:
     image: semitechnologies/weaviate:1.24.8
     ports:
-      - "8080:8080"       # REST API
-      - "50051:50051"     # gRPC
+      - "8080:8080"
+      - "50051:50051"
     environment:
       AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'true'
       PERSISTENCE_DATA_PATH: "/var/lib/weaviate"
@@ -14,22 +15,30 @@ services:
       - weaviate_data:/var/lib/weaviate
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+    command: uvicorn main:app --reload --host 0.0.0.0 --port 8000
+    volumes:
+      - ./backend:/app
     ports:
       - "8000:8000"
-    depends_on:
-      - weaviate
-    env_file:
-      - .env  
-    
-  frontend:
-    build: ./frontend
-    ports:
-      - "3000:3000"
-    depends_on:
-      - backend
     env_file:
       - .env
+    depends_on:
+      - weaviate
+
+  frontend:
+    working_dir: /app
+    image: node:18
+    command: sh -c "npm install && npm start"
+    volumes:
+      - ./frontend:/app
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    depends_on:
+      - backend
 
 volumes:
   weaviate_data:

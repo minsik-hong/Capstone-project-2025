@@ -28,7 +28,7 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "localhost")
 WEAVIATE_PORT = int(os.getenv("WEAVIATE_PORT", "8080"))
 WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
-WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "news_bbc")
+WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "News_bbc")
 
 # system_prompt = (
 #     "You are a friendly and knowledgeable English tutor who also provides news information. "
@@ -62,7 +62,7 @@ vectorstore = WeaviateVectorStore(
     client=client,
     embedding=embedding_model,
     index_name=WEAVIATE_INDEX_NAME,
-    text_key="text"
+    text_key="content"
 )
 
 # 요약 기반 메모리

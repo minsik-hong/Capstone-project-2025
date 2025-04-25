@@ -34,3 +34,9 @@ secrets.json
 
 # Public cache (확실하다면 유지)
 public/*.cache
+
+# frontend 내부 .env 제외
+/frontend/.env
+
+# backend 내부 .env 제외
+/backend/.env

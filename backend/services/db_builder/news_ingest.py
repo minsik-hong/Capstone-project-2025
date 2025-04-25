@@ -205,28 +205,28 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 # 실행
 if __name__ == "__main__":
-    start_date = "2025-03-25"
-    end_date = "2025-04-24"
+    start_date = "2025-04-01"
+    end_date = "2025-04-07"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
         # {"api_name": "cnn", "name": "cnn"}
     ]
 
     # api 호출 벡터화 동시
-    # for source in sources:
-    #     print(f"\n {source['name'].upper()} 뉴스 수집 중...")
-    #     articles = fetch_news_from_to(
-    #         query="",
-    #         start_date=start_date,
-    #         end_date=end_date,
-    #         source=source["api_name"]
-    #     )
-    #     save_and_vectorize_langchain(
-    #         articles,
-    #         source_name=source["name"],
-    #         start_date=start_date,
-    #         end_date=end_date
-    #     )
+    for source in sources:
+         print(f"\n {source['name'].upper()} 뉴스 수집 중...")
+         articles = fetch_news_from_to(
+             query="",
+             start_date=start_date,
+             end_date=end_date,
+             source=source["api_name"]
+         )
+         save_and_vectorize_langchain(
+             articles,
+             source_name=source["name"],
+             start_date=start_date,
+             end_date=end_date
+         )
 
     # api 호출 없이 파일 벡터화
     for source in sources:
