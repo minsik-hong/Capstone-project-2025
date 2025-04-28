@@ -1,3 +1,6 @@
+# db.models.users.py 파일과 똑같은 기능을 하는 파일
+# 삭제
+
 from sqlalchemy import Column, Integer, String, DateTime, Enum  # SQLAlchemy에서 필요한 클래스 가져오기
 from datetime import datetime  # 날짜 및 시간 처리를 위한 datetime 모듈
 from db import Base  # SQLAlchemy Base 클래스 가져오기

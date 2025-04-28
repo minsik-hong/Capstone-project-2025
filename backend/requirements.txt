@@ -1,20 +1,27 @@
-# torch==2.2.2+cpu
-# torchvision==0.17.2+cpu
-# torchaudio==2.2.2+cpu
-# --index-url https://download.pytorch.org/whl/cpu
-
-
+# 🔹 기본 패키지
 fastapi
 uvicorn
 python-dotenv
+
+# 🔹 인증 관련
+python-jose[cryptography]
+passlib[bcrypt]
+
+
+# 🔹 NLP/AI 관련
+#transformers==4.36.2
+#sentence-transformers==2.2.2
+
+# 🔹 Langchain 관련 패키지
 langchain
 langchain-community
 langchain-openai
 langchain-weaviate
-weaviate-client
-python-jose[cryptography]
-passlib[bcrypt]
 langchain-huggingface
 openai
-transformers==4.36.2
-sentence-transformers==2.2.2
+
+# 🔹 기타
+openai
+weaviate-client
+psycopg2-binary
+

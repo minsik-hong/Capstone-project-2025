@@ -1,0 +1,19 @@
+# 캐시 및 빌드 불필요 파일
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# DB, 민감 정보
+*.sqlite3
+*.db
+.env
+
+# IDE 및 에디터 설정
+.idea/
+.vscode/
+
+# 데이터 파일 및 벡터DB (용량 큼)
+data/vector_db/
+data/news_articles/
+vector_db/

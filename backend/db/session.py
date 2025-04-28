@@ -9,6 +9,8 @@ load_dotenv()  # .env 파일에서 환경변수 로드
 
 # PostgreSQL용 DATABASE_URL
 DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL 환경변수가 설정되지 않았습니다.")
 
 # PostgreSQL 엔진 생성 (connect_args 제거)
 engine = create_engine(DATABASE_URL)
