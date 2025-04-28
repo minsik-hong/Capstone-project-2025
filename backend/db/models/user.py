@@ -36,7 +36,7 @@ class ChatSessionMessage(Base):
     session_id = Column(UUID, ForeignKey("chat_sessions.session_id"), nullable=False)
     sender = Column(String(10), nullable=False)
     message = Column(Text, nullable=False)
-    message_metadata = Column(JSONB, nullable=True) #선택사항항
+    #message_metadata = Column(JSONB, nullable=True) #선택사항
     created_at = Column(TIMESTAMP, nullable=False)
     
     session = relationship("ChatSession", back_populates="messages")

@@ -6,6 +6,8 @@ from db.models.user import User
 from db.schemas.user import UserCreate, UserLogin
 from services.auth import hash_password, verify_password, create_access_token
 from datetime import timedelta
+import os
+import requests
 
 router = APIRouter()
 
@@ -58,3 +60,47 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     # 토큰을 반환
     return {"access_token": access_token, "token_type": "bearer"}
 
+# 카카오 로그인 API
+KAKAO_CLIENT_ID = os.getenv("KAKAO_REST_KEY")
+KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
+
+@router.get("/oauth/kakao")
+def kakao_login(code: str, db: Session = Depends(get_db)):
+    # 카카오 토큰 요청
+    token_url = "https://kauth.kakao.com/oauth/token"
+    data = {
+        "grant_type": "authorization_code",
+        "client_id": KAKAO_CLIENT_ID,
+        "redirect_uri": KAKAO_REDIRECT_URI,
+        "code": code,
+    }
+    headers = {"Content-Type": "application/x-www-form-urlencoded"}
+    token_res = requests.post(token_url, headers=headers, data=data)
+    token_json = token_res.json()
+    access_token = token_json.get("access_token")
+
+    if not access_token:
+        raise HTTPException(status_code=400, detail=f"카카오 토큰 요청 실패: {token_json}")
+
+    # 사용자 정보 요청
+    user_res = requests.get(
+        "https://kapi.kakao.com/v2/user/me",
+        headers={"Authorization": f"Bearer {access_token}"}
+    )
+    user_info = user_res.json()
+
+    kakao_id = str(user_info.get("id"))
+    email = user_info.get("kakao_account", {}).get("email", f"{kakao_id}@kakao.fake")
+    username = f"kakao_{kakao_id}"
+
+    # DB 사용자 확인 or 생성
+    user = db.query(User).filter(User.username == username).first()
+    if not user:
+        user = User(username=username, email=email, hashed_password="kakao_login_dummy")
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+    # JWT 발급
+    token = create_access_token({"sub": user.username}, expires_delta=timedelta(minutes=30))
+    return {"access_token": token, "token_type": "bearer"}
