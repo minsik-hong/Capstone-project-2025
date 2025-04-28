@@ -25,7 +25,7 @@ export const loginUser = async (username, password) => {
 };
 
 
-// ✅ 실제 FastAPI 챗봇 API 연결 함수 추가
+// 실제 FastAPI 챗봇 API 연결 함수 추가
 export const askQuestion = async (question) => {
   try {
     const response = await axios.post(`${API_URL}/api/chat`, { question });
@@ -50,4 +50,15 @@ export const fetchNewsSummary = async (topic, source) => {
       );
     }, 800);
   });
+};
+
+// 카카오 로그인 (인가 코드로 로그인 요청)
+export const kakaoLogin = async (code) => {
+  try {
+    const response = await axios.get(`${API_URL}/api/oauth/kakao?code=${code}`);
+    return response.data;
+  } catch (error) {
+    console.error('Kakao Login API error:', error);
+    throw error;
+  }
 };
