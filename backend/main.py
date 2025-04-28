@@ -4,10 +4,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from api import users, chat  # chat 라우터 추가
 from db.session import Base, engine
 
-# 새로운 DB 파일(users.db)에 테이블 생성
-Base.metadata.create_all(bind=engine)
-
 app = FastAPI()
+
+# # 새로운 DB 파일(users.db)에 테이블 생성
+# Base.metadata.create_all(bind=engine)
+
+# 앱 시작 시 PostgreSQL에 테이블 자동 생성
+@app.on_event("startup")
+def startup():
+    Base.metadata.create_all(bind=engine)
+
+
 
 # CORS 설정 (프론트엔드와 통신 가능하도록)
 app.add_middleware(
