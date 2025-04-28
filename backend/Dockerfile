@@ -1,9 +1,10 @@
 FROM python:3.10
 
 WORKDIR /app
-
+RUN pip install --upgrade pip
 # 의존성 설치
 COPY requirements.txt .
+
 RUN pip install --no-cache-dir -r requirements.txt
 
 # 앱 코드 복사
