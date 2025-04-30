@@ -26,6 +26,6 @@ def get_db():
     finally:
         db.close() # 작업 완료 후 세션 닫기
 
-# ✅ DB 초기화 함수 추가
+# DB 초기화 함수 추가
 def init_db():
     Base.metadata.create_all(bind=engine)       

@@ -7,7 +7,7 @@ from db.session import Base, engine
 app = FastAPI()
 
 
-# ✅ 앱 시작 시 PostgreSQL에 테이블 자동 생성
+# 앱 시작 시 PostgreSQL에 테이블 자동 생성
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
