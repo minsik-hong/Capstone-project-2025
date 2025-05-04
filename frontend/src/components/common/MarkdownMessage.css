@@ -1,0 +1,20 @@
+.markdown-message {
+    font-size: 16px;
+    line-height: 1.8;
+  }
+  
+  .markdown-message ul {
+    padding-left: 20px;
+    list-style-type: disc;
+  }
+  
+  .markdown-message blockquote {
+    border-left: 3px solid #ccc;
+    padding-left: 10px;
+    color: #666;
+  }
+  
+  .markdown-message p {
+    margin-bottom: 10px;
+  }
+  

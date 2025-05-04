@@ -1,25 +1,23 @@
 import os
-import re
 from datetime import datetime
 from dotenv import load_dotenv
 
-from langchain.chains import ConversationalRetrievalChain
+from langchain.chains import ConversationalRetrievalChain, LLMChain
 from langchain.memory import ConversationSummaryBufferMemory
 from langchain_openai import ChatOpenAI
 from langchain_weaviate.vectorstores import WeaviateVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
-
+from langchain.prompts import PromptTemplate
+from langsmith import traceable
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
+from langchain.schema import HumanMessage
 
-from langchain.chains.summarize import load_summarize_chain
-from langsmith import traceable
-
-# .env 로드
+# Load .env
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 load_dotenv(dotenv_path=os.path.join(ROOT_DIR, ".env"))
 
-# 환경 변수
+# Environment settings
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY", "")
 os.environ["LANGCHAIN_PROJECT"] = "news-chatbot"
@@ -30,25 +28,77 @@ WEAVIATE_PORT = int(os.getenv("WEAVIATE_PORT", "8080"))
 WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "News_bbc")
 
-# system_prompt = (
-#     "You are a friendly and knowledgeable English tutor who also provides news information. "
-#     "You explain English vocabulary, grammar, and expressions using current news articles. "
-#     "You ask follow-up questions to help the user practice English conversation."
-# )
-
-# LLM 설정
+# LLM setup
 llm = ChatOpenAI(
     model_name="gpt-4o-mini",
     temperature=0.3,
-    openai_api_key=OPENAI_API_KEY,
-    # model_kwargs={"system_prompt": system_prompt}
+    openai_api_key=OPENAI_API_KEY
 )
 
-# Weaviate 연결
+# Tutor Prompt (for general English tutor chat)
+tutor_prompt = PromptTemplate(
+    input_variables=["question"],
+    template="""
+You are a friendly and talkative English tutor.
+
+User asked:
+
+{question}
+
+Please answer naturally and help them with vocabulary, grammar, and natural expressions like a human tutor.
+
+"""
+)
+
+tutor_chain = LLMChain(llm=llm, prompt=tutor_prompt)
+
+# Article prompt
+custom_prompt = PromptTemplate(
+    input_variables=["context", "question"],
+    template="""
+You are a friendly and talkative English tutor. Your main goal is to help the user easily understand English news articles.
+
+Article:
+{context}
+
+User asked:
+{question}
+
+Please follow these instructions carefully:
+
+[ Article Summary ]
+
+- Summarize the article using short and simple sentences.
+- Use "•" for each point.
+- Add blank lines between ideas.
+
+[ Important Words ]
+
+- Choose 3~4 important or difficult words.
+- For each word:
+    - Write the word.
+    - Add a simple explanation.
+- Use "-" and indentation to make it easy to read.
+
+[ Follow-up Question ]
+
+- Ask one friendly and simple question related to the article.
+- Make sure the entire response looks clean and easy to read.
+
+Your final response should be:
+- Plain text only
+- Structured with sections and symbols
+- Very easy for English learners to read
+
+"""
+)
+
+
+# Weaviate connection
 connection_params = ConnectionParams.from_params(
     http_host=WEAVIATE_HOST,
     http_port=WEAVIATE_PORT,
-    http_secure=False,   #  HTTPS 사용시 True, weaviate는 http로
+    http_secure=False,
     grpc_host=WEAVIATE_HOST,
     grpc_port=WEAVIATE_GRPC_PORT,
     grpc_secure=False
@@ -56,7 +106,7 @@ connection_params = ConnectionParams.from_params(
 client = WeaviateClient(connection_params=connection_params)
 client.connect()
 
-# Embedding & Vectorstore 설정
+# Embedding & Vectorstore
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 vectorstore = WeaviateVectorStore(
     client=client,
@@ -65,7 +115,7 @@ vectorstore = WeaviateVectorStore(
     text_key="content"
 )
 
-# 요약 기반 메모리
+# Conversation memory
 memory = ConversationSummaryBufferMemory(
     llm=llm,
     memory_key="chat_history",
@@ -73,101 +123,66 @@ memory = ConversationSummaryBufferMemory(
     return_messages=True
 )
 
-# QA 체인 구성
+# Article QA chain
 qa_chain = ConversationalRetrievalChain.from_llm(
     llm=llm,
     retriever=vectorstore.as_retriever(search_kwargs={"k": 2}),
     memory=memory,
+    combine_docs_chain_kwargs={"prompt": custom_prompt},
     return_source_documents=True,
     output_key="answer"
 )
 
-# 전역 변수
-last_question = {"question": ""}
-
-# -------------------------------
-# 주요 함수들
-# -------------------------------
-
-def detect_followup_type(q: str) -> str:
-    followup_phrases = {
-        "more": [r"\b(more please|more|tell me more|추가로|더 알려줘|관련 more|좀 더 자세히)\b"],
-        "similar": [r"\b(similar|another one|다른 주제|비슷한 주제|다른 걸로|유사한 뉴스)\b"]
-    }
-    for followup_type, patterns in followup_phrases.items():
-        for pattern in patterns:
-            if re.search(pattern, q, re.IGNORECASE):
-                return followup_type
-    return "original"
-
-def preprocess_question(q: str) -> str:
-    q = q.lower().strip()
-    followup_type = detect_followup_type(q)
-    if followup_type == "more":
-        return f"이전 질문에 대해 더 자세히 알려줘: {last_question['question']}"
-    elif followup_type == "similar":
-        return f"비슷하지만 다른 주제의 기사를 보여줘: {last_question['question']}"
-    else:
-        last_question["question"] = q
-        return q
-
+# Helper functions
 def clean_text(text: str) -> str:
     return text.encode("utf-8", "ignore").decode("utf-8")
 
-def summarize_doc(doc) -> str:
-    summary_chain = load_summarize_chain(llm=llm, chain_type="refine")
-    try:
-        result = summary_chain.invoke([doc])
-        if isinstance(result, dict):
-            return result.get("output_text", "요약 없음")
-        return result
-    except Exception as e:
-        print(f"요약 실패: {e}")
-        return "요약 실패"
-
-def log_interaction(question, answer, sources, base_question=None):
+def log_interaction(question, answer, sources):
     with open("chat_logs.txt", "a", encoding="utf-8") as f:
-        f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Sources: {sources}")
-        if base_question:
-            f.write(f" | BaseQ: {base_question}")
-        f.write("\n")
+        f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Sources: {sources}\n")
+
+# User intent detection (whether they want article or just tutor)
+def user_wants_article(user_input: str) -> bool:
+    chat = ChatOpenAI(model="gpt-4o-mini", temperature=0.0, openai_api_key=OPENAI_API_KEY)
+
+    prompt = f"""
+User said: "{user_input}"
+
+Does the user want to read articles or ask for news? Answer only 'Yes' or 'No'.
+"""
+
+    result = chat.invoke([HumanMessage(content=prompt)]).content.strip()
+    return "Yes" in result
 
 # -------------------------------
-# 외부에서 호출할 함수
+# External chatbot function
 # -------------------------------
 
 @traceable(name="run_chatbot")
 def run_chatbot(raw_input: str) -> dict:
-    question = preprocess_question(clean_text(raw_input))
-    # response = qa_chain.invoke({"question": question})
+    question = clean_text(raw_input)
 
-    # top_doc = response.get("source_documents", [])[0] if response.get("source_documents") else None
-    response = qa_chain.invoke({"question": question})
+    if user_wants_article(question):
+        # Article mode
+        response = qa_chain.invoke({"question": question})
+        source_url = ""
+        if response.get("source_documents"):
+            first_doc = response["source_documents"][0]
+            url = first_doc.metadata.get("url")
+            if url:
+                source_url = url  # valid url only
 
-    # --- [추가] None인 문서 content를 "" 로 바꾸기 ---
-    if "source_documents" in response:
-        for doc in response["source_documents"]:
-            if doc.page_content is None:
-                doc.page_content = ""
+        final_answer = clean_text(response.get("answer", "답변 생성 실패"))
 
-    top_doc = response.get("source_documents", [])[0] if response.get("source_documents") else None
-
-
-    if top_doc:
-        summary = summarize_doc(top_doc)
-        source = top_doc.metadata.get("url", "출처 없음")
     else:
-        summary = "관련 문서를 찾을 수 없습니다"
-        source = "출처 없음"
+        # Normal Tutor mode
+        final_answer = tutor_chain.run(question=question)
+        source_url = ""  # no source
 
-    final_answer = clean_text(summary)
-
-    followup_type = detect_followup_type(raw_input)
-    base_q = last_question["question"] if followup_type in ["more", "similar"] else None
-
-    log_interaction(raw_input, final_answer, [source], base_question=base_q)
+    log_interaction(question, final_answer, [source_url or "출처 없음"])
 
     return {
         "answer": final_answer,
-        "source": source
+        "source": source_url  # always string ("" or url)
     }
+

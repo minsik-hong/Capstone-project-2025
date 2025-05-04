@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Sidebar from './Chatting/SideBar';
 import ChatWindow from './Chatting/ChatWindow';
+import MarkdownMessage from './common/MarkdownMessage'; // 마크다운 메시지 컴포넌트
 import './ChatbotUI.css';
 
 function ChatbotUI() {
@@ -21,7 +22,13 @@ function ChatbotUI() {
           <button className="close-btn" onClick={handleCanvasClose}>
             ✖
           </button>
-          <p>{selectedCanvas?.text}</p>
+
+          {/* <p>{selectedCanvas?.text}</p> */}
+          {/* 마크다운 메시지 컴포넌트 사용 */}
+          <div className="canvas-text">
+            <MarkdownMessage text={selectedCanvas?.text} /> 
+          </div> 
+
           {selectedCanvas?.source && (
             <a href={selectedCanvas.source} target="_blank" rel="noreferrer">
               🔗 출처 보기

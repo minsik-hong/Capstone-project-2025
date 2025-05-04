@@ -46,8 +46,8 @@ def is_valid_news_article(article) -> bool:
     url_to_image = article.get("urlToImage")
     content = article.get("content", "")
 
-    # [NEW] url에 'articles' 포함 여부 체크
-    if "articles" not in url:
+    # [FIXED] 정확히 https://www.bbc.co.uk/news/articles/ 로 시작하는 URL만 허용
+    if not url.startswith("https://www.bbc.co.uk/news/articles/"):
         return False
 
 
