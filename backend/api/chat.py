@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from services.chatbot_test import run_chatbot  # run_qa에서 분리된 함수
+import traceback
 
 router = APIRouter()
 
@@ -17,4 +18,7 @@ async def chat_endpoint(request: ChatRequest):
         result = run_chatbot(request.question)
         return ChatResponse(**result)
     except Exception as e:
+        traceback.print_exc()  # 내부 에러 확인
+        print("Chat API Error:", e)
         raise HTTPException(status_code=500, detail=str(e))
+

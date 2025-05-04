@@ -48,7 +48,7 @@ llm = ChatOpenAI(
 connection_params = ConnectionParams.from_params(
     http_host=WEAVIATE_HOST,
     http_port=WEAVIATE_PORT,
-    http_secure=False,
+    http_secure=False,   #  HTTPS 사용시 True, weaviate는 http로
     grpc_host=WEAVIATE_HOST,
     grpc_port=WEAVIATE_GRPC_PORT,
     grpc_secure=False
@@ -139,9 +139,19 @@ def log_interaction(question, answer, sources, base_question=None):
 @traceable(name="run_chatbot")
 def run_chatbot(raw_input: str) -> dict:
     question = preprocess_question(clean_text(raw_input))
+    # response = qa_chain.invoke({"question": question})
+
+    # top_doc = response.get("source_documents", [])[0] if response.get("source_documents") else None
     response = qa_chain.invoke({"question": question})
 
+    # --- [추가] None인 문서 content를 "" 로 바꾸기 ---
+    if "source_documents" in response:
+        for doc in response["source_documents"]:
+            if doc.page_content is None:
+                doc.page_content = ""
+
     top_doc = response.get("source_documents", [])[0] if response.get("source_documents") else None
+
 
     if top_doc:
         summary = summarize_doc(top_doc)
