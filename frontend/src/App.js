@@ -4,7 +4,9 @@ import ChatbotPage from './pages/ChatbotPage';
 import LoginPage from './pages/LoginPage';
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  // const [isAuthenticated, setIsAuthenticated] = useState(false);
+  
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
 
   return (
     <Router basename="/">

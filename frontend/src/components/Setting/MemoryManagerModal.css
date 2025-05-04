@@ -1,0 +1,92 @@
+.mem-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.4);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:1100;
+}
+
+.mem-dialog{
+  width:95%;
+  max-width:800px;
+  max-height:90vh;
+  background:#f9fafb;
+  color:#111827;
+  border-radius:12px;
+  padding:24px 28px;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+
+header{
+  padding-bottom:14px;
+}
+
+header h3{
+  font-size:1.1rem;
+  font-weight:600;
+}
+
+.mem-list{
+  flex:1;
+  margin:14px 0 24px;
+  overflow-y:auto;
+  border-top:none;
+}
+
+.mem-list li{
+  display:flex;
+  justify-content:space-between;
+  padding:12px 4px;
+  border-bottom:1px solid #e5e7eb;
+}
+
+.mem-list .text{
+  flex:1;
+  font-size:.9rem;
+}
+
+.trash{
+  background:none;
+  border:none;
+  font-size:18px;
+  color:#6b7280;
+  cursor:not-allowed;
+}
+
+.trash:hover{
+  color:#ef4444;
+}
+
+.mem-footer{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.delete-all{
+  padding:8px 20px;
+  border:none;
+  border-radius:6px;
+  background:#ef4444;
+  color:#fff;
+  cursor:not-allowed;
+  opacity:.85;
+}
+
+.close-btn{
+  position:absolute;
+  top:14px;
+  right:18px;
+  background:none;
+  border:none;
+  font-size:26px;
+  color:#6b7280;
+  cursor:pointer;
+}
+
+@media(max-width:600px){
+  .mem-dialog{padding:20px;}
+}
