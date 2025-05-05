@@ -17,12 +17,15 @@ services:
   frontend:
     build:
       context: ./frontend
+    volumes:
+      - ./frontend:/app
     ports:
       - "3000:3000"
     depends_on:
       - backend
     env_file:
       - .env
+    command: bash -c "npm install && npm start"
 
   weaviate:
     image: semitechnologies/weaviate:1.24.8

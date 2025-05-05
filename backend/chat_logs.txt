@@ -421,3 +421,531 @@ Richard McDonald, a former champion runner and trader, is now trading stocks pri
 [ Follow-up Question (EN) ]
 
 What do you think might happen to the economy if high tariffs continue for a long time? | Sources: ['https://www.bbc.co.uk/news/articles/c9djj7pgz57o']
+2025-05-05 14:47:02.292489 | Q: hi | A: Sorry, I don't know how to answer that. | Sources: ['출처 없음']
+2025-05-05 14:47:27.215834 | Q: korea news  | A: ### Article Summary (EN)
+Wildfires in South Korea's southeast region have killed at least 24 people, mostly elderly, and injured 26 others, with 12 in critical condition. Over 23,000 people have been evacuated from their homes. The fires, described as unprecedented, destroyed a 1,300-year-old temple and have burned about 17,000 hectares of forest. Strong winds are making firefighting efforts difficult, and the government is taking steps to prevent illegal burning, a major cause of wildfires.
+
+### Explanation (KR)
+한국 동남부에서 발생한 산불로 최소 24명이 사망하고, 26명이 부상을 입었습니다. 피해자 대부분은 60대와 70대의 노인들입니다. 23,000명 이상이 집에서 대피해야 했습니다. 이번 산불은 전례 없는 상황으로, 1,300년 된 사원이 파괴되었고, 약 17,000헥타르의 숲이 불탔습니다. 강한 바람으로 인해 진화 작업이 어려워지고 있으며, 정부는 불법 소각을 방지하기 위한 조치를 취하고 있습니다.
+
+### Important Words (EN -> KR)
+1. **Wildfires** - 산불: 자연적으로 발생하는 큰 불로, 숲이나 초원을 태우는 현상입니다.
+2. **Evacuated** - 대피하다: 위험한 상황에서 안전한 장소로 이동하는 것을 의미합니다.
+3. **Unprecedented** - 전례 없는: 이전에 경험한 적이 없는, 매우 특별한 상황을 나타냅니다.
+4. **Critical condition** - 위독한 상태: 환자의 상태가 매우 심각하여 생명이 위험한 상황을 의미합니다.
+
+### Follow-up Question (EN)
+What do you think the government should do to prevent future wildfires in South Korea? | Sources: ['https://www.bbc.co.uk/news/articles/c1lp365pd1go']
+2025-05-05 14:47:50.582990 | Q: 그걸로 퀴즈 내줘 | A: Sure! Here’s a vocabulary quiz based on the article about the sinkhole incident in Seoul:
+
+### Vocabulary Quiz
+
+**1. What does the word "sinkhole" mean?**  
+A) A type of vehicle  
+B) A deep hole in the ground caused by the collapse of a surface layer  
+C) A kind of plant  
+D) A type of weather phenomenon  
+
+**Answer:** B) A deep hole in the ground caused by the collapse of a surface layer  
+**Explanation:** "Sinkhole"는 지표면이 무너져내려 생긴 깊은 구멍을 의미합니다. 이 기사에서는 도로가 무너져 생긴 큰 구멍에 대해 설명하고 있습니다.
+
+---
+
+**2. What does the word "rescuers" mean?**  
+A) People who create videos  
+B) People who help save others from danger  
+C) People who build roads  
+D) People who study the environment  
+
+**Answer:** B) People who help save others from danger  
+**Explanation:** "Rescuers"는 위험에 처한 사람들을 구하는 사람들을 의미합니다. 기사에서는 구멍에 빠진 남자를 구하기 위해 출동한 소방관들을 언급하고 있습니다.
+
+---
+
+**3. What does the word "infrastructure" mean?**  
+A) The physical structures and facilities needed for the operation of a society  
+B) A type of technology  
+C) A form of entertainment  
+D) A type of food  
+
+**Answer:** A) The physical structures and facilities needed for the operation of a society  
+**Explanation:** "Infrastructure"는 사회의 운영에 필요한 물리적 구조물과 시설을 의미합니다. 기사에서는 서울에서 발생한 싱크홀의 원인 중 하나로 열악한 인프라 관리를 언급하고 있습니다.
+
+---
+
+이 퀴즈를 통해 학생들이 중요한 단어의 의미를 이해하고, 기사 내용을 더 잘 파악할 수 있기를 바랍니다! | Sources: ['https://www.bbc.co.uk/news/articles/cd923lzdwkqo']
+2025-05-05 14:47:51.323436 | Q: 줘 | A: Sorry, I don't know how to answer that. | Sources: ['출처 없음']
+2025-05-05 14:55:40.086658 | Q: hi | A: Hi there! How’s your day going? | Sources: ['출처 없음']
+2025-05-05 14:56:00.489104 | Q: what is your functions? | A: Hey there! My main function is to help you with learning and practicing English. I can answer your questions, explain grammar, suggest vocabulary, and even chat about different topics to improve your skills. Basically, I’m here to support you in your English journey!
+
+간단히 말하자면, 나는 영어를 배우고 연습하는 데 도움을 주는 역할을 해. 질문에 답하고, 문법을 설명하고, 어휘를 제안하고, 다양한 주제로 대화하면서 네 실력을 향상시킬 수 있도록 도와줄 수 있어. | Sources: ['출처 없음']
+2025-05-05 14:56:27.161948 | Q: 그러면 한국 뉴스 좀 알려줘 재밌는걸로. | A: ### Article Summary (EN)
+A man riding his motorbike fell into a large sinkhole in Seoul, South Korea, and was found dead. The sinkhole is 20 meters wide and deep. Rescuers discovered his body about 50 meters from where he fell. A car driver was also injured in the incident, which was captured on a dashcam video. Authorities are investigating the cause of the sinkhole, which has been linked to poor infrastructure and excavation work in the city. Over the past decade, there have been 223 sinkholes reported in Seoul.
+
+### Explanation (KR)
+서울에서 한 남자가 오토바이를 타고 가다가 큰 싱크홀에 빠져 사망했습니다. 이 싱크홀은 너비와 깊이가 각각 20미터입니다. 구조대는 그가 떨어진 곳에서 약 50미터 떨어진 곳에서 그의 시신을 발견했습니다. 이 사건은 차량 운전자가 부상을 입었고, 대시캠 영상에 찍혀 소셜 미디어에서 화제가 되었습니다. 당국은 싱크홀의 원인을 조사하고 있으며, 이는 도시의 인프라 문제와 굴착 작업과 관련이 있다고 알려져 있습니다. 지난 10년 동안 서울에서 223개의 싱크홀이 발생했습니다.
+
+### Important Words (EN -> KR)
+1. **Sinkhole (싱크홀)**: 땅이 갑자기 꺼져서 생긴 구멍으로, 보통 지하의 암석이 녹거나 부서져서 발생합니다.
+2. **Rescue (구조)**: 위험에 처한 사람을 구하는 행위입니다.
+3. **Infrastructure (인프라)**: 사회가 기능하기 위해 필요한 기본적인 시설이나 시스템입니다. 예를 들어, 도로, 다리, 수도관 등이 포함됩니다.
+4. **Excavation (굴착)**: 땅을 파내는 작업으로, 건설이나 다른 작업을 위해 필요할 수 있습니다.
+
+### Follow-up Question (EN)
+What do you think could be done to prevent sinkholes from happening in cities? | Sources: ['https://www.bbc.co.uk/news/articles/cd923lzdwkqo']
+2025-05-05 14:56:54.104003 | Q: 방금 뉴스 가지고 단어 퀴즈좀 | A: Sure! Here’s a vocabulary quiz based on the article, featuring three difficult words:
+
+### Vocabulary Quiz
+
+#### Question 1: 
+What does the word **"sinkhole"** mean?
+A) A type of vehicle  
+B) A hole in the ground caused by the collapse of a surface layer  
+C) A type of natural disaster  
+D) A type of underground water source  
+
+**Answer:** B) A hole in the ground caused by the collapse of a surface layer  
+**Explanation in Korean:** "Sinkhole"은 지표면이 무너져내려 생긴 구멍을 의미합니다. 이는 보통 지하의 암석이 침식되면서 발생합니다.
+
+---
+
+#### Question 2: 
+What does the word **"rescuers"** mean?
+A) People who cause accidents  
+B) People who provide help in emergencies  
+C) People who build roads  
+D) People who drive vehicles  
+
+**Answer:** B) People who provide help in emergencies  
+**Explanation in Korean:** "Rescuers"는 긴급 상황에서 도움을 주는 사람들을 의미합니다. 이들은 구조 작업을 수행하여 위험에 처한 사람들을 구합니다.
+
+---
+
+#### Question 3: 
+What does the word **"infrastructure"** mean?
+A) The physical structures and facilities needed for the operation of a society  
+B) A type of technology  
+C) A form of transportation  
+D) A type of natural resource  
+
+**Answer:** A) The physical structures and facilities needed for the operation of a society  
+**Explanation in Korean:** "Infrastructure"는 사회의 운영에 필요한 물리적 구조물과 시설을 의미합니다. 도로, 다리, 수도관 등이 이에 해당합니다.
+
+---
+
+이 퀴즈를 통해 학생들이 기사에서 사용된 어려운 단어들을 이해하고 학습할 수 있기를 바랍니다! | Sources: ['https://www.bbc.co.uk/news/articles/cd923lzdwkqo']
+2025-05-05 14:56:55.601202 | Q: 좀 | A: Hey there! It looks like you typed "좀," which means "a little" or "some" in English. How's your day going? | Sources: ['출처 없음']
+2025-05-05 14:57:24.242374 | Q: 문법퀴즈도 | A: Sure! Here’s a grammar quiz based on the article about Lil Nas X. 
+
+### Grammar Quiz
+
+#### Question 1: Verb Tense
+Fill in the blank with the correct form of the verb in parentheses.
+
+Lil Nas X ______ (post) a video from his hospital bed, showing an unsuccessful attempt to smile.
+
+A) posted  
+B) posts  
+C) posting  
+
+**Answer:** A) posted  
+**Explanation in Korean:** 이 문장에서 "posted"는 과거 시제를 나타냅니다. Lil Nas X가 병원 침대에서 비디오를 올린 것은 과거의 사건이기 때문에 "posted"가 맞습니다.
+
+---
+
+#### Question 2: Modal Verbs
+Choose the correct modal verb to complete the sentence.
+
+Lil Nas X said he ______ (can/could) not catch a vibe for the collaboration with Taylor Swift.
+
+A) can  
+B) could  
+
+**Answer:** B) could  
+**Explanation in Korean:** "could"는 과거의 능력을 나타내는 조동사입니다. Lil Nas X가 Taylor Swift와의 협업에서 "vibe"를 느끼지 못했다고 말했으므로 과거형인 "could"가 적절합니다.
+
+---
+
+#### Question 3: Conditional Sentences
+Complete the sentence with the correct form of the verb in parentheses.
+
+If he ______ (not/take) steroids within the first 72 hours, an attack could last up to seven months.
+
+A) does not take  
+B) did not take  
+C) had not taken  
+
+**Answer:** A) does not take  
+**Explanation in Korean:** 이 문장은 조건문으로, 현재 사실을 나타내고 있습니다. "If he does not take steroids"는 현재의 조건을 나타내므로 "does not take"가 맞습니다. | Sources: ['https://www.bbc.co.uk/news/articles/cx2vx31eg6vo']
+2025-05-05 14:57:52.617207 | Q: 아니 아까 한국 뉴스로 가지고 퀴즈 | A: Sorry, I don't know how to answer that. | Sources: ['출처 없음']
+2025-05-05 14:57:54.643872 | Q: 즈 | A: Hey there! It looks like you typed "즈." Is there something specific you wanted to talk about or ask? I'm here to help! 😊 | Sources: ['출처 없음']
+2025-05-05 14:58:18.521128 | Q: 아니 아까 한국 뉴스로 가지고 퀴즈줘 | A: ### Article Summary (EN)
+Myanmar authorities arrested an astrologer named John Moe The for causing panic with a TikTok video predicting an earthquake. He made this prediction on April 9, just two weeks after a major earthquake killed 3,500 people. He warned that an earthquake would hit every city in Myanmar on April 21. Experts say predicting earthquakes is impossible. Many people believed his prediction and left their homes. John Moe The's TikTok account had over 300,000 followers but is now closed. He was arrested at his home in Sagaing.
+
+### Explanation (KR)
+미얀마 당국은 점성가인 존 모에 더를 TikTok 비디오에서 지진을 예고하여 공황을 일으킨 혐의로 체포했습니다. 그는 4월 9일에 이 예측을 했으며, 이는 3,500명이 사망한 대규모 지진이 발생한 지 2주 후입니다. 그는 4월 21일에 미얀마의 모든 도시에서 지진이 발생할 것이라고 경고했습니다. 전문가들은 지진 예측이 불가능하다고 말합니다. 많은 사람들이 그의 예측을 믿고 집을 떠났습니다. 존 모에 더의 TikTok 계정은 30만 명 이상의 팔로워가 있었지만 현재는 폐쇄되었습니다. 그는 사가잉에 있는 집에서 체포되었습니다.
+
+### Important Words (EN -> KR)
+1. **Astrologer (점성가)**: 별과 행성을 연구하여 사람의 성격이나 미래를 예측하는 사람.
+2. **Panic (공황)**: 두려움이나 불안으로 인해 사람들이 이성을 잃고 행동하는 상태.
+3. **Prediction (예측)**: 미래에 일어날 일을 미리 말하는 것.
+4. **Earthquake (지진)**: 지구의 표면이 흔들리는 자연재해.
+
+### Follow-up Question (EN)
+What do you think about making predictions about natural disasters? | Sources: ['https://www.bbc.co.uk/news/articles/c1jx7n3jee9o']
+2025-05-05 15:00:29.146790 | Q: Last year was the deadliest for Russian forces since the start of the full-scale war in Ukraine: at least 45,287 people were killed.  This is almost three times more than in the first year of the invasion and significantly exceeds the losses of 2023, when the longest and deadliest battle of the war was taking place in Bakhmut.  At the start of the war, losses happened in waves during battles for key locations, but 2024 saw a month-on-month increase in the death toll as the front line slowly edged forward, enabling us to estimate that Russia lost at least 27 lives for every square kilometre of Ukrainian territory captured.  The BBC Russian Service, in collaboration with independent media outlet Mediazona and a team of volunteers, has processed open source data from Russian cemeteries, military memorials and obituaries.  So far, we have identified the names of 106,745 Russian soldiers killed during the full-scale invasion of Ukraine.  The true number is clearly much higher. Military experts estimate our number may cover between 45% and 65% of deaths, which would mean 164,223 to 237,211 people. | A: ### Article Summary (EN)
+Last year was the deadliest for Russian forces in the war in Ukraine, with at least 45,287 soldiers killed. This number is almost three times higher than in the first year of the invasion. In 2023, the longest and deadliest battle took place in Bakhmut. Initially, Russian losses occurred in waves during battles for important locations, but in 2024, the death toll increased every month as the front line moved forward. Estimates suggest that Russia lost at least 27 soldiers for every square kilometer of Ukrainian territory captured. The BBC Russian Service, along with Mediazona and volunteers, has identified 106,745 Russian soldiers killed, but the actual number is likely much higher, with estimates ranging from 164,223 to 237,211 deaths.
+
+### Explanation (KR)
+작년은 우크라이나 전쟁에서 러시아 군대에게 가장 치명적인 해였습니다. 최소 45,287명의 군인이 사망했으며, 이는 침공 첫 해의 거의 세 배에 해당합니다. 2023년에는 바흐무트에서 가장 길고 치명적인 전투가 벌어졌습니다. 처음에는 주요 지역 전투 중에 러시아의 손실이 발생했지만, 2024년에는 전선이 앞으로 나아가면서 매달 사망자 수가 증가했습니다. 추정에 따르면, 러시아는 점령한 우크라이나 영토 1제곱킬로미터당 최소 27명의 군인을 잃었습니다. BBC 러시아 서비스는 Mediazona 및 자원봉사자들과 함께 106,745명의 사망한 러시아 군인을 확인했지만, 실제 숫자는 훨씬 더 높을 것으로 보이며, 전문가들은 사망자 수가 164,223명에서 237,211명 사이일 것이라고 추정하고 있습니다.
+
+### Important Words (EN -> KR)
+1. **Deadliest (치명적인)**: 가장 많은 사망자를 초래하는, 가장 위험한.
+2. **Casualties (사상자)**: 전투나 사고에서 다치거나 죽은 사람들.
+3. **Estimates (추정)**: 어떤 수치나 양에 대한 대략적인 계산이나 예측.
+4. **Territory (영토)**: 특정 국가나 지역의 땅.
+
+### Follow-up Question (EN)
+What do you think could be done to reduce the number of casualties in conflicts like this? | Sources: ['https://www.bbc.co.uk/news/articles/cg5q0mev07lo']
+2025-05-05 15:00:51.350393 | Q:  Last year was the deadliest for Russian forces since the start of the full-scale war in Ukraine: at least 45,287 people were killed. This is almost three times more than in the first year of the invasion and significantly exceeds the losses of 2023, when the longest and deadliest battle of the war was taking place in Bakhmut. At the start of the war, losses happened in waves during battles for key locations, but 2024 saw a month-on-month increase in the death toll as the front line slowly edged forward, enabling us to estimate that Russia lost at least 27 lives for every square kilometre of Ukrainian territory captured. The BBC Russian Service, in collaboration with independent media outlet Mediazona and a team of volunteers, has processed open source data from Russian cemeteries, military memorials and obituaries. So far, we have identified the names of 106,745 Russian soldiers killed during the full-scale invasion of Ukraine. The true number is clearly much higher. Military experts estimate our number may cover between 45% and 65% of deaths, which would mean 164,223 to 237,211 people. 이 내용 가지고 퀴즈 내줘 | A: ### Quiz Questions
+
+**Question 1:**  
+Last year, how many Russian soldiers were reported to have been killed during the full-scale war in Ukraine?  
+A) 27,000  
+B) 45,287  
+C) 106,745  
+D) 164,223  
+
+**Question 2:**  
+What was the estimated range of the total number of Russian soldiers killed, according to military experts?  
+A) 45,000 to 65,000  
+B) 164,223 to 237,211  
+C) 106,745 to 164,223  
+D) 27,000 to 45,287  
+
+**Question 3:**  
+What method did the BBC Russian Service use to gather data on Russian military casualties?  
+A) Interviews with soldiers  
+B) Open source data from cemeteries, memorials, and obituaries  
+C) Government reports  
+D) Social media analysis  
+
+---
+
+### Answers and Explanations
+
+**Answer 1:** B) 45,287  
+**Explanation in Korean:** 작년에는 우크라이나 전쟁의 전면전에서 최소 45,287명의 러시아 군인이 사망한 것으로 보고되었습니다. 이는 전쟁 초기의 사망자 수보다 거의 세 배 많은 수치입니다.
+
+---
+
+**Answer 2:** B) 164,223 to 237,211  
+**Explanation in Korean:** 군사 전문가들은 BBC 러시아 서비스의 데이터가 전체 사망자의 45%에서 65%를 포함하고 있다고 추정하고 있습니다. 따라서 전체 사망자는 164,223명에서 237,211명 사이일 것으로 보입니다.
+
+---
+
+**Answer 3:** B) Open source data from cemeteries, memorials, and obituaries  
+**Explanation in Korean:** BBC 러시아 서비스는 러시아 군인 사망자에 대한 데이터를 수집하기 위해 공개 소스 데이터를 사용했습니다. 이 데이터는 러시아의 묘지, 군사 기념물 및 부고에서 수집되었습니다. | Sources: ['https://www.bbc.co.uk/news/articles/cg5q0mev07lo']
+2025-05-05 15:00:53.180415 | Q: 줘 | A: Hey there! It looks like you typed "줘," which means "give me" in Korean. Is there something specific you’d like to talk about or ask for? I'm here to help! 😊 | Sources: ['출처 없음']
+2025-05-05 15:32:52.368034 | Q: hi | A: Hi there! How's your day going? | Sources: ['출처 없음']
+2025-05-05 15:32:58.690407 | Q: gi | A: Hey there! It looks like you might have typed something by accident. How's your day going? 😊 | Sources: ['출처 없음']
+2025-05-05 15:33:02.516522 | Q: hi | A: Hi there! How’s your day going? | Sources: ['출처 없음']
+2025-05-05 15:33:05.571255 | Q: hi | A: Hi there! How's your day going? | Sources: ['출처 없음']
+2025-05-05 15:33:28.021306 | Q: article please | A: ### Article Summary (EN)
+Robert F. Kennedy Jr., the US Health Secretary, announced a major research effort to find the causes of autism within five months. Experts believe this task is unrealistic and complicated. Kennedy has previously supported false claims linking vaccines to autism. He stated that the research will involve many scientists and will explore various factors, including environmental influences. However, the Autism Society of America criticized his plan as misleading and harmful. Concerns were also raised about his hiring of David Geier, a controversial figure in vaccine research. The idea that vaccines cause autism has been widely discredited since a flawed study in 1998.
+
+### Explanation (KR)
+로버트 F. 케네디 주니어 미국 보건부 장관은 자폐증의 원인을 5개월 안에 찾기 위한 대규모 연구 노력을 발표했습니다. 전문가들은 이 작업이 비현실적이고 복잡하다고 생각하고 있습니다. 케네디는 이전에 백신과 자폐증의 연관성을 주장한 바 있습니다. 그는 이 연구가 많은 과학자들을 포함하고 환경적 요인도 조사할 것이라고 밝혔습니다. 그러나 미국 자폐증 협회는 그의 계획이 잘못된 정보와 해로운 영향을 미친다고 비판했습니다. 또한 백신 연구에서 논란이 있는 데이비드 기어를 고용한 것에 대한 우려도 제기되었습니다. 백신이 자폐증을 유발한다는 주장은 1998년의 결함이 있는 연구 이후 널리 반박되었습니다.
+
+### Important Words (EN -> KR)
+1. **Autism (자폐증)**: 발달 장애의 일종으로, 사회적 상호작용과 의사소통에 어려움을 겪는 상태입니다.
+2. **Research (연구)**: 특정 주제나 문제에 대해 체계적으로 조사하고 분석하는 과정입니다.
+3. **Vaccine (백신)**: 질병을 예방하기 위해 체내에 주입하는 물질로, 면역력을 높이는 역할을 합니다.
+4. **Misleading (오해를 일으키는)**: 사실과 다르게 사람들을 혼란스럽게 하거나 잘못된 정보를 주는 것입니다.
+
+### Follow-up Question (EN)
+What do you think about the relationship between vaccines and autism? | Sources: ['https://www.bbc.co.uk/news/articles/cj0z9nmzvdlo']
+2025-05-05 15:33:43.496861 | Q: 방금 알려준 기사로 단어 퀴즈 줘봐 | A: Sure! Here’s a vocabulary quiz based on the article you provided. 
+
+### Vocabulary Quiz
+
+#### Question 1: 
+What does the word **"sinkhole"** mean?
+A) A type of tree  
+B) A hole in the ground caused by the collapse of a surface layer  
+C) A tool for digging  
+D) A type of vehicle  
+
+**Answer: B) A hole in the ground caused by the collapse of a surface layer**  
+**Explanation in Korean:** "Sinkhole"은 지면의 표면층이 무너져 내리면서 생기는 구멍을 의미합니다. 이 기사에서는 서울에서 발생한 대형 싱크홀에 대한 이야기가 다뤄지고 있습니다.
+
+---
+
+#### Question 2: 
+What does the word **"rescue"** mean?
+A) To lose something  
+B) To save someone from danger  
+C) To build something  
+D) To travel somewhere  
+
+**Answer: B) To save someone from danger**  
+**Explanation in Korean:** "Rescue"는 위험에 처한 사람을 구하는 것을 의미합니다. 기사에서는 구조 작업이 진행되고 있다고 언급되어 있습니다.
+
+---
+
+#### Question 3: 
+What does the word **"infrastructure"** refer to?
+A) The physical structures and facilities needed for the operation of a society  
+B) A type of building  
+C) A method of transportation  
+D) A type of technology  
+
+**Answer: A) The physical structures and facilities needed for the operation of a society**  
+**Explanation in Korean:** "Infrastructure"는 사회의 운영에 필요한 물리적 구조물과 시설을 의미합니다. 기사에서는 서울에서 발생한 싱크홀이 불량한 인프라 관리로 인해 발생했다고 언급하고 있습니다.
+
+---
+
+이 퀴즈를 통해 기사에서 사용된 어려운 단어들을 이해하는 데 도움이 되길 바랍니다! | Sources: ['https://www.bbc.co.uk/news/articles/cd923lzdwkqo']
+2025-05-05 15:33:57.697520 | Q: 문법퀴즈 줘봐 | A: ### Grammar Quiz from the Article
+
+#### Question 1: Subject-Verb Agreement
+**Choose the correct form of the verb to complete the sentence:**
+
+Netumbo Nandi-Ndaitwah ______ (be) Namibia's first female president.
+
+A) is  
+B) are  
+C) were  
+
+**Answer:** A) is
+
+**Explanation in Korean:** 주어 "Netumbo Nandi-Ndaitwah"는 단수이므로, 동사 "is"가 올바른 형태입니다. "are"는 복수 주어와 함께 사용되며, "were"는 과거형으로 사용되기 때문에 이 문장에 적합하지 않습니다.
+
+---
+
+#### Question 2: Tense Consistency
+**Fill in the blank with the correct tense of the verb:**
+
+She ______ (join) Swapo when she was only 14.
+
+A) joins  
+B) joined  
+C) joining  
+
+**Answer:** B) joined
+
+**Explanation in Korean:** 문맥상 과거의 사건을 설명하고 있으므로, "joined"라는 과거형 동사가 적합합니다. "joins"는 현재형, "joining"은 현재진행형으로, 이 문장에는 맞지 않습니다.
+
+---
+
+#### Question 3: Prepositions
+**Choose the correct preposition to complete the sentence:**
+
+Namibia is one of the world's most unequal countries, with a Gini coefficient ______ 59.1 in 2015.
+
+A) at  
+B) in  
+C) of  
+
+**Answer:** A) at
+
+**Explanation in Korean:** "Gini coefficient"와 같은 수치나 지표를 언급할 때는 "at"이라는 전치사를 사용합니다. "in"은 특정한 장소나 시간에 사용되며, "of"는 소속이나 관계를 나타낼 때 사용됩니다. 따라서 "at"이 올바른 선택입니다. | Sources: ['https://www.bbc.co.uk/news/articles/cly8ln5g12wo']
+2025-05-05 15:33:58.377528 | Q: 봐 | A: Sorry, I don't know how to answer that. | Sources: ['출처 없음']
+2025-05-05 15:35:47.564650 | Q: 단어 퀴즈 줄 수 있니? | A: Sure! Here’s a vocabulary quiz based on the article. 
+
+### Vocabulary Quiz
+
+**1. Sinkhole**  
+What does the word "sinkhole" mean in the context of the article?  
+A) A type of road  
+B) A hole in the ground caused by the collapse of a surface layer  
+C) A type of vehicle  
+D) A method of rescue  
+
+**Answer:** B) A hole in the ground caused by the collapse of a surface layer  
+**Explanation in Korean:** "Sinkhole"은 지표면이 무너져내려 생긴 구멍을 의미합니다. 이 기사에서는 도로가 무너져서 생긴 큰 구멍을 설명하고 있습니다.
+
+---
+
+**2. Rescuers**  
+What does the word "rescuers" refer to in the article?  
+A) People who cause accidents  
+B) People who help in emergencies  
+C) People who take videos  
+D) People who work in offices  
+
+**Answer:** B) People who help in emergencies  
+**Explanation in Korean:** "Rescuers"는 긴급 상황에서 사람들을 돕는 사람들을 의미합니다. 이 기사에서는 사고가 발생한 후 구조 작업을 하는 사람들을 언급하고 있습니다.
+
+---
+
+**3. Infrastructure**  
+What does the word "infrastructure" mean in the article?  
+A) The physical structures and facilities needed for the operation of a society  
+B) The people who manage a city  
+C) The vehicles used for transportation  
+D) The laws governing a city  
+
+**Answer:** A) The physical structures and facilities needed for the operation of a society  
+**Explanation in Korean:** "Infrastructure"는 사회의 운영에 필요한 물리적 구조물과 시설을 의미합니다. 기사에서는 서울에서 발생한 싱크홀의 원인 중 하나로 인프라 관리의 부족을 언급하고 있습니다.
+
+---
+
+Feel free to use this quiz for your students! | Sources: ['https://www.bbc.co.uk/news/articles/cd923lzdwkqo']
+2025-05-05 15:36:42.027579 | Q: 다른 종류의 한국 기사가져와줘 | A: ### Article Summary (EN)
+A community dance day is being organized by Jumped Up Theatre in Peterborough. The event will take place at the Key Theatre and will feature various dance workshops, including Indian classical and Lithuanian dance. The aim is to bring people together through music and movement, and everyone is welcome regardless of their dancing ability. The event will also include live performances and film screenings. Most workshops cost £5, and some events are free. Tickets need to be booked in advance.
+
+### Explanation (KR)
+Jumped Up Theatre라는 예술 단체가 피터버러에서 커뮤니티 댄스 데이를 개최합니다. 이 행사는 키 극장에서 열리며, 인도 전통 무용과 리투아니아 무용을 포함한 다양한 댄스 워크숍이 진행됩니다. 이 행사의 목표는 음악과 움직임을 통해 사람들을 하나로 모으는 것입니다. 모든 사람은 춤 실력에 관계없이 환영받습니다. 행사에는 라이브 공연과 영화 상영도 포함됩니다. 대부분의 워크숍은 £5의 비용이 들며, 일부 이벤트는 무료입니다. 대부분의 행사에 대해 사전 예약이 필요합니다.
+
+### Important Words (EN -> KR)
+1. **Workshop (워크숍)**: 특정 주제나 기술을 배우기 위해 사람들이 모여서 활동하는 시간입니다.
+2. **Community (커뮤니티)**: 특정 지역이나 관심사를 공유하는 사람들의 모임입니다.
+3. **Accessible (접근 가능한)**: 모든 사람들이 쉽게 이용할 수 있도록 설계된 상태입니다.
+4. **Performance (공연)**: 예술가들이 관객 앞에서 보여주는 예술 활동입니다.
+
+### Follow-up Question (EN)
+What type of dance would you like to learn if you had the chance? | Sources: ['https://www.bbc.co.uk/news/articles/cdjymgle8ljo']
+2025-05-05 15:36:45.295720 | Q: 줘 | A: Hey there! It looks like you typed "줘," which means "give me" in Korean. What would you like to talk about or ask for? I'm here to help! 😊 | Sources: ['출처 없음']
+2025-05-05 15:42:05.443194 | Q: hi | A: Hi there! How’s your day going? 😊 | Sources: ['출처 없음']
+2025-05-05 15:42:22.745708 | Q: hi | A: ### Article Summary (EN)
+The US has launched air strikes against Houthi rebels in Yemen due to their attacks on shipping in the Red Sea. President Trump stated that the Houthis, funded by Iran, have caused violence and piracy that endangered lives and cost billions. The Houthis reported casualties from the strikes and vowed to continue targeting shipping until Israel lifts its blockade of Gaza. They have attacked many vessels recently, prompting major shipping companies to avoid the Red Sea. Trump warned the Houthis that their actions would not be tolerated and urged Iran to stop supporting them.
+
+### Explanation (KR)
+미국은 예멘의 후티 반군에 대한 공습을 시작했습니다. 이는 후티 반군이 홍해에서 선박을 공격했기 때문입니다. 트럼프 대통령은 후티 반군이 이란의 지원을 받아 폭력과 해적 행위를 일으켜 인명과 재산에 큰 피해를 주었다고 말했습니다. 후티 측은 공습으로 인한 사상자를 보고하며 이스라엘이 가자 지구의 봉쇄를 해제할 때까지 선박 공격을 계속하겠다고 밝혔습니다. 후티 반군은 최근 많은 선박을 공격했으며, 이로 인해 주요 해운 회사들이 홍해를 피하고 있습니다. 트럼프는 후티의 행동이 용납되지 않을 것이라고 경고했습니다.
+
+### Important Words (EN -> KR)
+1. **Air strikes (공습)**: 군대가 공중에서 목표를 공격하기 위해 폭탄이나 미사일을 사용하는 것.
+2. **Rebels (반군)**: 정부에 반대하여 싸우는 무장 단체나 사람들.
+3. **Blockade (봉쇄)**: 특정 지역이나 항구에 접근하지 못하도록 차단하는 것.
+4. **Piracy (해적 행위)**: 바다에서 불법적으로 선박을 공격하거나 약탈하는 행위.
+
+### Follow-up Question (EN)
+What do you think about the impact of the Houthi attacks on global shipping? | Sources: ['https://www.bbc.co.uk/news/articles/c05mvr3j3yro']
+2025-05-05 15:50:44.538892 | Q: hello | A: ### Article Summary (EN)
+Prime Minister Sir Keir Starmer announced that military planning for a potential ceasefire in Ukraine is now in an "operational phase" after a meeting with 29 world leaders. Military leaders will meet in London to create strong plans to support a peace deal and ensure Ukraine's security. Ukraine has agreed to a 30-day ceasefire, but Russian President Vladimir Putin has set conditions for peace. Ukrainian President Volodymyr Zelensky emphasized the need for active pressure on Russia to achieve peace. Leaders agreed to increase military support and tighten sanctions on Russia if Putin does not agree to an immediate ceasefire. They are also considering a "coalition of the willing" to help defend Ukraine. 
+
+### Explanation (KR)
+영국의 총리인 키어 스타머가 우크라이나의 휴전 계획을 위한 군사 작전이 "운영 단계"로 들어갔다고 발표했습니다. 그는 29개국의 세계 지도자들과 회의를 가진 후 이 발표를 했습니다. 군사 지도자들은 런던에서 평화 협정을 지원하고 우크라이나의 안전을 보장하기 위한 강력한 계획을 세우기 위해 모일 예정입니다. 우크라이나는 30일간의 휴전에 합의했지만, 러시아의 대통령인 블라디미르 푸틴은 평화를 위한 조건을 제시했습니다. 우크라이나의 대통령인 볼로디미르 젤렌스키는 러시아에 대한 적극적인 압박이 필요하다고 강조했습니다. 지도자들은 푸틴이 즉각적인 휴전에 동의하지 않으면 군사 지원을 증가시키고 러시아에 대한 제재를 강화하기로 합의했습니다. 그들은 또한 우크라이나를 방어하기 위한 "자발적인 연합"을 고려하고 있습니다.
+
+### Important Words (EN -> KR)
+1. **Ceasefire (휴전)**: 전투를 중단하고 평화로운 상태로 돌아가는 것을 의미합니다.
+2. **Sanctions (제재)**: 특정 국가나 개인에 대해 경제적 또는 정치적 압박을 가하기 위해 시행되는 조치입니다.
+3. **Coalition (연합)**: 여러 국가나 단체가 공동의 목표를 위해 함께 모인 그룹을 의미합니다.
+4. **Operational phase (운영 단계)**: 계획이나 준비가 완료되어 실제로 실행에 옮기는 단계입니다.
+
+### Follow-up Question (EN)
+What do you think are the challenges in achieving a ceasefire between Ukraine and Russia? | Sources: ['https://www.bbc.co.uk/news/articles/c5ymrz8d21yo']
+2025-05-05 15:59:00.962265 | Q: hi | A: Hi there! How are you today? 
+
+안녕하세요! 오늘 기분이 어떠세요? 
+
+반갑습니다! 😊 | Sources: ['출처 없음']
+2025-05-05 16:02:33.497500 | Q: hi | A: Hi there! 😊 How are you doing today? | Sources: ['출처 없음']
+2025-05-05 16:02:42.900770 | Q: what is your role | A: Hey there! My role is to help you learn and practice English. I’m here to answer your questions, explain things, and make learning fun! 
+
+(내 역할은 너가 영어를 배우고 연습하는 것을 도와주는 거야. 나는 너의 질문에 대답하고, 설명하고, 학습을 재미있게 만드는 것이야!) 
+
+If you have more questions, feel free to ask! 😊 | Sources: ['출처 없음']
+2025-05-05 16:03:15.800140 | Q: 한국 뉴스 줄 수 있니? | A: ### Article Summary (EN)
+Multiple wildfires in South Korea's southeast region have killed at least 24 people, mostly elderly, and injured 26 others, with 12 in critical condition. Over 23,000 people have been evacuated from their homes. The fires have destroyed a 1,300-year-old temple and are the deadliest in South Korea's history, affecting around 17,000 hectares of forest. Thousands of firefighters and military personnel are working to control the flames, which are fueled by strong winds. The government is investigating the cause of the fires and plans to strengthen enforcement against illegal burning.
+
+### Explanation (KR)
+한국의 동남부 지역에서 여러 건의 산불이 발생하여 최소 24명이 사망하고, 26명이 부상을 입었으며, 그 중 12명은 중태입니다. 23,000명 이상이 집에서 대피해야 했습니다. 이 산불은 1,300년 된 사원을 파괴했으며, 한국 역사상 가장 치명적인 산불로 기록되고 있습니다. 약 17,000헥타르의 숲이 파괴되었습니다. 수천 명의 소방관과 군인들이 불길을 잡기 위해 노력하고 있으며, 강한 바람이 불길을 키우고 있습니다. 정부는 산불의 원인을 조사하고 불법 소각에 대한 단속을 강화할 계획입니다.
+
+### Important Words (EN -> KR)
+1. **Wildfire (산불)**: 자연적으로 발생한 큰 불로, 주로 숲이나 초원에서 발생합니다.
+2. **Evacuated (대피하다)**: 위험한 상황에서 안전한 장소로 이동하는 것을 의미합니다.
+3. **Crisis (위기)**: 심각한 문제나 상황으로, 즉각적인 대응이 필요한 상태를 말합니다.
+4. **Temple (사원)**: 종교적인 목적을 위해 지어진 건물로, 주로 기도를 하거나 예배를 드리는 장소입니다.
+
+### Follow-up Question (EN)
+What do you think the government should do to prevent wildfires in the future? | Sources: ['https://www.bbc.co.uk/news/articles/c1lp365pd1go']
+2025-05-05 16:03:41.567539 | Q: 관련해서 단어 퀴즈 만들어봐 | A: Here’s a vocabulary quiz based on the article, featuring three difficult words along with multiple-choice questions and explanations in Korean.
+
+### Vocabulary Quiz
+
+#### 1. **Ravage**
+**Question:** What does the word "ravage" mean in the context of the article?  
+A) To protect  
+B) To destroy severely  
+C) To build  
+D) To observe  
+
+**Answer:** B) To destroy severely  
+**Explanation:** "Ravage"는 심각하게 파괴하다라는 의미로, 기사에서는 한국의 동남부 지역에서 발생한 산불이 많은 피해를 주었다는 맥락에서 사용되었습니다.
+
+---
+
+#### 2. **Unprecedented**
+**Question:** What does the word "unprecedented" mean in the context of the article?  
+A) Common  
+B) Never seen before  
+C) Expected  
+D) Minor  
+
+**Answer:** B) Never seen before  
+**Explanation:** "Unprecedented"는 이전에 없었던, 즉 전례가 없는 상황을 의미합니다. 기사에서는 한국 역사상 최악의 산불이라는 맥락에서 사용되었습니다.
+
+---
+
+#### 3. **Evacuate**
+**Question:** What does the word "evacuate" mean in the context of the article?  
+A) To stay  
+B) To leave a place for safety  
+C) To celebrate  
+D) To gather  
+
+**Answer:** B) To leave a place for safety  
+**Explanation:** "Evacuate"는 안전을 위해 어떤 장소를 떠나다라는 의미입니다. 기사에서는 23,000명이 집을 떠나야 했다는 내용을 설명하는 데 사용되었습니다.
+
+---
+
+이 퀴즈를 통해 학생들이 중요한 단어들을 이해하고, 그 의미를 문맥 속에서 파악할 수 있도록 도와줄 수 있습니다. | Sources: ['https://www.bbc.co.uk/news/articles/c1lp365pd1go']
+2025-05-05 16:03:52.467479 | Q: 봐 | A: ### Vocabulary Quiz
+
+**1. Administrative**  
+What does "administrative" mean in the context of the article?  
+A) Related to the management of a business or organization  
+B) Related to a legal court  
+C) Related to a criminal act  
+D) Related to a personal relationship  
+
+**Answer:** A) Related to the management of a business or organization  
+**Explanation in Korean:** "Administrative"는 "행정의"라는 뜻으로, 비즈니스나 조직의 관리와 관련된 것을 의미합니다. 이 기사에서는 트럼프 행정부의 실수로 인한 행정적 오류를 언급하고 있습니다.
+
+---
+
+**2. Deportation**  
+What does "deportation" refer to in the article?  
+A) The process of allowing someone to enter a country  
+B) The process of sending someone back to their home country  
+C) The process of granting citizenship  
+D) The process of providing legal protection  
+
+**Answer:** B) The process of sending someone back to their home country  
+**Explanation in Korean:** "Deportation"은 "추방"을 의미하며, 특정 개인이 자신의 고국으로 송환되는 과정을 나타냅니다. 기사에서는 Mr. Ábrego García가 잘못 추방된 사건이 다루어지고 있습니다.
+
+---
+
+**3. Allegation**  
+What does "allegation" mean in the context of the article?  
+A) A proven fact  
+B) A claim or assertion made without proof  
+C) A legal agreement  
+D) A type of punishment  
+
+**Answer:** B) A claim or assertion made without proof  
+**Explanation in Korean:** "Allegation"은 "주장"이라는 뜻으로, 증거 없이 제기된 주장이나 주장입니다. 기사에서는 Mr. Ábrego García가 MS-13 갱단과 관련이 있다는 주장이 있지만, 이는 입증되지 않은 주장으로 언급되고 있습니다. | Sources: ['https://www.bbc.co.uk/news/articles/c20z63gr8mzo']
+2025-05-05 16:04:47.480661 | Q: 단어 퀴즈 줘봐 | A: Sure! How about a little word quiz? I'll give you a word, and you can try to guess its meaning or use it in a sentence. 
+
+Here’s your first word: **"curious."**
+
+What do you think it means? Or can you use it in a sentence? 
+
+(한국어 설명: "curious"는 "호기심이 많은"이라는 뜻이에요. 어떤 의미인지 생각해 보세요!) | Sources: ['출처 없음']
+2025-05-05 16:04:49.610907 | Q: 봐 | A: Hey there! It looks like you wrote "봐," which means "look" in English. If you want to say something like "Look at this!" you can say, "Look at this!" in English. 
+
+If you have something specific you want to show or talk about, feel free to share! 😊 
+
+(간단히 말하자면, "봐"는 영어로 "look"이라는 뜻이에요. 더 궁금한 게 있으면 언제든지 물어봐요!) | Sources: ['출처 없음']

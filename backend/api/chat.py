@@ -1,3 +1,4 @@
+# backend/api/chat.py
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from services.chatbot_test import run_chatbot  # run_qa에서 분리된 함수
@@ -7,6 +8,7 @@ router = APIRouter()
 
 class ChatRequest(BaseModel):
     question: str
+    mode: str = ""
 
 class ChatResponse(BaseModel):
     answer: str
@@ -15,7 +17,7 @@ class ChatResponse(BaseModel):
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest):
     try:
-        result = run_chatbot(request.question)
+        result = run_chatbot(request.question, request.mode)
         return ChatResponse(**result)
     except Exception as e:
         traceback.print_exc()  # 내부 에러 확인

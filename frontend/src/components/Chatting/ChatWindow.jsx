@@ -1,5 +1,5 @@
-// ✅ ChatWindow.jsx
-import React from 'react';
+// ChatWindow.jsx
+import React, { useState } from 'react';
 import ChatBubble from './ChatBubble';
 import Canvas from './Canvas';
 import useChat from '../../hooks/useChat';
@@ -12,7 +12,13 @@ function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
     setUserInput,
     sendMessage,
     messageEndRef,
+    mode,
+    setMode,
   } = useChat();
+
+  const toggleMode = (selectedMode) => {
+    setMode(mode === selectedMode ? "" : selectedMode);
+  };
 
   return (
     <div className="chat-window">
@@ -31,10 +37,20 @@ function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
         )}
         <div ref={messageEndRef} />
       </div>
-      <div className={`chat-footer ${isCanvasOpen ? 'reduced' : ''}`}>
+      
+      {/* 모드 표시 */}
+      {mode && (
+        <div className="current-mode">
+          <strong>Current Mode:</strong> {mode}
+        </div>
+      )}
+
+      <div className="chat-footer">
         <div className="footer-buttons">
-          <button className="footer-button">#Quiz Mode</button>
-          <button className="footer-button">#Roleplay Mode</button>
+          <button className={`footer-button ${mode === "article" ? "active" : ""}`} onClick={() => toggleMode("article")}>Article</button>
+          <button className={`footer-button ${mode === "vocab_quiz" ? "active" : ""}`} onClick={() => toggleMode("vocab_quiz")}>Vocab Quiz</button>
+          <button className={`footer-button ${mode === "grammar_quiz" ? "active" : ""}`} onClick={() => toggleMode("grammar_quiz")}>Grammar Quiz</button>
+          <button className={`footer-button ${mode === "content_quiz" ? "active" : ""}`} onClick={() => toggleMode("content_quiz")}>Content Quiz</button>
         </div>
         <div className="input-container">
           <input
@@ -43,10 +59,10 @@ function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
             placeholder="Write your message"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && sendMessage(userInput)}
+            onKeyDown={(e) => e.key === 'Enter' && sendMessage(userInput, mode)}
           />
-          <button className="send-button" onClick={() => sendMessage(userInput)}>
-            <img src="/assets/send-icon.svg" alt="Send" className="send-icon" />
+          <button className="send-button" onClick={() => sendMessage(userInput, mode)}>
+            Send
           </button>
         </div>
       </div>

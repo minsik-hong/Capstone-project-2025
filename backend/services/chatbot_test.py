@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from dotenv import load_dotenv
 
-from langchain.chains import ConversationalRetrievalChain, LLMChain
 from langchain.memory import ConversationSummaryBufferMemory
 from langchain_openai import ChatOpenAI
 from langchain_weaviate.vectorstores import WeaviateVectorStore
@@ -12,7 +11,6 @@ from langsmith import traceable
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
 from langchain.schema import HumanMessage
-
 
 # -------------------------------
 # Environment & Settings
@@ -47,72 +45,24 @@ llm = ChatOpenAI(
 # Prompts
 # -------------------------------
 
-# article_prompt = PromptTemplate(
-#     input_variables=["context", "question"],
-#     template="""
-# You are a friendly and talkative English tutor. Your main goal is to help the user easily understand English news articles.
-
-# Article:
-# {context}
-
-# User asked:
-# {question}
-
-# Please follow these instructions carefully:
-
-# [ Article Summary ]
-
-# - Summarize the article using short, clear, and natural paragraphs.
-# - Make each paragraph easy to read and friendly for English learners.
-# - Add blank lines between paragraphs.
-
-# [ Important Words ]
-
-# - Choose 3~4 important or difficult words.
-# - For each word:
-#     - Write the word.
-#     - Add a simple explanation.
-# - Use "-" and indentation to make it easy to read.
-
-# [ Follow-up Question ]
-
-# - Ask one friendly and simple question related to the article.
-# - Make sure the entire response looks clean and easy to read.
-# """
-# )
-
-# tutor_prompt = PromptTemplate(
+# korean_tutor_prompt = PromptTemplate(
 #     input_variables=["question"],
 #     template="""
-# You are a friendly and talkative English tutor.
+# You are a friendly English tutor who teaches Korean students.
+
+# When you answer, follow these steps:
+
+# 1. Answer naturally and simply in English.
+# 2. Explain the meaning in Korean.
+# 3. Use friendly Korean expressions.
 
 # User asked:
 
 # {question}
 
-# Please answer naturally and help them with vocabulary, grammar, and natural expressions like a human tutor.
+# Now, please answer.
 # """
 # )
-
-korean_tutor_prompt = PromptTemplate(
-    input_variables=["question"],
-    template="""
-You are a friendly English tutor who teaches Korean students.
-
-When you answer, follow these steps:
-
-1. First, give your answer in natural and simple English.
-2. Then, explain the meaning in Korean so that Korean students can easily understand.
-3. Use simple and friendly Korean expressions when explaining.
-4. If necessary, give example sentences both in English and Korean.
-
-User asked:
-
-{question}
-
-Now, please answer.
-"""
-)
 
 korean_article_prompt = PromptTemplate(
     input_variables=["context", "question"],
@@ -125,34 +75,109 @@ Article:
 User asked:
 {question}
 
-Please follow these steps:
-
 [ Article Summary (EN) ]
-
-- Summarize the article in clear and simple English.
-- Use short and friendly sentences.
+- Summarize in clear and simple English.
 
 [ Explanation (KR) ]
-
-- Explain the article and its key points in Korean so that Korean students can understand easily.
+- Explain in Korean.
 
 [ Important Words (EN -> KR) ]
-
-- Select 3-4 important/difficult words.
-- For each word:
-    - Write the word (EN)
-    - Explain in simple Korean.
+- Pick 3~4 words, explain them in Korean.
 
 [ Follow-up Question (EN) ]
+- Ask one question in English.
+"""
+)
 
-- Ask one friendly and simple English question related to the article.
+vocab_quiz_prompt = PromptTemplate(
+    input_variables=["context", "question"],
+    template="""
+You are an English quiz maker for Korean students.
+
+Article:
+{context}
+
+User asked:
+{question}
+
+Make a vocabulary quiz from the article:
+- Select 3 difficult words.
+- For each, make a multiple-choice question.
+- Provide answers and explain each in Korean.
+"""
+)
+
+grammar_quiz_prompt = PromptTemplate(
+    input_variables=["context", "question"],
+    template="""
+You are an English grammar quiz maker for Korean students.
+
+Article:
+{context}
+
+User asked:
+{question}
+
+Make a grammar quiz from the article:
+- Select 3 grammar points.
+- For each, make a question (multiple choice or fill in the blank).
+- Explain answers in Korean.
+"""
+)
+
+content_quiz_prompt = PromptTemplate(
+    input_variables=["context", "question"],
+    template="""
+You are an English reading comprehension quiz maker for Korean students.
+
+Article:
+{context}
+
+User asked:
+{question}
+
+Make a content quiz:
+- Make 3 questions about the content.
+- Multiple choice preferred.
+- Explain the answers in Korean.
+"""
+)
+
+# free_chat_prompt = PromptTemplate(
+#     input_variables=["question"],
+#     template="""
+# You are a friendly English teacher who enjoys casual conversation.
+
+# User asked:
+
+# {question}
+
+# Please respond in natural and friendly English like a real person having a chat. If the user asks for explanation, explain simply in Korean as well.
+# """
+# )
+
+default_tutor_prompt = PromptTemplate(
+    input_variables=["question"],
+    template="""
+You are a kind and natural English tutor for Korean students.
+
+When the user asks a question, do these:
+
+1. Respond naturally in English, like casual conversation.
+2. If the sentence is difficult, provide simple Korean explanation too.
+3. Use friendly expressions as if you are speaking with a student.
+
+User asked:
+
+{question}
+
+Please answer.
 """
 )
 
 
-
 # -------------------------------
-# Vector Store (Weaviate)
+# Vector Store
 # -------------------------------
 
 connection_params = ConnectionParams.from_params(
@@ -189,7 +214,7 @@ memory = ConversationSummaryBufferMemory(
 
 
 # -------------------------------
-# Helper functions
+# Helper Functions
 # -------------------------------
 
 def clean_text(text: str) -> str:
@@ -199,52 +224,49 @@ def log_interaction(question, answer, sources):
     with open("chat_logs.txt", "a", encoding="utf-8") as f:
         f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Sources: {sources}\n")
 
-def user_wants_article(user_input: str) -> bool:
+def detect_intent(user_input: str) -> str:
     check_llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.0, openai_api_key=OPENAI_API_KEY)
 
     prompt = f"""
 User said: "{user_input}"
 
-Does the user want to read articles or ask for news? Answer only "Yes" or "No".
+Classify the intent as only one of:
+- free_chat (casual chat or basic English QnA)
+- tutor (English learning, explain in Korean)
+- article
+- vocab_quiz
+- grammar_quiz
+- content_quiz
 """
 
     result = check_llm.invoke([HumanMessage(content=prompt)]).content.strip()
-    return "Yes" in result
+    return result
 
 
 # -------------------------------
 # Unified Chat Logic
 # -------------------------------
 
-# def get_answer(user_input: str):
-#     if user_wants_article(user_input):
-#         # Article mode
-#         docs = vectorstore.similarity_search(user_input, k=2)
-#         context = "\n\n".join([doc.page_content for doc in docs])
-
-#         response = llm.invoke(article_prompt.format(context=context, question=user_input)).content
-#         source_url = docs[0].metadata.get("url", "") if docs else ""
-
-#     else:
-#         # General tutor mode
-#         response = llm.invoke(tutor_prompt.format(question=user_input)).content
-#         source_url = ""
-
-#     return clean_text(response), source_url
-
-def get_answer(user_input: str):
-    if user_wants_article(user_input):
-        # Article mode
+def get_answer(user_input: str, intent: str):
+    # 전문 모드일 경우만 기사 기반 벡터 검색
+    if intent in ["article", "vocab_quiz", "grammar_quiz"]:
         docs = vectorstore.similarity_search(user_input, k=2)
         context = "\n\n".join([doc.page_content for doc in docs])
-
-        response = llm.invoke(korean_article_prompt.format(context=context, question=user_input)).content
         source_url = docs[0].metadata.get("url", "") if docs else ""
-
     else:
-        # General tutor mode
-        response = llm.invoke(korean_tutor_prompt.format(question=user_input)).content
+        context = ""
         source_url = ""
+
+    # intent 에 따른 응답 처리
+    if intent == "article":
+        response = llm.invoke(korean_article_prompt.format(context=context, question=user_input)).content
+    elif intent == "vocab_quiz":
+        response = llm.invoke(vocab_quiz_prompt.format(context=context, question=user_input)).content
+    elif intent == "grammar_quiz":
+        response = llm.invoke(grammar_quiz_prompt.format(context=context, question=user_input)).content
+    else:
+        # 기본 → 자연스럽고 친절한 튜터 + 프리챗
+        response = llm.invoke(default_tutor_prompt.format(question=user_input)).content
 
     return clean_text(response), source_url
 
@@ -254,22 +276,19 @@ def get_answer(user_input: str):
 # -------------------------------
 
 @traceable(name="run_chatbot")
-def run_chatbot(raw_input: str) -> dict:
+def run_chatbot(raw_input: str, mode: str = "") -> dict:
     question = clean_text(raw_input)
-
-    # Save user input
     memory.save_context({"input": question}, {"answer": ""})
 
-    answer, source_url = get_answer(question)
+    # 전문 모드가 아니면 intent → default 모드 (free chat + tutor)
+    intent = mode if mode in ["article", "vocab_quiz", "grammar_quiz"] else "default"
 
-    # Save generated answer
+    answer, source_url = get_answer(question, intent)
+
     memory.save_context({"input": question}, {"answer": answer})
-
     log_interaction(question, answer, [source_url or "출처 없음"])
 
     return {
         "answer": answer,
         "source": source_url
     }
-
-
