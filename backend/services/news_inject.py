@@ -4,6 +4,8 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 from datetime import datetime, timedelta, timezone
+import weaviate
+
 from langchain_weaviate.vectorstores import WeaviateVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.schema import Document
@@ -11,10 +13,8 @@ from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
 
 load_dotenv()
-
 NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
-# # Weaviate 연결
 # connection_params = ConnectionParams.from_params(
 #     http_host="54.252.156.14",
 #     http_port=8080,
@@ -26,60 +26,52 @@ NEWS_API_KEY = os.getenv("NEWS_API_KEY")
 
 connection_params = ConnectionParams.from_params(
     http_host="54.252.156.14",
-    # http_host="newslearningcap.duckdns.org",
     http_port=8080,
     http_secure=False,
-    grpc_host="54.252.156.14",  # gRPC도 http_host와 동일하게
-    # grpc_host="newslearningcap.duckdns.org",
-    grpc_port=50051,            # 열려있는 포트로 정확히 입력
-    grpc_secure=False
+    grpc_host="54.252.156.14",     # 이건 http_host 와 같게 하면 됨
+    grpc_port=50051,               # 일반적인 grpc 포트
+    grpc_secure=False              # http 인데 grpc_secure True면 안 됨 → False
 )
 
-client = WeaviateClient(connection_params=connection_params)
+client = weaviate.WeaviateClient(connection_params=connection_params)
 client.connect()
+
+# Check if URL exists in Weaviate (중복 체크)
+def is_url_in_weaviate(url, index_name):
+    try:
+        collection = client.collections.get(index_name)
+
+        result = collection.query.fetch_objects(
+            filters={
+                "operator": "Equal",
+                "path": ["url"],
+                "valueText": url
+            },
+            limit=1
+        )
+
+        return len(result.objects) > 0
+    except Exception as e:
+        print("Weaviate 중복 확인 실패:", e)
+        return False
+
 
 # 기사 유효성 필터
 def is_valid_news_article(article) -> bool:
     url = article.get("url", "").lower()
     title = article.get("title", "").strip().lower()
     description = article.get("description", "")
-    url_to_image = article.get("urlToImage")
-    content = article.get("content", "")
-
-    # [FIXED] 정확히 https://www.bbc.co.uk/news/articles/ 로 시작하는 URL만 허용
-    if not url.startswith("https://www.bbc.co.uk/news/articles/"):
+    if "articles" not in url:
         return False
-
-
-    radio_url_keywords = ["programmes", "sounds", "live", "/radio/", "/audio/"]
-    if any(kw in url for kw in radio_url_keywords):
-        return False
-
-    if not description:
-        return False
-
-    if not url_to_image:
-        return False
-
-    if len(content) < 200:
-        return False
-
     repetitive_keywords = [
-        "five minute news bulletin",
-        "bbc world service",
-        "news summary",
-        "news update",
-        "listen to the latest news",
-        "bulletin",
-        "audio",
-        "programme",
-        "world service",
+        "five minute news bulletin", "bbc world service", "news summary",
+        "news update", "listen to the latest news", "bulletin",
+        "audio", "programme", "world service",
     ]
     if any(kw in title for kw in repetitive_keywords):
         return False
     if any(kw in description.lower() for kw in repetitive_keywords):
         return False
-
     return True
 
 # 본문 스크래핑
@@ -105,7 +97,7 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
     delta = timedelta(days=5)
     cutoff_date = datetime.now(timezone.utc) - timedelta(days=30)
     if start_dt < cutoff_date:
-        print(f" 시작일 {start_date}은 무료 플랜 범위를 초과함. {cutoff_date.date()} 이후로 설정하세요.")
+        print(f" 시작일 {start_date}은 무료 플랜 범위를 초과함.")
         return []
 
     while start_dt < end_dt:
@@ -205,15 +197,29 @@ def save_and_vectorize_langchain(articles, source_name, start_date, end_date):
         for article in new_articles
     ]
 
-    vector_store = WeaviateVectorStore.from_documents(
-        documents=docs,
-        embedding=embedding_model,
-        client=client,
-        index_name=f"news_{source_name}".lower(),   # 자동으로 소스별 클래스 구분
-        text_key="content"
-    )
+    # Weaviate 중복 확인 후 없는 것만 넣기
+    docs_to_add = []
+    duplicate_count = 0
+    index_name = f"news_{source_name}".lower()
 
-    print(f" LangChain 벡터화 완료: {source_name}, 총 {len(new_articles)}개 추가")
+    for doc in docs:
+        url = doc.metadata["url"]
+        if not is_url_in_weaviate(url, index_name):
+            docs_to_add.append(doc)
+        else:
+            duplicate_count += 1
+
+    if docs_to_add:
+        vector_store = WeaviateVectorStore.from_documents(
+            documents=docs_to_add,
+            embedding=embedding_model,
+            client=client,
+            index_name=index_name,
+            text_key="content"
+        )
+        print(f" LangChain 벡터화 완료: {source_name}, 총 {len(docs_to_add)}개 추가, 중복 제외 {duplicate_count}개")
+    else:
+        print(f" LangChain 벡터화 완료: {source_name}, 추가 없음, 중복 제외 {duplicate_count}개")
 
 # 저장된 기사 파일 불러오기 및 벡터화
 def load_and_vectorize_from_file(source_name, start_date, end_date):
@@ -256,30 +262,28 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 # 실행
 if __name__ == "__main__":
-    start_date = "2025-04-02"
-    end_date = "2025-05-01"
+    start_date = "2025-04-06"
+    end_date = "2025-05-04"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
         {"api_name": "cnn", "name": "cnn"}
     ]
 
-    # # 수집 부분 
-    # for source in sources:
-    #     print(f"\n {source['name'].upper()} 뉴스 수집 중...")
-    #     articles = fetch_news_from_to(
-    #         query="",
-    #         start_date=start_date,
-    #         end_date=end_date,
-    #         source=source["api_name"]
-    #     )
-    #     save_and_vectorize_langchain(
-    #         articles,
-    #         source_name=source["name"],
-    #         start_date=start_date,
-    #         end_date=end_date
-    #     )
-    
-    # 벡터화 부분
+    for source in sources:
+        print(f"\n {source['name'].upper()} 뉴스 수집 중...")
+        articles = fetch_news_from_to(
+            query="",
+            start_date=start_date,
+            end_date=end_date,
+            source=source["api_name"]
+        )
+        save_and_vectorize_langchain(
+            articles,
+            source_name=source["name"],
+            start_date=start_date,
+            end_date=end_date
+        )
+
     for source in sources:
         print(f"\n {source['name'].upper()} 벡터화 실행 중...")
         load_and_vectorize_from_file(

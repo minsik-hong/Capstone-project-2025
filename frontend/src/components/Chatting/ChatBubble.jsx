@@ -1,6 +1,6 @@
 import React from "react";
 import "./ChatBubble.css";
-import MarkdownMessage from "../../common/MarkdownMessage"; // 마크다운 메시지 컴포넌트
+import MarkdownMessage from "../common/MarkdownMessage"; // 마크다운 메시지 컴포넌트
 
 
 /**
@@ -13,7 +13,7 @@ function ChatBubble({ message, sender }) {
   return (
     <div className={`chat-bubble ${sender}`}>
       {/* <p className="message-text">{message}</p> */}
-      
+
       {/* 마크다운 메시지 컴포넌트 사용 */}
       <MarkdownMessage text={message} />  
     </div>
