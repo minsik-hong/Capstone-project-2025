@@ -1,15 +1,25 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from db.session import SessionLocal
-from db.models.user import User
+from models.user import User
+from models.login_attempt import LoginAttempt # LoginAttempt 모델 임포트
 from db.schemas.user import UserCreate, UserLogin
 from services.auth import hash_password, verify_password, create_access_token
 from datetime import timedelta
 import os
 import requests
+from jose import JWTError, jwt  # ✅ 토큰 디코딩을 위한 jose 라이브러리 추가
+from dotenv import load_dotenv
+
+load_dotenv()  # ✅ .env 환경 변수 로딩
 
 router = APIRouter()
+
+# JWT 설정 (재발급에 필요)
+SECRET_KEY = os.getenv("JWT_SECRET_KEY")  # ✅ .env에서 불러옴
+ALGORITHM = "HS256"
+
 
 # 데이터베이스 세션 생성
 def get_db():
@@ -60,6 +70,31 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     # 토큰을 반환
     return {"access_token": access_token, "token_type": "bearer"}
 
+# ✅ 토큰 재발급 API
+@router.post("/users/refresh")
+def refresh_token(request: Request):
+    """
+    Authorization 헤더로 전달된 JWT 토큰을 디코딩하여 유저 정보가 유효하면 새 토큰 발급
+    """
+    auth_header = request.headers.get("Authorization")
+    if not auth_header or not auth_header.startswith("Bearer "):
+        raise HTTPException(status_code=401, detail="Missing or invalid Authorization header")
+
+    token = auth_header.split(" ")[1]
+
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise HTTPException(status_code=401, detail="Invalid token: no subject")
+    except JWTError:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+    # 새 토큰 생성
+    new_token = create_access_token({"sub": username}, expires_delta=timedelta(minutes=30))
+    return {"access_token": new_token, "token_type": "bearer"}
+
+
 # 카카오 로그인 API
 KAKAO_CLIENT_ID = os.getenv("KAKAO_REST_KEY")
 KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
@@ -96,7 +131,12 @@ def kakao_login(code: str, db: Session = Depends(get_db)):
     # DB 사용자 확인 or 생성
     user = db.query(User).filter(User.username == username).first()
     if not user:
-        user = User(username=username, email=email, hashed_password="kakao_login_dummy")
+        user = User(    
+            username=username, 
+            email=email, 
+            password="kakao_login_dummy",           # User 클래스에서 비밀번호 필드가 password로 되어있으므로 수정해야함.
+            provider="kakao"                        # 카카오 로그인 시 provider를 "kakao"로 설정    
+            )
         db.add(user)
         db.commit()
         db.refresh(user)

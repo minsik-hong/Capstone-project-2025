@@ -23,12 +23,14 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+
+  
   adminer:
     image: adminer
     restart: always
     ports:
       - "8081:8080"  # Adminer 웹 UI의 외부 포트를 8081로 변경
-      
+
   backend:
     build: ./backend
     ports:

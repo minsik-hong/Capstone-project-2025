@@ -1,8 +1,9 @@
+from dotenv import load_dotenv
+load_dotenv()  # .env 파일에서 환경 변수 로드
 from fastapi import FastAPI
 from api import users, chat  # chat 라우터 추가
 from db.session import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
-from db.session import Base, engine
 
 app = FastAPI()
 
@@ -15,7 +16,7 @@ def startup():
 # CORS 설정 (프론트엔드와 통신 가능하도록)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

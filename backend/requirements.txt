@@ -6,6 +6,8 @@ python-dotenv
 # 🔹 인증 관련
 python-jose[cryptography]
 passlib[bcrypt]
+pydantic[email]
+
 
 
 # 🔹 NLP/AI 관련

@@ -19,7 +19,13 @@ export const loginUser = async (username, password) => {
     const response = await axios.post(`${API_URL}/api/users/login`, { username, password });
     return response.data;
   } catch (error) {
-    console.error('Login API error:', error);
+    if (error.response) {
+      // Backend response error
+      console.error('Login API error response:', error.response.data);
+    } else {
+      // Network error or timeout
+      console.error('Login API network error:', error.message);
+    }
     return { success: false, message: error.response?.data?.detail || "Login failed" };
   }
 };

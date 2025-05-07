@@ -6,6 +6,25 @@
   border-radius: 15px;
   background-color: #fff;
 }
+/* 카카오 로그인 버튼 스타일 */
+.kakao-login-button {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.kakao-login-button:hover {
+  filter: brightness(0.95);
+}
+
+.kakao-login-button img {
+  width: 100%;
+  height: 45px; /* 원본 이미지 높이에 맞춤 */
+  max-width: 300px; /* 이미지 원본 사이즈 기준 */
+  display: block;
+  border-radius: 4px;
+}
 
 /* 제목 스타일 */
 .login-container h2 {

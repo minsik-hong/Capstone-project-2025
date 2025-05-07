@@ -1,30 +1,20 @@
-# FastAPI 서버
 fastapi
 uvicorn[standard]
 python-dotenv
-
-# 인증
-passlib[bcrypt]
-python-jose
-
-# LLM / LangChain
 openai
-langchain==0.3.21
-langchain-openai==0.3.11
-langchain-weaviate==0.0.4
-langchain-huggingface==0.1.2
-langsmith
-
-# Weaviate
-weaviate-client==4.11.3
-
-# Embedding (뉴스 벡터화)
-sentence-transformers>=2.6.0  # ✅ 명시적으로 충돌 방지
-huggingface_hub
-transformers
-torch
-
-# 기타 필수 유틸
-tqdm
-pydantic
 requests
+newsapi-python
+pandas
+numpy
+sqlalchemy
+psycopg2-binary
+pydantic
+chromadb
+faiss-cpu
+tiktoken
+transformers
+sentence-transformers
+langchain
+beautifulsoup4
+lxml
+pytest
