@@ -1015,3 +1015,20 @@ Donald Trump and Ukrainian President Volodymyr Zelensky met briefly at Pope Fran
 
 **[한국어]**  
 도널드 트럼프와 우크라이나 대통령 볼로디미르 젤렌스키가 로마에서 프란치스코 교황의 장례식에서 잠깐 만났습니다. 트럼프는 푸틴이 우크라이나 전쟁을 끝내고 싶어하는지 의문을 제기하며, 러시아의 우크라이나 도시 공격이 평화를 원하지 않는다는 것을 보여준다고 말했습니다. 그들의 만남은 긍정적으로 평가되었고, 그들은 진행 중인 갈등에 대해 이야기했습니다. 트럼프는 이전에 젤렌스키를 비판했지만 이번 대화는 더 좋았습니다. 만남 후 젤렌스키는 프랑스 대통령 마크롱을 포함한 다른 지도자들과 평화 노력을 논의했습니다. | Source: https://www.bbc.co.uk/news/articles/cvgqyqmy7qqo
+2025-05-07 07:57:18.435387 | Q: korea | A: **[English]**
+
+A: Did you read about the situation in South Sudan?  
+B: No, what happened?  
+A: There was a bombing at a hospital and a market. Seven people died.  
+B: Oh no, that’s terrible! Is it because of the civil war?  
+A: Yes, the tensions between the leaders are rising again.  
+B: I hope they can find a way to peace soon.  
+
+**[한국어]**
+
+A: 남수단 상황에 대해 읽어봤어?  
+B: 아니, 무슨 일이야?  
+A: 병원과 시장이 폭격당했어. 7명이 죽었대.  
+B: 아, 안타깝다! 내전 때문이야?  
+A: 응, 지도자들 사이의 긴장이 다시 높아지고 있어.  
+B: 빨리 평화가 찾아오길 바래. | Source: https://www.bbc.co.uk/news/articles/cx2708dl9n1o
