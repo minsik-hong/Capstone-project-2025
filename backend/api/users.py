@@ -9,6 +9,8 @@ from datetime import timedelta
 
 import os
 
+import requests
+
 router = APIRouter()
 
 # 데이터베이스 세션 생성
