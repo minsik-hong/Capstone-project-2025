@@ -27,8 +27,10 @@ export const loginUser = async (username, password) => {
 
 // 실제 FastAPI 챗봇 API 연결 함수 추가
 export const askQuestion = async (question, mode = "") => {
+  // export const askQuestion = async (question) => {
   try {
     const response = await axios.post(`${API_URL}/api/chat`, { question, mode });
+    // const response = await axios.post(`${API_URL}/api/chat`, { question});
     return response.data; // { answer, source }
   } catch (error) {
     console.error('Chatbot API error:', error);

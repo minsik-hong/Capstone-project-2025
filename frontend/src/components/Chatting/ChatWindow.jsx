@@ -47,10 +47,10 @@ function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
 
       <div className="chat-footer">
         <div className="footer-buttons">
-          <button className={`footer-button ${mode === "article" ? "active" : ""}`} onClick={() => toggleMode("article")}>Article</button>
-          <button className={`footer-button ${mode === "vocab_quiz" ? "active" : ""}`} onClick={() => toggleMode("vocab_quiz")}>Vocab Quiz</button>
-          <button className={`footer-button ${mode === "grammar_quiz" ? "active" : ""}`} onClick={() => toggleMode("grammar_quiz")}>Grammar Quiz</button>
-          <button className={`footer-button ${mode === "content_quiz" ? "active" : ""}`} onClick={() => toggleMode("content_quiz")}>Content Quiz</button>
+          <button className={`footer-button ${mode === "summary" ? "active" : ""}`} onClick={() => toggleMode("summary")}>Summary</button>
+          <button className={`footer-button ${mode === "vocab" ? "active" : ""}`} onClick={() => toggleMode("vocab")}>Vocab Quiz</button>
+          <button className={`footer-button ${mode === "grammar" ? "active" : ""}`} onClick={() => toggleMode("grammar")}>Grammar Quiz</button>
+          <button className={`footer-button ${mode === "dialogue" ? "active" : ""}`} onClick={() => toggleMode("dialogue")}>Dialogue</button>
         </div>
         <div className="input-container">
           <input
