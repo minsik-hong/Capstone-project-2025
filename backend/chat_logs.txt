@@ -875,3 +875,143 @@ D) 25
 
 **[한국어]**
 "물론이죠! 최근 한국에서는 대중교통 개선에 대한 논의가 있었습니다. 정부는 모든 사람이 더 쉽게 이동할 수 있도록 버스와 지하철에 더 많은 투자를 할 계획이에요." | Source: https://www.bbc.co.uk/news/articles/c1lp365pd1go
+2025-05-07 07:35:49.185450 | Q: ai | A: Sure! Please provide the news article you would like me to summarize. | Source: 
+2025-05-07 07:36:01.282841 | Q: ai | A: **[English]**
+
+1. What does "recovering" most likely mean in this news?  
+A) becoming worse  
+B) getting better  
+C) staying the same  
+D) going back
+
+2. What is a synonym of "inflation"?  
+A) price rise  
+B) vacation  
+C) pollution  
+D) education
+
+3. He will ______ from the illness soon.  
+A) become  
+B) recover  
+C) increase  
+D) avoid
+
+**Answers:**  
+1 B (getting better)  
+2 A (price rise)  
+3 B (recover)
+
+**[한국어]**
+
+1. recover는 여기서 "나아지고 있다"라는 뜻이에요.  
+2. inflation의 유의어는 "가격 상승"입니다.  
+3. 그는 곧 병에서 회복할 것입니다.
+
+**정답:**  
+1번 B  
+2번 A  
+3번 B | Source: 
+2025-05-07 07:36:16.301171 | Q: ai | A: **[English]**
+
+1. Which of the following is the correct form of the verb in the sentence?  
+"The committee _____ to finalize the report by next week."  
+A) is expected  
+B) are expected  
+C) was expected  
+D) expect
+
+2. Choose the correct preposition to complete the sentence:  
+"The results will be announced _____ the end of the month."  
+A) in  
+B) at  
+C) on  
+D) for
+
+3. What is the correct modal verb to express a strong possibility?  
+"She _____ win the competition if she practices hard."  
+A) must  
+B) might  
+C) could  
+D) should
+
+→ **Answer:**
+1. A
+- **Explanation:** "Is expected" is the correct passive form used to indicate that the committee is anticipated to complete the report.
+
+2. B
+- **Explanation:** "At the end of the month" is the correct prepositional phrase used to indicate a specific time.
+
+3. A
+- **Explanation:** "Must" indicates a strong possibility or certainty that she will win if she practices.
+
+**[한국어]**
+
+1. 다음 중 문장에서 동사의 올바른 형태는 무엇입니까?  
+"위원회는 다음 주까지 보고서를 _____."  
+→ **정답: A (is expected)**  
+**해설:** "is expected"는 위원회가 보고서를 완성할 것으로 예상된다는 수동형 표현입니다.
+
+2. 문장을 완성할 올바른 전치를 고르세요:  
+"결과는 이 달의 _____ 발표될 것입니다."  
+→ **정답: B (at)**  
+**해설:** "at the end of the month"는 특정 시간을 나타내는 올바른 전치사 구입니다.
+
+3. 강한 가능성을 표현하기 위한 올바른 조동사는 무엇입니까?  
+"그녀는 열심히 연습하면 대회를 _____."  
+→ **정답: A (must)**  
+**해설:** "must"는 그녀가 연습하면 대회에서 이길 가능성이 높다는 것을 나타냅니다. | Source: 
+2025-05-07 07:53:27.499505 | Q: AI news | A: **[English]**  
+This month, there is a quiz where people guess which celebrity pictures are real and which are made by AI. Celebrities like Jack Black and Usher are included. The article suggests that people should check where images come from and verify news.  
+
+There is also a new trend on social media where people create small dolls or action figures of themselves using AI. This can be fun, but some experts worry about the energy used by AI and the possible misuse of copyrighted images. The results can be good or bad.  
+
+In Myanmar, an astrologer named John Moe The was arrested for making a TikTok video that scared people by predicting a big earthquake. This happened after a real earthquake had already caused damage. Experts say it is not possible to predict earthquakes, and they are worried about the spread of false information.  
+
+**[한국어]**  
+이번 달에는 사람들이 어떤 유명인 사진이 진짜이고 어떤 것이 AI로 만들어졌는지 맞추는 퀴즈가 있습니다. 잭 블랙과 어셔 같은 유명인들이 포함되어 있습니다. 이 기사는 사람들이 이미지의 출처를 확인하고 뉴스를 검증해야 한다고 제안합니다.  
+
+또한, 사람들은 AI를 사용하여 자신을 작은 인형이나 액션 피규어로 만드는 새로운 트렌드가 있습니다. 이것은 재미있지만, 일부 전문가들은 AI 사용으로 인한 에너지 소비와 저작권 이미지의 오용 가능성에 대해 걱정합니다. 결과는 좋을 수도 있고 나쁠 수도 있습니다.  
+
+미얀마에서는 점쟁이인 존 모에 더가 큰 지진을 예고하는 틱톡 영상을 올려 사람들을 놀라게 해 체포되었습니다. 이는 실제 지진이 이미 피해를 준 후에 일어난 일입니다. 전문가들은 지진을 예측하는 것은 불가능하다고 말하며, 잘못된 정보의 확산에 대해 걱정하고 있습니다. | Source: https://www.bbc.co.uk/bitesize/articles/z69jb7h
+2025-05-07 07:53:57.764831 | Q: 그림관련 뉴스 알려줘 | A: **[English]**  
+In Myanmar, an astrologer named John Moe The was arrested after he made a TikTok video predicting an earthquake. His prediction scared many people, especially after a recent earthquake that killed 3,500 people. He said an earthquake would happen on April 21 in every city. Experts say it is not possible to predict earthquakes. Because of his prediction, many people stayed outside their homes. The authorities arrested him for causing fear with false statements.
+
+**[한국어]**  
+미얀마에서 점성가인 존 모에 더가 지진을 예측한 틱톡 동영상 때문에 체포되었습니다. 그의 예측은 최근에 3,500명이 사망한 큰 지진 이후 많은 사람들을 두렵게 했습니다. 그는 4월 21일에 모든 도시에서 지진이 일어날 것이라고 말했습니다. 전문가들은 지진 예측이 불가능하다고 말합니다. 그의 예측 때문에 많은 사람들이 집 밖에 머물렀습니다. 당국은 그가 잘못된 발언으로 공포를 일으켰다고 해서 그를 체포했습니다.
+
+---
+
+**[English]**  
+A new trend on social media is for people to use AI tools to make mini dolls or action figures that look like them. This trend is fun, but some experts are worried about the energy it uses, which can harm the environment. Users upload their pictures and tell the AI what to do. Sometimes the results are funny or not very accurate. Critics say that while it seems enjoyable, there are concerns about privacy and the energy used.
+
+**[한국어]**  
+소셜 미디어에서 새로운 트렌드는 사람들이 AI 도구를 사용하여 자신을 닮은 미니 인형이나 액션 피규어를 만드는 것입니다. 이 트렌드는 재미있지만, 일부 전문가들은 환경에 해를 끼칠 수 있는 에너지를 많이 사용한다는 점에 대해 걱정하고 있습니다. 사용자들은 자신의 사진을 업로드하고 AI에게 지시를 합니다. 때때로 결과는 재미있거나 정확하지 않을 수 있습니다. 비평가들은 이 트렌드가 즐거워 보이지만, 개인 정보와 사용되는 에너지에 대한 우려가 있다고 말합니다.
+
+---
+
+**[English]**  
+A big explosion happened at Shahid Rajaee port in Iran, killing at least 28 people and injuring 800 others. The explosion was very strong and damaged buildings far away. It is thought to have started from a fire that spread to containers with flammable materials. Iranian officials are looking into what happened, and the president showed sympathy for the victims. This explosion happened during important talks between Iran and the US about Iran's nuclear program.
+
+**[한국어]**  
+이란의 샤히드 라자에 항구에서 큰 폭발이 발생하여 최소 28명이 사망하고 800명이 부상했습니다. 폭발은 매우 강력하여 멀리 있는 건물도 파손되었습니다. 이는 인화성 물질이 담긴 컨테이너로 퍼진 불에서 시작된 것으로 보입니다. 이란 정부는 사건을 조사하고 있으며, 대통령은 피해자들에게 애도를 표했습니다. 이 폭발은 이란과 미국의 핵 프로그램에 대한 중요한 협상 중에 발생했습니다. | Source: https://www.bbc.co.uk/news/articles/c1jx7n3jee9o
+2025-05-07 07:54:18.116048 | Q: 줘 | A: **[English]**  
+Two women, Kath Morris and Gwenfron Picken, are both 101 years old and worked as codebreakers during World War II. They recently met again after celebrating their birthdays together. They helped break German codes during the war and were recognized for their work. Gwenfron wanted to be a nurse and started at Bletchley Park when she was 18. Kath began as a fire watcher before becoming a codebreaker. After the war, they lived normal lives and stayed active in their community. They also met the First Minister of Wales, who praised them.
+
+**[한국어]**  
+두 여성, 캐스 모리스와 그웬프론 피켄은 모두 101세이며 제2차 세계대전 중 코드 해독자로 일했습니다. 그들은 최근 생일 파티에서 다시 만났습니다. 그들은 전쟁 중 독일의 코드를 해독하는 데 도움을 주었고, 그들의 작업에 대해 인정받았습니다. 그웬프론은 간호사가 되고 싶었고 18세에 블렛클리 파크에서 일하기 시작했습니다. 캐스는 화재 감시원으로 시작한 후 코드 해독자가 되었습니다. 전쟁이 끝난 후, 그들은 평범한 삶을 살았고 지역 사회에서 활발히 활동했습니다. 그들은 웨일스의 수장과 만나 칭찬을 받았습니다.  
+
+---
+
+**[English]**  
+British fighter jets, called RAF Typhoons, intercepted two Russian planes near NATO airspace this week. One was a Russian intelligence plane over the Baltic Sea, and the other was an unknown aircraft coming from Kaliningrad. This is part of the UK's support for NATO's air defense, known as Operation Chessman. The UK plans to spend more on defense because of increasing security threats. The RAF often intercepts Russian planes as part of NATO's defense strategy.
+
+**[한국어]**  
+영국 전투기인 RAF 타이푼이 이번 주 NATO 공역 근처에서 두 대의 러시아 비행기를 가로막았습니다. 하나는 발트해 위의 러시아 정보 비행기였고, 다른 하나는 칼리닌그라드에서 오는 미확인 비행기였습니다. 이것은 NATO의 공중 방어를 지원하기 위한 영국의 노력인 체스맨 작전의 일환입니다. 영국은 증가하는 안보 위협에 대응하기 위해 방위비를 늘릴 계획입니다. RAF는 NATO의 방어 전략의 일환으로 러시아 비행기를 자주 가로막습니다.
+
+---
+
+**[English]**  
+Donald Trump and Ukrainian President Volodymyr Zelensky met briefly at Pope Francis's funeral in Rome. Trump shared his doubts about whether Putin wants to end the war in Ukraine, saying Russia's attacks on Ukrainian cities show they do not want peace. Their meeting was seen as positive, and they talked about the ongoing conflict. Although Trump has criticized Zelensky before, this time the conversation was better. After their meeting, Zelensky spoke with other leaders, including French President Macron, about peace efforts.
+
+**[한국어]**  
+도널드 트럼프와 우크라이나 대통령 볼로디미르 젤렌스키가 로마에서 프란치스코 교황의 장례식에서 잠깐 만났습니다. 트럼프는 푸틴이 우크라이나 전쟁을 끝내고 싶어하는지 의문을 제기하며, 러시아의 우크라이나 도시 공격이 평화를 원하지 않는다는 것을 보여준다고 말했습니다. 그들의 만남은 긍정적으로 평가되었고, 그들은 진행 중인 갈등에 대해 이야기했습니다. 트럼프는 이전에 젤렌스키를 비판했지만 이번 대화는 더 좋았습니다. 만남 후 젤렌스키는 프랑스 대통령 마크롱을 포함한 다른 지도자들과 평화 노력을 논의했습니다. | Source: https://www.bbc.co.uk/news/articles/cvgqyqmy7qqo

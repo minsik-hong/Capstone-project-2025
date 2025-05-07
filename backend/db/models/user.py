@@ -1,25 +1,17 @@
-# #데이터베이스 테이블을 정의하는 파일
+# backend/db/models/user.py
 
-# from sqlalchemy import Column, Integer, String
-# from db.base import Base
-
-# #users 테이블에 해당하는 구조를 정의
-# class User(Base):
-#     __tablename__ = "users"
-#      # 자동 증가하는 id 컬럼을 Primary Key로 설정
-#     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-#     username = Column(String, unique=True, index=True)
-#     email = Column(String, unique=True, index=True)
-#     password = Column(String)
-
-#데이터베이스 테이블을 정의하는 파일
-
-from sqlalchemy import Column, String, Boolean, Integer, TIMESTAMP, Text, ForeignKey
-from sqlalchemy.dialects.postgresql import JSONB
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, Boolean, DateTime, Enum
 from sqlalchemy.dialects.postgresql import UUID
-import uuid
+from datetime import datetime
 from db.base import Base
+import enum
+import uuid
+
+# 사용자 레벨 열거형
+class UserLevel(enum.Enum):
+    beginner = "beginner"
+    intermediate = "intermediate"
+    advanced = "advanced"
 
 class User(Base):
     __tablename__ = "users"
@@ -29,28 +21,11 @@ class User(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
-    provider = Column(String(20), default="local")  # local, google 등
-    
-    
-class ChatSession(Base):
-    __tablename__ = "chat_sessions"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, nullable=False)
-    session_id = Column(UUID, default=uuid.uuid4, unique=True, nullable=False)
-    started_at = Column(TIMESTAMP, nullable=False)
-    summary = Column(Text)
+    provider = Column(String(20), default="local")
+    level = Column(Enum(UserLevel), default=UserLevel.beginner)
+    created_at = Column(DateTime, default=datetime.utcnow)
 
-    messages = relationship("ChatSessionMessage", back_populates="session")
+    # 관계는 __init__.py 에서 선언
 
-class ChatSessionMessage(Base):
-    __tablename__ = "chat_session_messages"
-    
-    id = Column(Integer, primary_key=True, index=True)
-    session_id = Column(UUID, ForeignKey("chat_sessions.session_id"), nullable=False)
-    sender = Column(String(10), nullable=False)
-    message = Column(Text, nullable=False)
-    message_metadata = Column(JSONB, nullable=True) #선택사항항
-    created_at = Column(TIMESTAMP, nullable=False)
-    
-    session = relationship("ChatSession", back_populates="messages")
+    def __repr__(self):
+        return f"<User(username='{self.username}', email='{self.email}', level='{self.level.value}')>"
