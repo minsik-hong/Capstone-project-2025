@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from api import users, chat  # chat 라우터 추가
 from db.session import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
-from db.session import Base, engine
+
 
 app = FastAPI()
 
