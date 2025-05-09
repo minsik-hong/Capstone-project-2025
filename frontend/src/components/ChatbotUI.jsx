@@ -1,12 +1,15 @@
-// ✅ ChatbotUI.jsx
+// frontend/src/components/common/ChatbotUI.jsx
 import React, { useState } from 'react';
 import Sidebar from './Chatting/SideBar';
 import ChatWindow from './Chatting/ChatWindow';
 import MarkdownMessage from './common/MarkdownMessage'; // 마크다운 메시지 컴포넌트
 import './ChatbotUI.css';
 
+import useChat from '../hooks/useChat';  //  추가
+
 function ChatbotUI() {
   const [selectedCanvas, setSelectedCanvas] = useState(null);
+  const chat = useChat();  // useChat 전체 사용
 
   const handleCanvasOpen = (canvas) => setSelectedCanvas(canvas);
   const handleCanvasClose = () => setSelectedCanvas(null);
@@ -16,7 +19,11 @@ function ChatbotUI() {
   return (
     <div className="chat-container">
       <Sidebar />
-      <ChatWindow onCanvasOpen={handleCanvasOpen} isCanvasOpen={isCanvasOpen} />
+      <ChatWindow
+        {...chat}  // 모든 useChat 상태를 props로 전달
+        onCanvasOpen={handleCanvasOpen}
+        isCanvasOpen={isCanvasOpen}
+      />
       {isCanvasOpen && (
         <div className="canvas-panel">
           <button className="close-btn" onClick={handleCanvasClose}>

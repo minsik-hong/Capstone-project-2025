@@ -1,3 +1,4 @@
+# backend/services/chatbot_test.py
 import os
 from datetime import datetime
 from dotenv import load_dotenv
@@ -12,6 +13,10 @@ from langchain.chains import LLMChain
 from langsmith import traceable
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
+
+from services.memory_manager import UserSessionMemoryManager
+from db.session import get_db
+from sqlalchemy.orm import Session
 
 # ========== 환경 변수 설정 ==========
 
@@ -407,6 +412,52 @@ MODE_MAPPING = {
     "dialogue": "dialogue",
     "": "default"  # 빈값일 때
 }
+
+
+def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mode: str, db: Session):
+    mode = MODE_MAPPING.get(mode, "default")
+    question = clean_text(user_input)
+
+    # 사용자 맞춤 memory
+    memory_manager = UserSessionMemoryManager(db, session_id, user_id)
+    memory = memory_manager.get_memory()
+
+    # 첫 인사
+    if not memory.chat_memory.messages:
+        welcome = "안녕하세요! 저는 최신 뉴스로 영어를 자연스럽게 가르쳐주는 AI 튜터입니다. 모드를 선택해서 영어를 효과적으로 배울 수 있어요!"
+        memory_manager.save_message("bot", welcome)
+        return {"answer": welcome, "source": ""}
+
+    # 뉴스 사용 여부 결정
+    use_news = mode in ["summary", "vocab_quiz", "grammar_quiz", "dialogue"]
+    if mode == "default":
+        use_news = should_use_news(question)
+
+    news_summary, source_url = "", ""
+    if use_news:
+        docs = vectorstore.similarity_search(question, k=5)
+        news_summary, source_url = summarize_news(docs)
+
+    # 프롬프트 & 입력 구성
+    prompt = PROMPTS.get(mode, PROMPTS["default"])
+    inputs = {}
+    if "input" in prompt.input_variables:
+        inputs["input"] = question
+    if "news" in prompt.input_variables:
+        inputs["news"] = news_summary
+
+    chain = LLMChain(llm=llm, prompt=prompt, memory=memory if mode == "default" else None)
+    result = chain.invoke(inputs)
+    response = clean_text(result["text"])
+
+    if mode == "default":
+        memory_manager.save_message("user", question)
+        memory_manager.save_message("bot", response)
+
+    log_interaction(question, response, source_url)
+
+    return {"answer": response, "source": source_url}
+
 
 @traceable(name="run_chatbot")
 def run_chatbot(user_input: str, mode: str = "") -> dict:

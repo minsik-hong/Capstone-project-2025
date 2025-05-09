@@ -1,3 +1,4 @@
+// frontend/src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client'; // ReactDOM을 사용하여 React 컴포넌트를 DOM에 렌더링
 import App from './App'; // App 컴포넌트 가져오기

@@ -1,21 +1,20 @@
 // ChatWindow.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import ChatBubble from './ChatBubble';
 import Canvas from './Canvas';
-import useChat from '../../hooks/useChat';
 import './ChatWindow.css';
 
-function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
-  const {
-    messages,
-    userInput,
-    setUserInput,
-    sendMessage,
-    messageEndRef,
-    mode,
-    setMode,
-  } = useChat();
-
+function ChatWindow({
+  messages,
+  userInput,
+  setUserInput,
+  sendMessage,
+  messageEndRef,
+  mode,
+  setMode,
+  onCanvasOpen,
+  isCanvasOpen
+}) {
   const toggleMode = (selectedMode) => {
     setMode(mode === selectedMode ? "" : selectedMode);
   };
@@ -37,8 +36,7 @@ function ChatWindow({ onCanvasOpen, isCanvasOpen }) {
         )}
         <div ref={messageEndRef} />
       </div>
-      
-      {/* 모드 표시 */}
+
       {mode && (
         <div className="current-mode">
           <strong>Current Mode:</strong> {mode}

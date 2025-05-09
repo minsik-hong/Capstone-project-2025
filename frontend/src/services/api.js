@@ -1,3 +1,4 @@
+// frontend/src/services/api.js
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -24,14 +25,16 @@ export const loginUser = async (username, password) => {
   }
 };
 
-
-// 실제 FastAPI 챗봇 API 연결 함수 추가
-export const askQuestion = async (question, mode = "") => {
-  // export const askQuestion = async (question) => {
+// [수정됨] 질문하기 (user_id, session_id 포함)
+export const askQuestion = async (user_id, session_id, question, mode = "") => {
   try {
-    const response = await axios.post(`${API_URL}/api/chat`, { question, mode });
-    // const response = await axios.post(`${API_URL}/api/chat`, { question});
-    return response.data; // { answer, source }
+    const response = await axios.post(`${API_URL}/api/chat`, {
+      user_id,
+      session_id,
+      question,
+      mode
+    });
+    return response.data;
   } catch (error) {
     console.error('Chatbot API error:', error);
     return {
@@ -39,19 +42,6 @@ export const askQuestion = async (question, mode = "") => {
       source: "출처 없음",
     };
   }
-};
-
-
-// 뉴스 요약 임시 구현
-// topic: 사용자가 입력한 주제, source: "CNN" 또는 "BBC"
-export const fetchNewsSummary = async (topic, source) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        `News summary from ${source} about "${topic}" - Blah Blah.`
-      );
-    }, 800);
-  });
 };
 
 // 카카오 로그인 (인가 코드로 로그인 요청)

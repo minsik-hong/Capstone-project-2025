@@ -1,3 +1,4 @@
+# backend/api/users.py
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
@@ -59,8 +60,8 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     # JWT 토큰 생성
     access_token = create_access_token({"sub": db_user.username}, expires_delta=timedelta(minutes=30))
     
-    # 토큰을 반환
-    return {"access_token": access_token, "token_type": "bearer"}
+    # 토큰을 반환 + user id 추가
+    return {"access_token": access_token, "token_type": "bearer", "user_id": str(db_user.id)} # user id 추가
 
 # 카카오 로그인 API
 KAKAO_CLIENT_ID = os.getenv("KAKAO_REST_KEY")
