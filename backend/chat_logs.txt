@@ -1701,3 +1701,23 @@ D) processed
 
 **[한국어]**
 "안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-09 15:41:55.070861 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-09 15:41:56.612541 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어떻게 보내고 있나요?" | Source: 
+2025-05-09 15:42:04.477659 | Q: ai news please | A: **[English]**
+"Sure! Recently, there's been a lot of discussion about how artificial intelligence is helping in various fields, like healthcare and education. For example, AI can assist doctors in diagnosing diseases more accurately and can help students learn by providing personalized study plans."
+
+**[한국어]**
+"물론이죠! 최근 인공지능이 의료와 교육 같은 다양한 분야에서 어떻게 도움이 되고 있는지에 대한 많은 논의가 있었어요. 예를 들어, AI는 의사들이 질병을 더 정확하게 진단하는 데 도움을 줄 수 있고, 학생들에게 개인화된 학습 계획을 제공하여 학습을 도울 수 있어요." | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-09 15:42:22.799544 | Q: usa news | A: **[English]**
+"Sure! Recently, there have been discussions in the USA about climate change and how to reduce carbon emissions. Many people are advocating for renewable energy sources like solar and wind power."
+
+**[한국어]**
+"물론이죠! 최근 미국에서는 기후 변화와 탄소 배출을 줄이는 방법에 대한 논의가 있었습니다. 많은 사람들이 태양광과 풍력 같은 재생 가능 에너지의 사용을 촉구하고 있어요." | Source: https://www.bbc.co.uk/news/articles/cvge4l109r3o
