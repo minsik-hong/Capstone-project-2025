@@ -79,20 +79,24 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
     mode = MODE_MAPPING.get(mode, "default")
     question = clean_text(user_input)
 
+    # 메모리 매니저 초기화
     memory_manager = UserSessionMemoryManager(db, session_id, user_id)
     memory = memory_manager.get_memory()
 
+    # 첫 인사 처리
     if not memory.chat_memory.messages:
         welcome = "안녕하세요! 저는 최신 뉴스로 영어를 자연스럽게 가르쳐주는 AI 튜터입니다. 모드를 선택해서 영어를 효과적으로 배울 수 있어요!"
         memory_manager.save_message("bot", welcome)
         return {"answer": welcome, "source": ""}
 
+    # 뉴스 기반 모드 확인
     use_news = mode in ["summary", "vocab_quiz", "grammar_quiz", "dialogue"]
     
     # default 모드에서는 뉴스 사용 여부를 판단
     # if mode == "default":
     #     use_news = should_use_news(question)
 
+    # default 모드에서는 news 사용 안 함
     news_text, source_url = "", ""
     if use_news:
         docs = vectorstore.similarity_search(question, k=1)
@@ -100,6 +104,7 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
             news_text = docs[0].page_content
             source_url = docs[0].metadata.get("url", "")
 
+    # 프롬프트 준비
     prompt = PROMPTS.get(mode, PROMPTS["default"])
     inputs = {}
     if "input" in prompt.input_variables:
@@ -107,11 +112,12 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
     if "news" in prompt.input_variables:
         inputs["news"] = news_text
 
-    chain = LLMChain(llm=llm, prompt=prompt, memory=memory if mode == "default" else None)
+    # 모든 모드에서 memory 사용 (follow-up 대응 가능)
+    chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
     result = chain.invoke(inputs)
     response = clean_text(result["text"])
 
-    # 저장
+    # 대화 저장
     memory_manager.save_message("user", question)
     memory_manager.save_message("bot", response)
 

@@ -65,3 +65,14 @@ export const refreshUserProfile = async (userId) => {
     throw error;
   }
 };
+
+// 퀴즈 정답
+export const submitQuizAnswers = async (userId, sessionId, quizContent, selectedAnswers) => {
+  const response = await axios.post(`${API_URL}/api/quiz/submit`, {
+    user_id: userId,
+    // session_id: sessionId,
+    quiz_content: quizContent,
+    user_answers: selectedAnswers,
+  });
+  return response.data;
+};

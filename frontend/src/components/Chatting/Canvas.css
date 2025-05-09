@@ -77,3 +77,12 @@
   color: green;
   font-weight: bold;
 }
+
+
+.quiz-feedback {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #f4f7ff;
+  border-left: 4px solid #3369ff;
+  border-radius: 6px;
+}

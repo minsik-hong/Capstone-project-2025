@@ -10,6 +10,8 @@ Your job is to help them improve English naturally through conversation.
 **Important Rules**
 - Do not include or explain harmful, violent, sexual, or inappropriate content.
 - Only use safe, neutral, and educational content.
+- If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
+- You remember previous messages and can elaborate if the user wants more detail.
 
 Provide answers in two parts:
 
@@ -62,6 +64,8 @@ Your task is to summarize news articles in very simple and easy English.
 **Important Rules**
 - Do not include or explain harmful, violent, sexual, or inappropriate content.
 - Only use safe, neutral, and educational content.
+- If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
+- You remember previous messages and can elaborate if the user wants more detail.
 
 Provide answers in two parts:
 
@@ -86,20 +90,16 @@ Your job is to make vocabulary quizzes from news articles using the words from t
 **Important Rules**
 - Do not include or explain harmful, violent, sexual, or inappropriate content.
 - Only use safe, neutral, and educational content.
+- If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
+- You remember previous messages and can elaborate if the user wants more detail.
 
 Create 3 vocabulary questions:
 - Focus on words from the news article.
 - Mix question types: meaning guess (context), synonym, antonym, and fill-in-the-blank.
 - Provide 4 options (A, B, C, D).
-- At the end, provide correct answers and simple explanations.
-
-Provide answers in two parts:
 
 **[English]**
-(Quiz + Answers + Explanation)
-
-**[한국어]**
-(Quiz + Answers + Explanation in Korean)
+(Quiz)
 
 ---
 
@@ -131,22 +131,6 @@ B) recover
 C) increase  
 D) avoid
 
-**Answers:**  
-1 B (getting better)  
-2 A (price rise)  
-3 B (recover)
-
-**[한국어]**
-
-1. recover는 여기서 "나아지고 있다"라는 뜻이에요.  
-2. inflation의 유의어는 "가격 상승"입니다.  
-3. 그는 곧 병에서 회복할 것입니다.
-
-**정답:**  
-1번 B  
-2번 A  
-3번 B
-
 ---
 
 News:
@@ -162,19 +146,15 @@ Your job is to make grammar and sentence pattern quizzes from news articles.
 **Important Rules**
 - Do not include or explain harmful, violent, sexual, or inappropriate content.
 - Only use safe, neutral, and educational content.
+- If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
+- You remember previous messages and can elaborate if the user wants more detail.
 
 Create 3 multiple-choice grammar questions:
 - Focus on sentence patterns, tense, articles, prepositions, modals, etc.
 - Provide 3 or 4 options (A, B, C, D).
-- At the end, provide correct answers with simple and clear explanations for each.
-
-Provide answers in two parts:
 
 **[English]**
-(Quiz + Answers + Explanation)
-
-**[한국어]**
-(Quiz + Answers + Explanation in Korean)
+(Quiz)
 
 ---
 
@@ -205,27 +185,6 @@ A) Something will likely happen
 B) Something already happened  
 C) Something impossible
 
-→ **Answer:**
-1. B
-- **Explanation:** "Are expected to" is the correct passive form used to express a general future expectation.
-2. B
-- **Explanation:** "Are expected to" shows that others believe scientists will announce the results next month.
-3. A
-- **Explanation:** "Are expected to" means something will likely happen in the future.
-
-**[한국어]**
-
-1. 미래 예측을 나타내는 올바른 표현은 무엇입니까?  
-→ **정답: B (are expected to)**  
-**해설:** 일반적인 미래 예상 표현으로 수동형이 쓰였습니다.
-
-2. 올바른 문장을 고르세요.  
-→ **정답: B**  
-**해설:** 과학자들이 결과를 발표할 것으로 예상된다는 뜻입니다.
-
-3. "are expected to"의 의미는 무엇입니까?  
-→ **정답: A (가능성이 높다)**  
-**해설:** 미래에 일어날 가능성이 높은 일을 나타냅니다.
 
 ---
 
@@ -244,6 +203,8 @@ Your task is to create a short and natural dialogue based on news articles.
 - Make the dialogue practical and natural as if two people are talking in real life.
 - Use simple and clear sentences suitable for learning.
 - Add small expressions for natural flow (e.g. "Oh really?", "That's nice", "I see", etc.)
+- If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
+- You remember previous messages and can elaborate if the user wants more detail.
 
 Provide answers in two parts:
 
@@ -288,25 +249,41 @@ Dialogue:
 """),
 
     "answer_reveal": ChatPromptTemplate.from_template("""
-You are an English tutor who is now revealing the correct answers for the quiz given earlier.
+You are now reviewing the user's submitted quiz answers. Give feedback for each question in both English and Korean.
 
-**Important Rules**
-- Do not include or explain harmful, violent, sexual, or inappropriate content.
-- Only use safe, neutral, and educational content.
+당신은 사용자의 제출한 퀴즈 답안을 채점하고, 각 문제에 대해 영어와 한국어로 피드백을 제공합니다.
 
-Provide answers in two parts:
+**Instructions | 지시사항**
+- 각 문항에 대해 맞았는지 ❌/✅ 표시
+- 정답 + 설명 (영어, 한국어)
+- 명확하게 설명
 
-**[English]**
-(Answers)
+---
 
-**[한국어]**
-(Answers in Korean)
+**Example Output | 예시 출력**
+1. ✅ Correct  
+- Explanation: "Recovering" means getting better.  
+- 해설: "Recovering"은 상태가 나아지고 있음을 의미합니다.
+
+2. ❌ Incorrect  
+- Correct Answer: A  
+- Explanation: "Inflation" means rising prices.  
+- 해설: "Inflation"은 물가가 상승하는 것을 의미합니다.
+
+3. ✅ Correct  
+- Explanation: "Recover" fits the context of healing.  
+- 해설: "Recover"는 치유되는 상황에 적절합니다.
 
 ---
 
 Quiz:
 {quiz_content}
 
-Answers:
-""")
+User Answers:
+{user_answers}
+
+---
+
+Please now give feedback in English and Korean:
+"""),
 }

@@ -2,6 +2,7 @@
 import React from "react";
 import "./Canvas.css";
 import MarkdownMessage from "../common/MarkdownMessage";
+import { submitQuizAnswers } from '../../services/api';
 
 function Canvas({   
   text, 
@@ -43,13 +44,31 @@ function Canvas({
     updateQuizState({ selectedAnswers: updated });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (quizState.selectedAnswers.some((s) => !s)) {
       alert("모든 문제에 답해주세요.");
       return;
     }
     updateQuizState({ submitted: true });
-    console.log("제출됨:", quizState.selectedAnswers);
+
+    //  콘솔 로그 추가 (중요)
+    const userId = localStorage.getItem("user_id");
+    const sessionId = localStorage.getItem("session_id"); // 또는 props에서 전달된 sessionId
+
+    console.log("전송 데이터 확인", {
+      user_id: userId,
+      session_id: sessionId,
+      quiz_content: text,
+      user_answers: quizState.selectedAnswers
+    });
+
+    try {
+      const feedback = await submitQuizAnswers(userId, sessionId, text, quizState.selectedAnswers);
+      updateQuizState({ feedback: feedback.feedback });
+    } catch (err) {
+      console.error("퀴즈 제출 실패", err);
+      alert("제출 중 오류가 발생했습니다.");
+    }
   };
 
   return (
@@ -84,6 +103,13 @@ function Canvas({
             ) : (
               <div className="submitted-msg">✅ 답안이 제출되었습니다.</div>
             )}
+          </div>
+        )}
+
+        {/* 피드백 출력 */}
+        {quizState.feedback && (
+          <div className="quiz-feedback">
+            <MarkdownMessage text={quizState.feedback} />
           </div>
         )}
 

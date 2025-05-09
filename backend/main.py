@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api import users, chat  # chat 라우터 추가
+from api import users, chat, quiz  # 라우터 추가
 from db.session import Base, engine
 
 app = FastAPI()
@@ -29,6 +29,7 @@ app.add_middleware(
 # API 라우터 등록
 app.include_router(users.router, prefix="/api")  # 회원 관련 엔드포인트: /api/users/...
 app.include_router(chat.router, prefix="/api")   # 챗봇 관련 엔드포인트: /api/chat
+app.include_router(quiz.router, prefix="/api")   # 
 
 @app.get("/")
 def root():
