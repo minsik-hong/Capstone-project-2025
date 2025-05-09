@@ -54,3 +54,14 @@ export const kakaoLogin = async (code) => {
     throw error;
   }
 };
+
+// 사용자 프로필 분석
+export const refreshUserProfile = async (userId) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/profile/refresh/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('User Profile Refresh Error:', error);
+    throw error;
+  }
+};

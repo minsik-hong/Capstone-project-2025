@@ -1560,3 +1560,144 @@ D) decorated
 1. "sinkhole"은 지표면이 무너져 생기는 구멍을 의미합니다.  
 2. "rescue"는 누군가를 위험이나 어려움에서 구하는 것을 의미합니다.  
 3. "caved in"은 도로가 구멍으로 무너지는 상황을 설명합니다. | Source: https://www.bbc.co.uk/news/articles/cd923lzdwkqo
+2025-05-09 15:29:48.123254 | Q: 최신 ai 뉴스로 알려줘 | A: **[English]**
+
+1. What does "generative" most likely mean in this news?  
+A) creating something new  
+B) destroying something  
+C) copying something  
+D) hiding something  
+
+2. What is a synonym of "trend"?  
+A) tradition  
+B) pattern  
+C) mistake  
+D) question  
+
+3. The AI tool can ______ images based on user instructions.  
+A) delete  
+B) generate  
+C) ignore  
+D) analyze  
+
+**Answers:**  
+1 A (creating something new) - "Generative" refers to the ability to create or produce something, especially in the context of AI creating new content.  
+2 B (pattern) - A "trend" is often a pattern or general direction in which something is developing or changing.  
+3 B (generate) - The AI tool is designed to generate images, meaning it creates them based on the prompts provided by the user.
+
+---
+
+**[한국어]**
+
+1. generative는 여기서 "새로운 것을 창조하는"이라는 뜻이에요.  
+2. trend의 유의어는 "패턴"입니다.  
+3. AI 도구는 사용자 지침에 따라 ______ 이미지를 생성할 수 있습니다.
+
+**정답:**  
+1번 A  
+2번 B  
+3번 B | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-09 15:29:52.957666 | Q: 줘 | A: **[English]**
+
+1. What does "inequality" most likely mean in this news?  
+A) fairness  
+B) imbalance  
+C) opportunity  
+D) wealth  
+
+2. What is a synonym of "burden"?  
+A) relief  
+B) load  
+C) benefit  
+D) freedom  
+
+3. Namibia is facing high rates of unemployment and poverty, and the new president aims to ______ these issues.  
+A) ignore  
+B) address  
+C) celebrate  
+D) complicate  
+
+**Answers:**  
+1 B (imbalance) - Inequality refers to a lack of fairness or balance, especially in terms of wealth or opportunities.  
+2 B (load) - A burden is something that is heavy or difficult to carry, similar to a load.  
+3 B (address) - To address issues means to deal with or tackle them directly.
+
+---
+
+**[한국어]**
+
+1. inequality는 여기서 "불균형"이라는 뜻이에요.  
+2. burden의 유의어는 "짐"입니다.  
+3. 나미비아는 높은 실업률과 빈곤 문제에 직면해 있으며, 새로운 대통령은 이 문제를 ______ 하려고 합니다.
+
+**정답:**  
+1번 B  
+2번 B  
+3번 B | Source: https://www.bbc.co.uk/news/articles/cly8ln5g12wo
+2025-05-09 15:30:03.744587 | Q: 1번이 왜 A인지 더 자세히 설명해줘. | A: **[English]**
+
+1. What does "approved" most likely mean in this news?  
+A) rejected  
+B) accepted  
+C) ignored  
+D) questioned  
+
+2. What is a synonym of "initiative"?  
+A) plan  
+B) failure  
+C) delay  
+D) confusion  
+
+3. The lab-grown food must be ______ before it can be sold to the public.  
+A) ignored  
+B) approved  
+C) discarded  
+D) processed  
+
+**Answers:**  
+1 B (accepted) - "Approved" means that something has been accepted or given official permission.  
+2 A (plan) - An "initiative" refers to a new plan or strategy aimed at addressing a particular issue.  
+3 B (approved) - The sentence indicates that the food needs to be officially accepted before it can be sold.
+
+---
+
+**[한국어]**
+
+1. approved는 여기서 "승인된"이라는 뜻이에요.  
+2. initiative의 유의어는 "계획"입니다.  
+3. 실험실에서 재배된 식품은 대중에게 판매되기 전에 ______ 되어야 합니다.
+
+**정답:**  
+1번 B  
+2번 A  
+3번 B | Source: https://www.bbc.co.uk/news/articles/c2ern1zjkvyo
+2025-05-09 15:30:42.251700 | Q: 줘 | A: **[English]**
+"Could you please provide a bit more context or ask a specific question? I'm here to help!"
+
+**[한국어]**
+"조금 더 구체적인 질문이나 상황을 말씀해 주실 수 있나요? 도와드리기 위해 여기 있어요!" | Source: 
+2025-05-09 15:30:45.871247 | Q:  방금 1번 문제 inequality"가 왜  정답이 B인지 자세히 설명해줘 | A: **[English]**
+"Sure! The answer is B because it correctly represents the relationship between the variables in the inequality. It shows that one value is less than or greater than another, which is essential for understanding how they compare."
+
+**[한국어]**
+"물론이죠! 정답이 B인 이유는 그것이 부등식에서 변수들 간의 관계를 올바르게 나타내기 때문이에요. 이는 한 값이 다른 값보다 작거나 크다는 것을 보여주며, 이는 서로 비교하는 데 중요합니다." | Source: 
+2025-05-09 15:36:54.042088 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어떻게 지내고 있나요?" | Source: 
+2025-05-09 15:36:56.158232 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-09 15:36:57.775651 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-09 15:36:59.420760 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 

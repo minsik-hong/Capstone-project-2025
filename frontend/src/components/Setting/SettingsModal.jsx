@@ -1,44 +1,29 @@
-import React, { useState } from "react";
-import "./SettingsModal.css";
-import MemoryManagerModal from "./MemoryManagerModal";
+// frontend/src/components/SettingsModal.jsx
+import React, { useState } from 'react';
+import './SettingsModal.css';
+import MemoryManagerModal from './MemoryManagerModal';
+import { refreshUserProfile } from '../../services/api';
 
-export default function SettingsModal({
-  trigger,
-  currentEmail = "user@example.com",
-}) {
+export default function SettingsModal({ trigger, currentEmail = "user@example.com" }) {
   const [open, setOpen] = useState(false);
   const [tab, setTab] = useState("profile");
   const [newEmail, setNewEmail] = useState("");
   const [showManager, setShowManager] = useState(false);
+  const [profileSummary, setProfileSummary] = useState(null);
 
   return (
     <>
-      {/* ── 트리거(아이콘) ── */}
       <span onClick={() => setOpen(true)}>{trigger}</span>
 
-      {/* ── 모달 ── */}
       {open && (
         <div className="modal-overlay" onClick={() => setOpen(false)}>
           <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
-            {/* ========== 좌측 탭 목록 ========== */}
             <nav className="modal-aside">
-              <button
-                className={tab === "profile" ? "tab-btn active" : "tab-btn"}
-                onClick={() => setTab("profile")}
-              >
-                프로필
-              </button>
-              <button
-                className={tab === "memory" ? "tab-btn active" : "tab-btn"}
-                onClick={() => setTab("memory")}
-              >
-                메모리
-              </button>
+              <button className={tab === "profile" ? "tab-btn active" : "tab-btn"} onClick={() => setTab("profile")}>프로필</button>
+              <button className={tab === "memory" ? "tab-btn active" : "tab-btn"} onClick={() => setTab("memory")}>메모리</button>
             </nav>
 
-            {/* ========== 우측 내용 영역 ========== */}
             <section className="modal-main">
-              {/* ─ 프로필 탭 ─ */}
               {tab === "profile" && (
                 <div className="profile-pane">
                   <h3>이메일 변경</h3>
@@ -63,10 +48,42 @@ export default function SettingsModal({
                       저장 (미구현)
                     </button>
                   </div>
+
+                  {/* 사용자 성향 분석 버튼 */}
+                  <div className="action-row" style={{ marginTop: "20px" }}>
+                    <button
+                      className="save-btn profile-analyze-btn"
+                      onClick={async () => {
+                        const userId = localStorage.getItem("user_id");
+                        if (userId) {
+                          try {
+                            const result = await refreshUserProfile(userId);
+                            setProfileSummary(result.profile);
+                          } catch (err) {
+                            alert("프로필 분석에 실패했습니다.");
+                          }
+                        } else {
+                          alert("로그인된 사용자 정보가 없습니다.");
+                        }
+                      }}
+                    >
+                      🧠 영어 학습 성향 분석하기
+                    </button>
+                  </div>
+
+                  {/* 분석 결과 표시 */}
+                  {profileSummary && (
+                    <div className="profile-summary-box">
+                      <h4>📊 분석 요약</h4>
+                      <p><strong>레벨:</strong> {profileSummary.level}</p>
+                      <p><strong>관심사:</strong> {profileSummary.interests.join(", ")}</p>
+                      <p><strong>약점:</strong> {profileSummary.weaknesses.join(", ")}</p>
+                      <p><strong>요약:</strong> {profileSummary.summary}</p>
+                    </div>
+                  )}
                 </div>
               )}
 
-              {/* ─ 메모리 탭 ─ */}
               {tab === "memory" && (
                 <div className="memory-pane">
                   <h3>메모리 설정</h3>
@@ -81,13 +98,9 @@ export default function SettingsModal({
                       <span className="slider"></span>
                     </label>
                   </div>
-                  
-                  {/* ─ 메모리 관리하기 링크 ─ */}
+
                   <div className="manage-link-row">
-                    <button
-                      className="manage-memory-link"
-                      onClick={() => setShowManager(true)}
-                    >
+                    <button className="manage-memory-link" onClick={() => setShowManager(true)}>
                       메모리 관리하기
                     </button>
                   </div>
@@ -103,7 +116,6 @@ export default function SettingsModal({
                     </label>
                   </div>
 
-                  {/* ─ 관리 모달 호출 ─ */}
                   {showManager && (
                     <MemoryManagerModal onClose={() => setShowManager(false)} />
                   )}
@@ -111,10 +123,7 @@ export default function SettingsModal({
               )}
             </section>
 
-            {/* ─ 닫기 버튼 (우상단) ─ */}
-            <button className="close-btn" onClick={() => setOpen(false)}>
-              ×
-            </button>
+            <button className="close-btn" onClick={() => setOpen(false)}>×</button>
           </div>
         </div>
       )}
