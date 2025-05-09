@@ -1,3 +1,4 @@
+# backend/services/chatbot_test.py
 import os
 from datetime import datetime
 from dotenv import load_dotenv
@@ -87,8 +88,10 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
         return {"answer": welcome, "source": ""}
 
     use_news = mode in ["summary", "vocab_quiz", "grammar_quiz", "dialogue"]
-    if mode == "default":
-        use_news = should_use_news(question)
+    
+    # default 모드에서는 뉴스 사용 여부를 판단
+    # if mode == "default":
+    #     use_news = should_use_news(question)
 
     news_text, source_url = "", ""
     if use_news:

@@ -26,33 +26,6 @@ class ChatResponse(BaseModel):
     answer: str
     source: Optional[str] = None
 
-# 개인화 테스트
-# @router.post("/chat", response_model=ChatResponse)
-# async def chat_endpoint(request: ChatRequest, db: Session = Depends(get_db)):
-#     try:
-#         memory_manager = UserSessionMemoryManager(db, request.session_id, request.user_id)
-#         memory = memory_manager.get_memory()
-
-#         llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3, openai_api_key=os.getenv("OPENAI_API_KEY"))
-#         prompt = PROMPTS.get(request.mode, PROMPTS["default"])
-
-#         # 입력 키 자동 추출
-#         input_key = prompt.input_variables[0] if prompt.input_variables else "input"
-
-#         chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
-#         result = chain.invoke({input_key: request.question})  # key 맞춰서 전달
-
-#         answer = result["text"]
-
-#         memory_manager.save_message("user", request.question)
-#         memory_manager.save_message("bot", answer)
-
-#         return ChatResponse(answer=answer, source=None)
-
-#     except Exception as e:
-#         traceback.print_exc()
-#         raise HTTPException(status_code=500, detail=str(e))
-
 @router.post("/chat", response_model=ChatResponse)
 async def chat_endpoint(request: ChatRequest, db: Session = Depends(get_db)):
     try:

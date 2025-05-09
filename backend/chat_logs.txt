@@ -1721,3 +1721,105 @@ D) processed
 
 **[한국어]**
 "물론이죠! 최근 미국에서는 기후 변화와 탄소 배출을 줄이는 방법에 대한 논의가 있었습니다. 많은 사람들이 태양광과 풍력 같은 재생 가능 에너지의 사용을 촉구하고 있어요." | Source: https://www.bbc.co.uk/news/articles/cvge4l109r3o
+2025-05-09 15:53:14.243728 | Q: ai news | A: **[English]**
+"AI news is really interesting! There are always new developments in technology. For example, some companies are using AI to help with healthcare, making it easier to diagnose diseases."
+
+**[한국어]**
+"AI 뉴스는 정말 흥미로워요! 기술에서 항상 새로운 발전이 있어요. 예를 들어, 일부 회사들은 AI를 사용하여 의료 분야에서 질병 진단을 더 쉽게 하고 있어요." | Source: 
+2025-05-09 15:53:30.057475 | Q: 영어 인터뷰에 도움이 되는 표현 알려줘. | A: **[English]**
+"Of course! Here are some useful phrases for an English interview: 
+1. 'I am excited about this opportunity.' 
+2. 'I believe my skills in [your skill] will help your team.' 
+3. 'Can you tell me more about the team I would be working with?' 
+These phrases can help you express your enthusiasm and ask questions."
+
+**[한국어]**
+"물론이죠! 영어 인터뷰에 유용한 표현 몇 가지를 소개할게요: 
+1. '이 기회에 대해 매우 기대하고 있습니다.' 
+2. '저의 [당신의 기술] 능력이 팀에 도움이 될 것이라고 믿습니다.' 
+3. '제가 함께 일할 팀에 대해 더 말씀해 주실 수 있나요?' 
+이 표현들은 당신의 열정을 표현하고 질문을 하는 데 도움이 될 거예요." | Source: 
+2025-05-09 15:54:20.469358 | Q: ai news please | A: **[English]**
+
+1. What does "generative" most likely mean in this news?  
+A) producing something  
+B) destroying something  
+C) changing something  
+D) hiding something
+
+2. What is a synonym of "compelled"?  
+A) forced  
+B) encouraged  
+C) ignored  
+D) relaxed
+
+3. Many people are ______ to participate in the trend.  
+A) discouraged  
+B) compelled  
+C) confused  
+D) indifferent
+
+**Answers:**  
+1 A (producing something) - "Generative" refers to the ability to produce or create something, especially in the context of AI tools.  
+2 A (forced) - "Compelled" means to be driven or forced to do something.  
+3 B (compelled) - The sentence indicates that many people feel a strong urge to join the trend.
+
+---
+
+**[한국어]**
+
+1. generative는 여기서 "무언가를 생산하는"이라는 뜻이에요.  
+2. compelled의 유의어는 "강요된"입니다.  
+3. 많은 사람들이 그 트렌드에 참여하도록 ______ 됩니다.
+
+**정답:**  
+1번 A  
+2번 A  
+3번 B | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-09 15:54:42.508544 | Q: 왜 1번 내용 정답 A인지 더 자세히 설명해줘. | A: **[English]**
+
+1. What does "renovation" most likely mean in this news?  
+A) destruction  
+B) improvement  
+C) decoration  
+D) relocation
+
+2. What is a synonym of "heritage"?  
+A) history  
+B) future  
+C) technology  
+D) economy
+
+3. The building was in a state of ______ before the renovation.  
+A) improvement  
+B) disrepair  
+C) occupation  
+D) completion
+
+**Answers:**  
+1 B (improvement)  
+2 A (history)  
+3 B (disrepair)
+
+**Explanation:**  
+1. "Renovation" refers to the process of improving or restoring something, which in this case is the building.  
+2. "Heritage" relates to history and the legacy of the past, making "history" a fitting synonym.  
+3. "Disrepair" indicates that the building was not maintained and was in poor condition before the renovation.
+
+---
+
+**[한국어]**
+
+1. renovation은 여기서 "개선"이라는 뜻이에요.  
+2. heritage의 유의어는 "역사"입니다.  
+3. 그 건물은 개조 전에 ______ 상태였습니다.
+
+**정답:**  
+1번 B  
+2번 A  
+3번 B
+
+**설명:**  
+1. "Renovation"은 무언가를 개선하거나 복원하는 과정을 의미하며, 여기서는 건물에 해당합니다.  
+2. "Heritage"는 역사와 과거의 유산과 관련이 있어 "역사"가 적절한 유의어입니다.  
+3. "Disrepair"는 건물이 제대로 유지되지 않아 상태가 좋지 않았음을 나타냅니다. | Source: https://www.bbc.co.uk/news/articles/c985j211j67o
