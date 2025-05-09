@@ -2,14 +2,14 @@
 from pydantic import BaseModel, EmailStr, Field
 
 class UserCreate(BaseModel):
-    # 사용자명: 3~20자, 알파벳, 숫자, 밑줄(_)만 허용
+    # 사용자명: 3~20자, 알파벳, 숫자 및 특수문자 허용
     username: str = Field(
         min_length=3,
         max_length=20,
-        pattern=r"^[a-zA-Z0-9_]+$"
+        pattern=r"^[a-zA-Z0-9_!@#$%^&*(),.?\":{}|<>-]*$" # 특수문자는 공백을 제외한 모든 문자 허용용
     )
     email: EmailStr         # 이메일: 이메일 형식 검증 abc@xyz.com 형식이 아니면 422 에러
-    Password: str = Field(min_length=8, max_length=128)      # 비밀번호: 최소 8자 이상
+    password :str = Field(min_length=8, max_length=128)      # 비밀번호: 최소 8자 이상
 
     
 class UserLogin(BaseModel):

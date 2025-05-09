@@ -6,13 +6,8 @@ python-dotenv
 # 🔹 인증 관련
 python-jose[cryptography]
 passlib[bcrypt]
+bcrypt==3.2.0
 pydantic[email]
-
-
-
-# 🔹 NLP/AI 관련
-#transformers==4.36.2
-#sentence-transformers==2.2.2
 
 # 🔹 Langchain 관련 패키지
 langchain
@@ -23,7 +18,5 @@ langchain-huggingface
 openai
 
 # 🔹 기타
-openai
 weaviate-client
 psycopg2-binary
-
