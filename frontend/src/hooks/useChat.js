@@ -35,7 +35,8 @@ const useChat = () => {
         sender: 'assistant',
         type: 'canvas',
         text: botReply.answer,
-        source: botReply.source
+        source: botReply.source,
+        mode: currentMode,  //  모드 정보 전달
       };
 
       setMessages((msgs) => [...msgs, canvasMsg]);

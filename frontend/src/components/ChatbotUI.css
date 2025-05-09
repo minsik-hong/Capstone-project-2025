@@ -30,3 +30,6 @@
     text-decoration: underline;
   }
   
+  .canvas-panel {
+  padding-top: 60px; /* 버튼 가리지 않게 위 여백 확보 */
+}

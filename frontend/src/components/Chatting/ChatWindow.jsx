@@ -1,4 +1,4 @@
-// ChatWindow.jsx
+// frontend/src/components/Chatting/ChatWindow.jsx
 import React from 'react';
 import ChatBubble from './ChatBubble';
 import Canvas from './Canvas';
@@ -13,7 +13,9 @@ function ChatWindow({
   mode,
   setMode,
   onCanvasOpen,
-  isCanvasOpen
+  isCanvasOpen,
+  quizStates,
+  updateQuizState,
 }) {
   const toggleMode = (selectedMode) => {
     setMode(mode === selectedMode ? "" : selectedMode);
@@ -28,7 +30,10 @@ function ChatWindow({
               key={msg.id}
               text={msg.text}
               source={msg.source}
+              mode={msg.mode}
               onOpen={() => onCanvasOpen(msg)}
+              quizState={quizStates[msg.id] || { selectedAnswers: ["", "", ""], submitted: false }}
+              updateQuizState={(updates) => updateQuizState(msg.id, updates)}
             />
           ) : (
             <ChatBubble key={msg.id} message={msg.text} sender={msg.sender} />

@@ -40,3 +40,40 @@
   text-decoration: underline;
 }
 
+.choice-btn {
+  margin: 4px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.choice-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.choice-btn.selected {
+  background-color: #a2c7ff;
+  font-weight: bold;
+}
+
+.canvas-submit button {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.canvas-submit button:hover {
+  background-color: #3367d6;
+}
+
+.submitted-msg {
+  margin-top: 10px;
+  color: green;
+  font-weight: bold;
+}
