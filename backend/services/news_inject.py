@@ -66,7 +66,7 @@ def is_valid_news_article(article) -> bool:
     repetitive_keywords = [
         "five minute news bulletin", "bbc world service", "news summary",
         "news update", "listen to the latest news", "bulletin",
-        "audio", "programme", "world service",
+        "audio", "programme", "world service", 'bitesize', 'news in brief',
     ]
     if any(kw in title for kw in repetitive_keywords):
         return False
@@ -262,27 +262,27 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 # 실행
 if __name__ == "__main__":
-    start_date = "2025-04-06"
-    end_date = "2025-05-04"
+    start_date = "2025-03-10"
+    end_date = "2025-03-26"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
         {"api_name": "cnn", "name": "cnn"}
     ]
 
-    for source in sources:
-        print(f"\n {source['name'].upper()} 뉴스 수집 중...")
-        articles = fetch_news_from_to(
-            query="",
-            start_date=start_date,
-            end_date=end_date,
-            source=source["api_name"]
-        )
-        save_and_vectorize_langchain(
-            articles,
-            source_name=source["name"],
-            start_date=start_date,
-            end_date=end_date
-        )
+    # for source in sources:
+    #     print(f"\n {source['name'].upper()} 뉴스 수집 중...")
+    #     articles = fetch_news_from_to(
+    #         query="",
+    #         start_date=start_date,
+    #         end_date=end_date,
+    #         source=source["api_name"]
+    #     )
+    #     save_and_vectorize_langchain(
+    #         articles,
+    #         source_name=source["name"],
+    #         start_date=start_date,
+    #         end_date=end_date
+    #     )
 
     for source in sources:
         print(f"\n {source['name'].upper()} 벡터화 실행 중...")

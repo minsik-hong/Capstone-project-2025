@@ -1,6 +1,7 @@
 # backend/services/memory_manager.py
 
-from langchain.memory import ConversationBufferMemory
+from langchain.memory import ConversationBufferMemory, ConversationSummaryBufferMemory
+from langchain_openai import ChatOpenAI
 from sqlalchemy.orm import Session
 from db.models.chat import ChatSession, ChatSessionMessage
 from langchain.schema import AIMessage, HumanMessage
@@ -13,7 +14,7 @@ class UserSessionMemoryManager:
         self.session_id = UUID(session_id)
         self.user_id = user_id
 
-        # 세션이 없으면 생성
+        # 세션 생성
         session = self.db.query(ChatSession).filter(ChatSession.session_id == self.session_id).first()
         if session is None:
             session = ChatSession(session_id=self.session_id, user_id=UUID(user_id), started_at=datetime.utcnow())
@@ -21,7 +22,15 @@ class UserSessionMemoryManager:
             self.db.commit()
 
         self.session = session
-        self.memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
+
+        # GPT 요약 메모리로 변경
+        self.llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
+        self.memory = ConversationSummaryBufferMemory(
+            llm=self.llm,
+            memory_key="chat_history",
+            return_messages=True
+        )
+
         self._load_history()
 
     def _load_history(self):

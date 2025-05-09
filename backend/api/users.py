@@ -8,8 +8,11 @@ from db.schemas.user import UserCreate, UserLogin
 from services.auth import hash_password, verify_password, create_access_token
 from datetime import timedelta
 
-import os
+from services.user_profile import summarize_user_profile
+from db.models.user_profile import UserProfile
+from uuid import UUID
 
+import os
 import requests
 
 router = APIRouter()
@@ -107,3 +110,24 @@ def kakao_login(code: str, db: Session = Depends(get_db)):
     # JWT 발급
     token = create_access_token({"sub": user.username}, expires_delta=timedelta(minutes=30))
     return {"access_token": token, "token_type": "bearer"}
+
+@router.post("/users/profile/refresh/{user_id}")
+def refresh_user_profile(user_id: UUID, db: Session = Depends(get_db)):
+    """
+    사용자의 최근 대화 메시지를 바탕으로 성향 분석하여 DB에 저장
+    """
+    try:
+        profile = summarize_user_profile(user_id=str(user_id), db=db)
+        return {"message": "Profile refreshed successfully", "profile": profile}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/users/profile/{user_id}")
+def get_user_profile(user_id: UUID, db: Session = Depends(get_db)):
+    """
+    저장된 사용자 프로필 조회
+    """
+    profile = UserProfile.get(db, user_id)
+    if not profile:
+        raise HTTPException(status_code=404, detail="User profile not found")
+    return profile
