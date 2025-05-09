@@ -6,7 +6,7 @@ from models.user import User
 from models.login_attempt import LoginAttempt # LoginAttempt 모델 임포트
 from db.schemas.user import UserCreate, UserLogin
 from services.auth import hash_password, verify_password, create_access_token
-from datetime import timedelta
+from datetime import datetime, timedelta
 import os
 import requests
 from jose import JWTError, jwt  # ✅ 토큰 디코딩을 위한 jose 라이브러리 추가
@@ -32,7 +32,7 @@ def get_db():
 
 # 회원가입 API
 @router.post("/users/register")
-def register(user: UserCreate, db: Session = Depends(get_db)): #get_db() 함수를 통해 DB 세션을 가져옴
+def register(user: UserCreate, db: Session = Depends(get_db)): 
     # DB에서 중복된 username 체크
     db_user = db.query(User).filter(User.username == user.username).first() 
     if db_user:
@@ -46,29 +46,48 @@ def register(user: UserCreate, db: Session = Depends(get_db)): #get_db() 함수�
     hashed_password = hash_password(user.password)
     new_user = User(username=user.username, email=user.email, password=hashed_password)
     
-    #새로운 유저 정보를 DB에 저장장
+    # 새로운 유저 정보를 DB에 저장
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
-    # **회원가입 후 사용자 정보 반환 개선**
+    # 회원가입 후 사용자 정보 반환
     return {"message": "User created successfully", "user": {"username": new_user.username, "email": new_user.email}}
 
-#로그인 API
+# 로그인 API
 @router.post("/users/login")
 def login(user: UserLogin, db: Session = Depends(get_db)):
     # DB에서 사용자 정보를 가져옴
     db_user = db.query(User).filter(User.username == user.username).first()
     
-    # 사용자 정보가 없거나 비밀번호가 일치하지 않으면 오류 발생
-    if not db_user or not verify_password(user.password, db_user.password):
+    # 로그인 성공 여부 기록을 위해 초기 설정
+    login_attempt = LoginAttempt(
+        user_id=db_user.id if db_user else None,  # 사용자 ID 기록 (없으면 None)
+        attempt_time=datetime.utcnow(),  # 시도 시간
+        success=False  # 초기 상태는 실패
+    )
+
+    # 사용자 정보 및 비밀번호 검증
+    if db_user and verify_password(user.password, db_user.password):
+        # 로그인 성공 시
+        login_attempt.success = True
+        db.add(login_attempt)  # 로그인 이력 기록
+        db.commit()
+
+        # JWT 토큰 생성
+        access_token = create_access_token({"sub": db_user.username}, expires_delta=timedelta(minutes=30))
+
+        # 토큰 반환
+        return {"access_token": access_token, "token_type": "bearer"}
+
+    else:
+        # 로그인 실패 시
+        db.add(login_attempt)  # 로그인 이력 기록
+        db.commit()
+
+        # 로그인 실패 예외 처리
         raise HTTPException(status_code=400, detail="Invalid username or password")
-    
-    # JWT 토큰 생성
-    access_token = create_access_token({"sub": db_user.username}, expires_delta=timedelta(minutes=30))
-    
-    # 토큰을 반환
-    return {"access_token": access_token, "token_type": "bearer"}
+
 
 # ✅ 토큰 재발급 API
 @router.post("/users/refresh")
@@ -134,7 +153,7 @@ def kakao_login(code: str, db: Session = Depends(get_db)):
         user = User(    
             username=username, 
             email=email, 
-            password="kakao_login_dummy",           # User 클래스에서 비밀번호 필드가 password로 되어있으므로 수정해야함.
+            password="kakao_login_dummy",           # 카카오 로그인은 비밀번호가 필요 없지만, 필드상 비밀번호 설정
             provider="kakao"                        # 카카오 로그인 시 provider를 "kakao"로 설정    
             )
         db.add(user)
