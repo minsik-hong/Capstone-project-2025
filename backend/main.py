@@ -29,7 +29,7 @@ app.add_middleware(
 # API 라우터 등록
 app.include_router(users.router, prefix="/api")  # 회원 관련 엔드포인트: /api/users/...
 app.include_router(chat.router, prefix="/api")   # 챗봇 관련 엔드포인트: /api/chat
-app.include_router(quiz.router, prefix="/api")   # 
+app.include_router(quiz.router, prefix="/api")   # 퀴즈 관련 엔드포인트: /api/quiz
 
 @app.get("/")
 def root():

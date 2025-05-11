@@ -3331,3 +3331,91 @@ C) reduce
 D) expand  
 
 --- | Source: https://www.bbc.co.uk/news/articles/cvge4l109r3o
+2025-05-11 09:48:50.165573 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어떻게 지내고 있나요?" | Source: 
+2025-05-11 12:08:25.609202 | Q: ai news | A: **[English]**
+
+1. What does "generative" most likely mean in this news?  
+A) creating something new  
+B) destroying something  
+C) copying something  
+D) analyzing something
+
+2. What is a synonym of "personalise"?  
+A) customize  
+B) generalize  
+C) standardize  
+D) ignore
+
+3. Many people are concerned about the ______ impact of AI technology.  
+A) positive  
+B) neutral  
+C) environmental  
+D) financial  
+
+--- | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-11 12:40:21.822343 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-11 12:40:38.592745 | Q: tech news | A: **[English]**  
+The US government has decided not to charge extra taxes on smartphones, computers, and some other electronic devices from China. This is a big change because these products were going to have high tariffs. President Trump said he would explain more about this decision soon. Many tech companies were worried that prices would go up if these taxes were applied. The exemptions will help companies have more time to move their production to the US. Some experts believe this is good news for tech investors and companies like Apple and Microsoft. Trump wants to make sure the US does not rely too much on China for important technology.
+
+**[한국어]**  
+미국 정부는 중국에서 오는 스마트폰, 컴퓨터 및 일부 전자 기기에 추가 세금을 부과하지 않기로 결정했습니다. 이는 이러한 제품에 높은 세금이 부과될 예정이었기 때문에 큰 변화입니다. 트럼프 대통령은 이 결정에 대해 곧 더 많은 설명을 할 것이라고 말했습니다. 많은 기술 회사들은 이러한 세금이 적용되면 가격이 오를까 걱정하고 있었습니다. 면세 혜택은 회사들이 미국으로 생산을 옮길 시간을 더 주는 데 도움이 될 것입니다. 일부 전문가들은 이것이 애플과 마이크로소프트와 같은 기술 투자자와 회사들에게 좋은 소식이라고 믿고 있습니다. 트럼프는 미국이 중요한 기술을 위해 중국에 너무 의존하지 않기를 원합니다. | Source: https://www.bbc.co.uk/news/articles/c20xn626y81o
+2025-05-11 12:43:57.496310 | Q: tech news | A: **[English]**
+
+1. What is the correct form of the verb in the sentence: "Trump said he _____ more details of the exemptions at the start of next week."  
+A) will give  
+B) gives  
+C) is giving  
+D) gave  
+
+2. Choose the correct sentence that uses the article appropriately.  
+A) The US is a major market for iPhones.  
+B) US is a major market for the iPhones.  
+C) The iPhones are a major market for US.  
+D) A US is a major market for iPhones.  
+
+3. Which option correctly uses a preposition?  
+A) Trump is comfortable with the high tariffs on China.  
+B) Trump is comfortable at the high tariffs on China.  
+C) Trump is comfortable in the high tariffs on China.  
+D) Trump is comfortable for the high tariffs on China.  
+
+--- 
+
+Feel free to answer the questions or ask for clarifications! | Source: https://www.bbc.co.uk/news/articles/c20xn626y81o
+2025-05-11 13:28:14.460870 | Q: recent news | A: **[English]**
+
+1. What does "controversy" most likely mean in this news?  
+A) a public disagreement or argument  
+B) a celebration or event  
+C) a type of food  
+D) a form of entertainment  
+
+2. What is a synonym of "jeopardise"?  
+A) protect  
+B) endanger  
+C) ignore  
+D) support  
+
+3. The White House officials have ______ the reports of military plans being shared.  
+A) confirmed  
+B) denied  
+C) celebrated  
+D) ignored   | Source: https://www.bbc.co.uk/news/articles/c4g8r701lrno
+2025-05-11 14:04:48.992627 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-11 14:05:02.371657 | Q: aw news | A: **[English]**  
+There is a controversy involving US Defence Secretary Pete Hegseth and a messaging app called Signal. Reports say that details about military attacks were shared in a group chat that included Hegseth's family and lawyer. President Trump supports Hegseth and says he is doing a good job. The White House claims that no classified information was shared. Hegseth has faced criticism for including his wife in meetings. There are concerns that sharing military plans could be dangerous. Hegseth fired three officials for leaking information, and he believes the media is unfairly attacking him. The situation is causing problems for the Pentagon and the President.
+
+**[한국어]**  
+미국 국방장관 피트 헥셋과 메시징 앱 시그널에 관한 논란이 있습니다. 보고서에 따르면, 헥셋의 가족과 변호사가 포함된 그룹 채팅에서 군사 공격에 대한 세부 정보가 공유되었다고 합니다. 트럼프 대통령은 헥셋을 지지하며 그가 잘하고 있다고 말했습니다. 백악관은 기밀 정보가 공유되지 않았다고 주장합니다. 헥셋은 아내를 회의에 포함시킨 것에 대해 비판을 받았습니다. 군사 계획을 공유하는 것이 위험할 수 있다는 우려가 있습니다. 헥셋은 정보를 유출한 세 명의 고위 관료를 해고했으며, 언론이 자신을 불공정하게 공격하고 있다고 믿고 있습니다. 이 상황은 국방부와 대통령에게 문제를 일으키고 있습니다. | Source: https://www.bbc.co.uk/news/articles/c4g8r701lrno

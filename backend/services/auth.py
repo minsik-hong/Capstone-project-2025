@@ -1,3 +1,4 @@
+# backend/services/auth.py
 # JWT 인증 및 암호화 (사용자의 비밀번호를 해시화하고, 로그인 시 JWT 토큰을 발급)
 from datetime import datetime, timedelta
 from typing import Optional

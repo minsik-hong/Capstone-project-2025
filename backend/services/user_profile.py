@@ -6,7 +6,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from sqlalchemy.orm import Session
 from db.models.chat import ChatSession, ChatSessionMessage
-from db.models.user_profile import UserProfile
+from db.models.user import UserProfile
 from datetime import datetime
 import json
 import re
@@ -27,7 +27,7 @@ Messages:
 
 Respond in JSON:
 {{
-  "level": "A1 ~ C2",
+  "level": "A1, A2, A3, B1, B2, B3, C1, C2",
   "interests": ["topic1", "topic2"],
   "weaknesses": ["grammar issue", "vocabulary gap"],
   "summary": "short summary of the user's style or pattern"
@@ -79,7 +79,7 @@ def summarize_user_profile(user_id: str, db: Session, max_messages: int = 100) -
         UserProfile.upsert(
             db=db,
             user_id=UUID(user_id),
-            level=profile_data.get("level"),
+            profile_level=profile_data.get("level"),
             interests=profile_data.get("interests", []),
             weaknesses=profile_data.get("weaknesses", []),
             summary=profile_data.get("summary")

@@ -9,11 +9,14 @@ from services.auth import hash_password, verify_password, create_access_token
 from datetime import timedelta
 
 from services.user_profile import summarize_user_profile
-from db.models.user_profile import UserProfile
 from uuid import UUID
 
 import os
 import requests
+
+# 카카오 로그인 API
+KAKAO_CLIENT_ID = os.getenv("KAKAO_REST_KEY")
+KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 
 router = APIRouter()
 
@@ -65,10 +68,6 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
     
     # 토큰을 반환 + user id 추가
     return {"access_token": access_token, "token_type": "bearer", "user_id": str(db_user.id)} # user id 추가
-
-# 카카오 로그인 API
-KAKAO_CLIENT_ID = os.getenv("KAKAO_REST_KEY")
-KAKAO_REDIRECT_URI = os.getenv("KAKAO_REDIRECT_URI")
 
 @router.get("/oauth/kakao")
 def kakao_login(code: str, db: Session = Depends(get_db)):
