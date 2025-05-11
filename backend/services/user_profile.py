@@ -20,7 +20,7 @@ llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
 # ========== 프롬프트 ==========
 profile_prompt = PromptTemplate.from_template("""
 You are analyzing English learning behavior of a user.
-Given the messages below, analyze and classify the user's English level (A1 to C2), learning interests (topics), and weaknesses (grammar, vocabulary, etc).
+Given the messages and session summaries below, analyze and classify the user's English level (A1 to C2), learning interests (topics), and weaknesses (grammar, vocabulary, etc).
 
 Messages:
 {messages}
@@ -45,7 +45,13 @@ def summarize_user_profile(user_id: str, db: Session, max_messages: int = 100) -
         # 메시지 수집
         sessions = db.query(ChatSession).filter(ChatSession.user_id == user_id).all()
         messages = []
+        session_summaries = []
+
         for session in sessions:
+            # session summary 추가
+            if session.summary:
+                session_summaries.append(session.summary)
+            # 메시지 수집
             msgs = (
                 db.query(ChatSessionMessage)
                 .filter(ChatSessionMessage.session_id == session.session_id)
@@ -57,7 +63,8 @@ def summarize_user_profile(user_id: str, db: Session, max_messages: int = 100) -
                     messages.append(m.message)
 
         recent_messages = messages[-max_messages:]
-        combined_text = "\n".join(recent_messages)
+        summary_text = "\n".join(session_summaries)
+        combined_text = "\n".join(recent_messages + [summary_text])
 
         print(" 분석 대상 메시지 수:", len(recent_messages))  # 디버깅
         if not combined_text:

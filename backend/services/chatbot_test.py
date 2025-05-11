@@ -108,14 +108,20 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
 
     # 프롬프트 준비
     prompt = PROMPTS.get(mode, PROMPTS["default"])
-    profile = UserProfile.get(db, user_id)
-    if profile:
+    # 사용자 프로필 불러오기
+    profile_obj = UserProfile.get(db, user_id)
+    if profile_obj:
         profile_dict = {
-            "level": profile.profile_level,
-            "interests": profile.interests,
-            "weaknesses": profile.weaknesses
+            "level": profile_obj.profile_level,
+            "interests": profile_obj.interests,
+            "weaknesses": profile_obj.weaknesses,
+            "summary": profile_obj.summary,
         }
-        prompt = inject_profile_into_prompt(profile_dict, prompt)
+        # 기존 PROMPTS.get(...) 결과와 결합
+        base_prompt = PROMPTS.get(mode, PROMPTS["default"])
+        prompt = inject_profile_into_prompt(profile_dict, base_prompt)
+    else:
+        prompt = PROMPTS.get(mode, PROMPTS["default"])
     
     inputs = {}
     if "input" in prompt.input_variables:
