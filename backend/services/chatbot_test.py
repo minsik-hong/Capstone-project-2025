@@ -14,6 +14,8 @@ from weaviate.connect import ConnectionParams
 
 from services.memory_manager import UserSessionMemoryManager
 from services.prompt_templates import PROMPTS
+from services.profile_injector import inject_profile_into_prompt
+from db.models.user import UserProfile
 from sqlalchemy.orm import Session
 
 # ========== 환경 변수 설정 ==========
@@ -106,6 +108,15 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
 
     # 프롬프트 준비
     prompt = PROMPTS.get(mode, PROMPTS["default"])
+    profile = UserProfile.get(db, user_id)
+    if profile:
+        profile_dict = {
+            "level": profile.profile_level,
+            "interests": profile.interests,
+            "weaknesses": profile.weaknesses
+        }
+        prompt = inject_profile_into_prompt(profile_dict, prompt)
+    
     inputs = {}
     if "input" in prompt.input_variables:
         inputs["input"] = question

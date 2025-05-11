@@ -3419,3 +3419,77 @@ There is a controversy involving US Defence Secretary Pete Hegseth and a messagi
 
 **[한국어]**  
 미국 국방장관 피트 헥셋과 메시징 앱 시그널에 관한 논란이 있습니다. 보고서에 따르면, 헥셋의 가족과 변호사가 포함된 그룹 채팅에서 군사 공격에 대한 세부 정보가 공유되었다고 합니다. 트럼프 대통령은 헥셋을 지지하며 그가 잘하고 있다고 말했습니다. 백악관은 기밀 정보가 공유되지 않았다고 주장합니다. 헥셋은 아내를 회의에 포함시킨 것에 대해 비판을 받았습니다. 군사 계획을 공유하는 것이 위험할 수 있다는 우려가 있습니다. 헥셋은 정보를 유출한 세 명의 고위 관료를 해고했으며, 언론이 자신을 불공정하게 공격하고 있다고 믿고 있습니다. 이 상황은 국방부와 대통령에게 문제를 일으키고 있습니다. | Source: https://www.bbc.co.uk/news/articles/c4g8r701lrno
+2025-05-11 14:18:58.719418 | Q: hi | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-05-11 14:19:07.269595 | Q: 너 나의 정보를 알고 있니? 레벨 | A: **[English]**
+"I don’t know your specific level yet, but I’d love to help you improve! Can you tell me what areas of English you want to focus on?"
+
+**[한국어]**
+"저는 아직 당신의 구체적인 레벨을 모르지만, 도와주고 싶어요! 어떤 영어 분야에 집중하고 싶은지 말씀해 주실 수 있나요?" | Source: 
+2025-05-11 14:19:09.278974 | Q: 벨 | A: **[English]**
+"Hi there! It looks like you typed '벨.' Did you mean to say something else, or is there a specific topic you'd like to talk about?"
+
+**[한국어]**
+"안녕하세요! '벨'이라고 입력하신 것 같은데, 다른 말을 하시려던 건가요, 아니면 이야기하고 싶은 특정 주제가 있나요?" | Source: 
+2025-05-11 14:19:23.592437 | Q: 나의 관심사를 알고 있니? | A: **[English]**
+"I don't know your interests yet! But I'd love to hear about them. What do you enjoy doing?"
+
+**[한국어]**
+"아직 당신의 관심사를 모르겠어요! 하지만 듣고 싶어요. 어떤 것을 즐기세요?" | Source: 
+2025-05-11 14:27:26.850947 | Q: hi | A: **[English]**
+"Hi there! How are you today?"
+
+**[한국어]**
+"안녕하세요! 오늘 기분은 어때요?" | Source: 
+2025-05-11 14:27:33.943653 | Q: 나의 레벨이 뭐니? | A: **[English]**
+"Your English level is A1. This means you are a beginner. You can understand and use simple words and phrases."
+
+**[한국어]**
+"당신의 영어 수준은 A1입니다. 이것은 당신이 초보자라는 뜻이에요. 간단한 단어와 구문을 이해하고 사용할 수 있습니다." | Source: 
+2025-05-11 14:27:59.346504 | Q: ai news | A: **[English]**
+
+1. What does "generative" most likely mean in this news?  
+A) creating something new  
+B) copying something  
+C) destroying something  
+D) changing something
+
+2. What is a synonym of "trend"?  
+A) style  
+B) mistake  
+C) problem  
+D) question
+
+3. People should ______ of the risks of using AI tools.  
+A) ignore  
+B) think  
+C) forget  
+D) avoid | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-11 14:29:23.869890 | Q: good | A: **[English]**
+
+A: Did you read about the American tourists in Paris?  
+B: No, what happened?  
+A: Some Americans feel embarrassed because of their president's actions.  
+B: Oh really? Why do they feel that way?  
+A: They are worried about trade tariffs and how it affects their image.  
+B: That’s interesting. Are they still welcome in France?  
+A: Yes, they are still welcome, but some are trying to hide their nationality.  
+B: I see. What did one couple do?  
+A: One man covered the US flag on his cap with tape.  
+B: Wow, that’s surprising!  
+
+**[한국어]**
+
+A: 파리에서 미국 관광객들에 대한 뉴스 봤어?  
+B: 아니, 무슨 일이야?  
+A: 몇몇 미국인들이 대통령의 행동 때문에 부끄럽다고 느끼고 있어.  
+B: 아 정말? 왜 그런 기분이 드는 거야?  
+A: 그들은 무역 관세에 대해 걱정하고, 자신의 이미지에 영향을 미친다고 생각해.  
+B: 흥미롭네. 그들은 여전히 프랑스에서 환영받고 있어?  
+A: 응, 여전히 환영받고 있지만, 일부는 국적을 숨기려고 해.  
+B: 그렇구나. 한 커플은 뭐 했어?  
+A: 한 남자는 모자에 있는 미국 국기를 테이프로 가렸어.  
+B: 와, 그거 놀랍다! | Source: https://www.bbc.co.uk/news/articles/c2kvqnx0dnno

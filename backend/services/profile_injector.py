@@ -17,13 +17,12 @@ You are tutoring a user with the following profile:
 Adapt your explanations and tone to suit the learner's level and needs.
 """
 
-def inject_profile_into_prompt(profile: dict) -> ChatPromptTemplate:
+def inject_profile_into_prompt(profile: dict, base_prompt: ChatPromptTemplate):
     """
     사용자 프로필을 LangChain ChatPromptTemplate에 삽입
     """
     system_prompt = build_system_prompt(profile)
 
     return ChatPromptTemplate.from_messages([
-        SystemMessagePromptTemplate.from_template(system_prompt),
-        HumanMessagePromptTemplate.from_template("{input}")
-    ])
+        SystemMessagePromptTemplate.from_template(system_prompt)
+    ] + base_prompt.messages)
