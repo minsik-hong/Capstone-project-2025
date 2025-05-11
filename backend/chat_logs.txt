@@ -3493,3 +3493,44 @@ A: 응, 여전히 환영받고 있지만, 일부는 국적을 숨기려고 해.
 B: 그렇구나. 한 커플은 뭐 했어?  
 A: 한 남자는 모자에 있는 미국 국기를 테이프로 가렸어.  
 B: 와, 그거 놀랍다! | Source: https://www.bbc.co.uk/news/articles/c2kvqnx0dnno
+2025-05-11 14:31:46.392099 | Q: hi | A: **[English]**
+"Hi there! How are you today?"
+
+**[한국어]**
+"안녕하세요! 오늘 기분이 어때요?" | Source: 
+2025-05-11 14:31:56.889051 | Q: korea news | A: **[English]**
+
+1. What does "ravage" most likely mean in this news?  
+A) to create  
+B) to destroy  
+C) to build  
+D) to protect  
+
+2. What is a synonym of "devastated"?  
+A) happy  
+B) excited  
+C) shocked  
+D) relaxed  
+
+3. The firefighters are trying to ______ the flames.  
+A) grow  
+B) contain  
+C) ignore  
+D) start  
+
+Feel free to ask if you need help with the answers or explanations! | Source: https://www.bbc.co.uk/news/articles/c1lp365pd1go
+2025-05-11 14:32:26.852291 | Q: contain의 의미를 더 자세히 설명해줘. | A: **[English]**
+"Sure! The word 'contain' means to hold or have something inside. For example, a bottle can contain water. It means the bottle has water inside it. You can also say a box contains toys. This means the toys are inside the box."
+
+**[한국어]**
+"물론이죠! 'contain'이라는 단어는 무언가를 안에 담고 있거나 포함한다는 뜻이에요. 예를 들어, 병은 물을 'contain'할 수 있어요. 즉, 병 안에 물이 있다는 뜻이죠. 상자가 장난감을 'contain'한다고도 할 수 있어요. 이것은 장난감이 상자 안에 있다는 의미예요." | Source: 
+2025-05-11 14:32:58.478970 | Q: What is my level? | A: **[English]**
+"Your English level is A1. This means you are a beginner. You can understand and use simple phrases and sentences. We can practice together to help you improve!"
+
+**[한국어]**
+"당신의 영어 수준은 A1입니다. 이것은 당신이 초급자라는 뜻이에요. 간단한 문장과 구문을 이해하고 사용할 수 있습니다. 함께 연습해서 더 나아질 수 있도록 도와줄게요!" | Source: 
+2025-05-11 14:33:20.253643 | Q: 나의 영어 레벨이 어떻게 되니? | A: **[English]**
+"Your English level is A1. This means you are a beginner. You can understand and use simple words and phrases. That's a great start!"
+
+**[한국어]**
+"당신의 영어 레벨은 A1이에요. 이것은 당신이 초보자라는 뜻이에요. 간단한 단어와 문구를 이해하고 사용할 수 있어요. 아주 좋은 시작이에요!" | Source: 
