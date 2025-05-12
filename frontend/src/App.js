@@ -1,3 +1,4 @@
+// frontend/src/App.js
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import ChatbotPage from './pages/ChatbotPage';
@@ -22,6 +23,7 @@ const App = () => {
         
         {/* 카카오 리다이렉트 처리용 경로 */}
         <Route path="/oauth/callback/kakao" element={<KakaoCallback />} />
+
         {isAuthenticated ? (
           <>
             <Route path="/chatbot" element={<ChatbotPage />} />

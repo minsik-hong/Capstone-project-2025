@@ -93,6 +93,12 @@
     color: #fff;
 }
 
+.footer-button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+
 .input-container {
     display: flex;
     align-items: center;
@@ -125,4 +131,33 @@
 .send-icon {
     width: 24px;
     height: 24px;
+}
+
+.current-mode {
+    padding: 6px 12px;
+    background-color: #007bff;
+    color: white;
+    font-size: 14px;
+    border-radius: 20px;
+    margin: 8px 16px;
+    display: inline-block;
+}
+
+/* ChatWindow.css 또는 global */
+.loading-container {
+  text-align: center;
+  margin: 16px 0;
+}
+.spinner {
+  border: 4px solid #eee;
+  border-top: 4px solid #555;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }

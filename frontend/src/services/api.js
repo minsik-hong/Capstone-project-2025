@@ -1,12 +1,19 @@
+// frontend/src/services/api.js
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_URL = process.env.REACT_APP_API_URL;
 
 // 회원가입
 export const registerUser = async (userData) => {
-  const response = await axios.post(`${API_URL}/api/users/register`, userData);
-  return response.data;
+  try {
+    const response = await axios.post(`${API_URL}/api/users/register`, userData);
+    return response.data;
+  } catch (error) {
+    console.error('Register API error:', error);
+    return { success: false, message: error.response?.data?.detail || "Registration failed" };
+  }
 };
+
 
 // 로그인
 export const loginUser = async (username, password) => {
@@ -25,12 +32,16 @@ export const loginUser = async (username, password) => {
   }
 };
 
-
-// ✅ 실제 FastAPI 챗봇 API 연결 함수 추가
-export const askQuestion = async (question) => {
+// [수정됨] 질문하기 (user_id, session_id 포함)
+export const askQuestion = async (user_id, session_id, question, mode = "") => {
   try {
-    const response = await axios.post(`${API_URL}/api/chat`, { question });
-    return response.data; // { answer, source }
+    const response = await axios.post(`${API_URL}/api/chat`, {
+      user_id,
+      session_id,
+      question,
+      mode
+    });
+    return response.data;
   } catch (error) {
     console.error('Chatbot API error:', error);
     return {
@@ -38,19 +49,6 @@ export const askQuestion = async (question) => {
       source: "출처 없음",
     };
   }
-};
-
-
-// 뉴스 요약 임시 구현
-// topic: 사용자가 입력한 주제, source: "CNN" 또는 "BBC"
-export const fetchNewsSummary = async (topic, source) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        `News summary from ${source} about "${topic}" - Blah Blah.`
-      );
-    }, 800);
-  });
 };
 
 // 카카오 로그인 (인가 코드로 로그인 요청)
@@ -62,4 +60,26 @@ export const kakaoLogin = async (code) => {
     console.error('Kakao Login API error:', error);
     throw error;
   }
+};
+
+// 사용자 프로필 분석
+export const refreshUserProfile = async (userId) => {
+  try {
+    const response = await axios.post(`${API_URL}/api/users/profile/refresh/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('User Profile Refresh Error:', error);
+    throw error;
+  }
+};
+
+// 퀴즈 정답
+export const submitQuizAnswers = async (userId, sessionId, quizContent, selectedAnswers) => {
+  const response = await axios.post(`${API_URL}/api/quiz/submit`, {
+    user_id: userId,
+    // session_id: sessionId,
+    quiz_content: quizContent,
+    user_answers: selectedAnswers,
+  });
+  return response.data;
 };

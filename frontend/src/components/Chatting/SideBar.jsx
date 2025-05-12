@@ -1,6 +1,8 @@
+// frontend/src/components/Chatting/SideBar.jsx 
 import React from "react";
 import ChatItem from "./ChatItem";
 import "./SideBar.css";
+import SettingsModal from "../Setting/SettingsModal";
 
 function Sidebar() {
   const chatHistory = [
@@ -31,6 +33,9 @@ function Sidebar() {
           {chatHistory.map((chat) => (
             <ChatItem key={chat.id} title={chat.title} onClick={() => console.log(chat.id)} />
           ))}
+        </div>
+        <div className="settings-wrapper">
+          <SettingsModal trigger={<img src="/assets/settings.svg" alt="settings" className="settings-btn" />}/>
         </div>
       </div>
     </div>
