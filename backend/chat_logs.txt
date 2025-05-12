@@ -221,3 +221,13 @@ There is a new trend where people use AI tools to create small dolls or action f
 
 **[한국어]**  
 사람들이 AI 도구를 사용하여 자신과 닮은 작은 인형이나 액션 피규어를 만드는 새로운 트렌드가 있습니다. 사람들은 사진을 업로드하고 인형이 어떻게 보이길 원하는지에 대한 지침을 줍니다. 많은 사람들이 이걸 즐기지만, 일부는 AI가 사용하는 에너지와 수집하는 데이터에 대해 걱정합니다. 전문가들은 이러한 이미지를 만드는 데 많은 전기가 사용될 수 있다고 말하며, 이는 환경에 좋지 않습니다. 또한 AI 사용이 우리의 개인 정보와 문화에 해를 끼칠 수 있다고 생각하는 사람들도 있습니다. 이러한 인형을 만드는 것은 재미있지만, AI를 사용하는 방법에 대해 신중하게 생각해야 합니다. | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-12 02:57:11.473761 | Q: ho | A: **[English]**
+"Hi there! It looks like you typed 'ho.' Did you mean to say 'hello'? How can I help you today?"
+
+**[한국어]**
+"안녕하세요! 'ho'라고 입력하신 것 같아요. 'hello'라고 하시려던 건가요? 오늘 무엇을 도와드릴까요?" | Source: 
+2025-05-12 02:57:24.734449 | Q: ai news | A: **[English]**  
+A new trend is happening online where people make small dolls or action figures of themselves using AI tools like ChatGPT. They upload a photo and give instructions on how they want the doll to look. Many people enjoy this, but some are worried about the energy and data these AI tools use. Some experts say that creating these images can harm the environment. They also mention that the AI might use pictures without permission. While it can be fun to create these mini versions of ourselves, we should think about how we use AI carefully.
+
+**[한국어]**  
+새로운 트렌드가 온라인에서 일어나고 있습니다. 사람들이 ChatGPT와 같은 AI 도구를 사용하여 자신을 작은 인형이나 액션 피규어로 만드는 것입니다. 그들은 사진을 업로드하고 인형이 어떻게 보이길 원하는지에 대한 지침을 줍니다. 많은 사람들이 이 과정을 즐기지만, 일부는 이러한 AI 도구가 사용하는 에너지와 데이터에 대해 걱정하고 있습니다. 전문가들은 이러한 이미지를 만드는 것이 환경에 해를 끼칠 수 있다고 말합니다. 또한 AI가 허락 없이 사진을 사용할 수 있다고 언급합니다. 우리 자신을 이렇게 작은 버전으로 만드는 것은 재미있지만, AI를 사용하는 방법에 대해 신중하게 생각해야 합니다. | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno

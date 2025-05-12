@@ -8,6 +8,8 @@ from langchain_weaviate.vectorstores import WeaviateVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.schema import HumanMessage
 from langchain.chains import LLMChain
+from langchain_core.runnables import RunnableSequence
+
 
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
@@ -18,9 +20,15 @@ from services.profile_injector import inject_profile_into_prompt
 from db.models.user import UserProfile
 from sqlalchemy.orm import Session
 
+from langchain_core.runnables import RunnableSequence
+
 # ========== 환경 변수 설정 ==========
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 load_dotenv(dotenv_path=os.path.join(ROOT_DIR, ".env"))
+
+os.environ["LANGSMITH_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
+os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT", "news-chatbot")
+os.environ["LANGCHAIN_TRACING_V2"] = "true" 
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "localhost")
@@ -130,7 +138,12 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
         inputs["news"] = news_text
 
     # 모든 모드에서 memory 사용 (follow-up 대응 가능)
-    chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
+    chain = LLMChain(
+        llm=llm, 
+        prompt=prompt, 
+        memory=memory,
+        verbose=True,
+        )
     result = chain.invoke(inputs)
     response = clean_text(result["text"])
 
