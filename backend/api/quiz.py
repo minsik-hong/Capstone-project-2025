@@ -26,18 +26,21 @@ def submit_quiz(request: QuizSubmitRequest, db: Session = Depends(get_db)):
     try:
         # 사용자 프로필 조회
         profile_obj = UserProfile.get(db, user_id=request.user_id)
+
+        # 프롬프트 생성 (기본 템플릿에 프로필 주입)
+        base_prompt = PROMPTS["answer_reveal"]
         profile_dict = {}
         if profile_obj:
             profile_dict = {
                 "level": profile_obj.profile_level,
                 "interests": profile_obj.interests or [],
                 "weaknesses": profile_obj.weaknesses or [],
+                "summary": profile_obj.summary,
             }
-
-        # 프롬프트 생성 (기본 템플릿에 프로필 주입)
-        base_prompt = PROMPTS["answer_reveal"]
-        final_prompt = inject_profile_into_prompt(profile_dict, base_prompt)
-
+            final_prompt = inject_profile_into_prompt(profile_dict, base_prompt)
+        else:
+            final_prompt = base_prompt
+            
         llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
         chain = LLMChain(prompt=final_prompt, llm=llm)
 
