@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import "./ChatBubble.css";
 import MarkdownMessage from "../common/MarkdownMessage"; // 마크다운 메시지 컴포넌트
 
@@ -11,12 +12,16 @@ import MarkdownMessage from "../common/MarkdownMessage"; // 마크다운 메시�
  */
 function ChatBubble({ message, sender }) {
   return (
-    <div className={`chat-bubble ${sender}`}>
-      {/* <p className="message-text">{message}</p> */}
-
+    <motion.div
+      className={`chat-bubble ${sender}`}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 12 }}
+      transition={{ duration: 0.25 }}
+    >
       {/* 마크다운 메시지 컴포넌트 사용 */}
       <MarkdownMessage text={message} />  
-    </div>
+    </motion.div>
   );
 }
 

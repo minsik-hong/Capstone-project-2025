@@ -20,7 +20,7 @@
   /* 왼쪽 영역: 웰컴 메시지와 설명 */
   .login-left {
     flex: 0 0 50%;
-    background-color: #3369FF;
+    background: linear-gradient(135deg, #3369ff 0%, #f47fb5 100%);
     color: #fff;
     display: flex;
     flex-direction: column;

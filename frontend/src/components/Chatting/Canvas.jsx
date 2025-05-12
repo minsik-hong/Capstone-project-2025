@@ -1,14 +1,14 @@
-// frontend/src/components/Chatting/Canvas.jsx
 import React from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import "./Canvas.css";
 import MarkdownMessage from "../common/MarkdownMessage";
 import { submitQuizAnswers } from '../../services/api';
 
-function Canvas({   
-  text, 
-  source, 
-  mode, 
-  onOpen, 
+function Canvas({
+  text,
+  source,
+  mode,
+  onOpen,
   quizState = { selectedAnswers: ["", "", ""], submitted: false },
   updateQuizState = () => {}
 }) {
@@ -19,7 +19,6 @@ function Canvas({
 
   const formatMarkdownText = (rawText) => {
     return rawText
-      .replace(/\*\*/g, "")
       .replace(/(\d+\..*?)\s+(?=[A-D]\))/g, "\n\n$1\n")
       .replace(/([A-D])\)/g, "\n$1)")
       .replace(/Answers:/g, "\n\n**Answers:**");
@@ -55,7 +54,7 @@ function Canvas({
     const userId = localStorage.getItem("user_id");
     const sessionId = localStorage.getItem("session_id"); // 또는 props에서 전달된 sessionId
 
-    console.log("전송 데이터 확인", {
+     console.log("전송 데이터 확인", {
       user_id: userId,
       session_id: sessionId,
       quiz_content: text,
@@ -72,45 +71,87 @@ function Canvas({
   };
 
   return (
-    <div className="canvas-box" onClick={onOpen}>
-      <img src={imageSrc} alt="document" className="canvas-icon" />
+    <motion.div
+      className="canvas-box"
+      onClick={onOpen}
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 24 }}
+      transition={{ duration: 0.35 }}
+    >
+      <motion.img
+        src={imageSrc}
+        alt="document"
+        className="canvas-icon"
+        initial={{ rotate: -6, scale: 0.9 }}
+        animate={{ rotate: 0, scale: 1 }}
+        transition={{ type: "spring", stiffness: 300, damping: 18 }}
+      />
       <div className="canvas-content">
         <MarkdownMessage text={formattedQuizText} />
 
         {isQuiz && questions.map((_, idx) => (
-          <div key={idx} className="choices">
-            {["A", "B", "C", "D"].map((opt) => (
-              <button
-                key={opt}
+            <div key={idx} className="choices">
+              {["A", "B", "C", "D"].map((opt) => (
+                <motion.button
+                  key={opt}
                 className={`choice-btn ${quizState.selectedAnswers[idx] === opt ? "selected" : ""}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleChoice(idx, opt);
-                }}
-              >
-                {opt}
-              </button>
-            ))}
-          </div>
-        ))}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleChoice(idx, opt);
+                  }}
+                >
+                  {opt}
+                </motion.button>
+              ))}
+            </div>
+          ))}
 
         {isQuiz && (
           <div className="canvas-submit">
-            {!quizState.submitted ? (
-              <button onClick={(e) => { e.stopPropagation(); handleSubmit(); }}>
-                제출하기
-              </button>
-            ) : (
-              <div className="submitted-msg">✅ 답안이 제출되었습니다.</div>
-            )}
+            <AnimatePresence mode="wait">
+              {!quizState.submitted ? (
+                <motion.button
+                  key="submit"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleSubmit();
+                  }}
+                >
+                  제출하기
+                </motion.button>
+              ) : (
+                <motion.div
+                  key="done"
+                  className="submitted-msg"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  ✅ 답안이 제출되었습니다.
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         )}
 
         {/* 피드백 출력 */}
         {quizState.feedback && (
-          <div className="quiz-feedback">
+          <motion.div
+            className="quiz-feedback"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.4 }}
+          >
             <MarkdownMessage text={quizState.feedback} />
-          </div>
+          </motion.div>
         )}
 
         {source && (
@@ -125,7 +166,7 @@ function Canvas({
           </a>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 }
 
