@@ -4,13 +4,8 @@ const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
 
 // 회원가입
 export const registerUser = async (userData) => {
-  try {
-    const response = await axios.post(`${API_URL}/api/users/register`, userData);
-    return response.data;
-  } catch (error) {
-    console.error('Register API error:', error);
-    return { success: false, message: error.response?.data?.detail || "Registration failed" };
-  }
+  const response = await axios.post(`${API_URL}/api/users/register`, userData);
+  return response.data;
 };
 
 // 로그인
