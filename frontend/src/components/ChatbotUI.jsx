@@ -78,7 +78,7 @@ function ChatbotUI() {
                   rel="noreferrer"
                   style={{ marginTop: "12px", display: "inline-block" }}
                 >
-                  🔗 출처 보기
+                  🔗 Link
                 </a>
               )}
             </>

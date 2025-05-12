@@ -74,11 +74,11 @@ export default function SettingsModal({ trigger, currentEmail = "user@example.co
                   {/* 분석 결과 표시 */}
                   {profileSummary && (
                     <div className="profile-summary-box">
-                      <h4>📊 분석 요약</h4>
-                      <p><strong>레벨:</strong> {profileSummary.level}</p>
-                      <p><strong>관심사:</strong> {profileSummary.interests.join(", ")}</p>
-                      <p><strong>약점:</strong> {profileSummary.weaknesses.join(", ")}</p>
-                      <p><strong>요약:</strong> {profileSummary.summary}</p>
+                      <h4>📊 분석 요약 (Analysis Summary)</h4>
+                      <p><strong>레벨(Level):</strong> {profileSummary.level}</p>
+                      <p><strong>관심사(Interests):</strong> {profileSummary.interests.join(", ")}</p>
+                      <p><strong>약점(Weaknesses):</strong> {profileSummary.weaknesses.join(", ")}</p>
+                      <p><strong>요약(Summary):</strong> {profileSummary.summary}</p>
                     </div>
                   )}
                 </div>

@@ -173,7 +173,7 @@ function Canvas({
             rel="noreferrer"
             onClick={(e) => e.stopPropagation()}
           >
-            🔗 출처 보기
+            🔗 Link
           </a>
         )}
       </div>
