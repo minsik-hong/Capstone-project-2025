@@ -1,7 +1,6 @@
 FROM python:3.10
 
 WORKDIR /app
-
 # pip 최신화
 RUN pip install --upgrade pip
 
@@ -11,6 +10,7 @@ RUN pip install torch==2.2.2+cpu torchvision==0.17.2+cpu torchaudio==2.2.2+cpu \
 
 # requirements.txt 복사
 COPY requirements.txt .
+
 # requirements.txt에 포함된 패키지 설치
 RUN pip install --no-cache-dir -r requirements.txt
 

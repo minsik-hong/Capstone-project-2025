@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
 from db.session import SessionLocal
-from models.user import User
-from models.login_attempt import LoginAttempt # LoginAttempt 모델 임포트
+from db.models.user import User
+from db.models.login_attempt import LoginAttempt # LoginAttempt 모델 임포트
 from db.schemas.user import UserCreate, UserLogin
 from services.auth import hash_password, verify_password, create_access_token
 from datetime import datetime, timedelta

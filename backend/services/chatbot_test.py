@@ -1,28 +1,26 @@
+# backend/services/chatbot_test.py
 import os
-import re
 from datetime import datetime
 from dotenv import load_dotenv
 
-from langchain.chains import ConversationalRetrievalChain
-from langchain.memory import ConversationSummaryBufferMemory
 from langchain_openai import ChatOpenAI
 from langchain_weaviate.vectorstores import WeaviateVectorStore
 from langchain_huggingface import HuggingFaceEmbeddings
+from langchain.schema import HumanMessage
+from langchain.chains import LLMChain
 
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
 
-from langchain.chains.summarize import load_summarize_chain
-from langsmith import traceable
+from services.memory_manager import UserSessionMemoryManager
+from services.prompt_templates import PROMPTS
+from services.profile_injector import inject_profile_into_prompt
+from db.models.user import UserProfile
+from sqlalchemy.orm import Session
 
-# .env 로드
+# ========== 환경 변수 설정 ==========
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 load_dotenv(dotenv_path=os.path.join(ROOT_DIR, ".env"))
-
-# 환경 변수
-os.environ["TOKENIZERS_PARALLELISM"] = "false"
-os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY", "")
-os.environ["LANGCHAIN_PROJECT"] = "news-chatbot"
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "localhost")
@@ -30,21 +28,9 @@ WEAVIATE_PORT = int(os.getenv("WEAVIATE_PORT", "8080"))
 WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "News_bbc")
 
-# system_prompt = (
-#     "You are a friendly and knowledgeable English tutor who also provides news information. "
-#     "You explain English vocabulary, grammar, and expressions using current news articles. "
-#     "You ask follow-up questions to help the user practice English conversation."
-# )
+# ========== LLM 및 Vectorstore 초기화 ==========
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3, openai_api_key=OPENAI_API_KEY)
 
-# LLM 설정
-llm = ChatOpenAI(
-    model_name="gpt-4o-mini",
-    temperature=0.3,
-    openai_api_key=OPENAI_API_KEY,
-    # model_kwargs={"system_prompt": system_prompt}
-)
-
-# Weaviate 연결
 connection_params = ConnectionParams.from_params(
     http_host=WEAVIATE_HOST,
     http_port=WEAVIATE_PORT,
@@ -56,7 +42,6 @@ connection_params = ConnectionParams.from_params(
 client = WeaviateClient(connection_params=connection_params)
 client.connect()
 
-# Embedding & Vectorstore 설정
 embedding_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 vectorstore = WeaviateVectorStore(
     client=client,
@@ -65,99 +50,94 @@ vectorstore = WeaviateVectorStore(
     text_key="content"
 )
 
-# 요약 기반 메모리
-memory = ConversationSummaryBufferMemory(
-    llm=llm,
-    memory_key="chat_history",
-    output_key="answer",
-    return_messages=True
-)
-
-# QA 체인 구성
-qa_chain = ConversationalRetrievalChain.from_llm(
-    llm=llm,
-    retriever=vectorstore.as_retriever(search_kwargs={"k": 2}),
-    memory=memory,
-    return_source_documents=True,
-    output_key="answer"
-)
-
-# 전역 변수
-last_question = {"question": ""}
-
-# -------------------------------
-# 주요 함수들
-# -------------------------------
-
-def detect_followup_type(q: str) -> str:
-    followup_phrases = {
-        "more": [r"\b(more please|more|tell me more|추가로|더 알려줘|관련 more|좀 더 자세히)\b"],
-        "similar": [r"\b(similar|another one|다른 주제|비슷한 주제|다른 걸로|유사한 뉴스)\b"]
-    }
-    for followup_type, patterns in followup_phrases.items():
-        for pattern in patterns:
-            if re.search(pattern, q, re.IGNORECASE):
-                return followup_type
-    return "original"
-
-def preprocess_question(q: str) -> str:
-    q = q.lower().strip()
-    followup_type = detect_followup_type(q)
-    if followup_type == "more":
-        return f"이전 질문에 대해 더 자세히 알려줘: {last_question['question']}"
-    elif followup_type == "similar":
-        return f"비슷하지만 다른 주제의 기사를 보여줘: {last_question['question']}"
-    else:
-        last_question["question"] = q
-        return q
-
+# ========== 유틸 함수 ==========
 def clean_text(text: str) -> str:
     return text.encode("utf-8", "ignore").decode("utf-8")
 
-def summarize_doc(doc) -> str:
-    summary_chain = load_summarize_chain(llm=llm, chain_type="refine")
-    try:
-        result = summary_chain.invoke([doc])
-        if isinstance(result, dict):
-            return result.get("output_text", "요약 없음")
-        return result
-    except Exception as e:
-        print(f"요약 실패: {e}")
-        return "요약 실패"
-
-def log_interaction(question, answer, sources, base_question=None):
+def log_interaction(question, answer, source_url):
     with open("chat_logs.txt", "a", encoding="utf-8") as f:
-        f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Sources: {sources}")
-        if base_question:
-            f.write(f" | BaseQ: {base_question}")
-        f.write("\n")
+        f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Source: {source_url}\n")
 
-# -------------------------------
-# 외부에서 호출할 함수
-# -------------------------------
+def should_use_news(question: str) -> bool:
+    judge_llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.0, openai_api_key=OPENAI_API_KEY)
+    prompt = f"""
+User input: "{question}"
 
-@traceable(name="run_chatbot")
-def run_chatbot(raw_input: str) -> dict:
-    question = preprocess_question(clean_text(raw_input))
-    response = qa_chain.invoke({"question": question})
+Is this about news, facts, or current issues? (Answer only yes or no)
+"""
+    result = judge_llm.invoke([HumanMessage(content=prompt)]).content.strip().lower()
+    return result == "yes"
 
-    top_doc = response.get("source_documents", [])[0] if response.get("source_documents") else None
+# ========== 메인 함수 ==========
+MODE_MAPPING = {
+    "summary": "summary",
+    "vocab": "vocab_quiz",
+    "grammar": "grammar_quiz",
+    "dialogue": "dialogue",
+    "": "default"
+}
 
-    if top_doc:
-        summary = summarize_doc(top_doc)
-        source = top_doc.metadata.get("url", "출처 없음")
+def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mode: str, db: Session):
+    mode = MODE_MAPPING.get(mode, "default")
+    question = clean_text(user_input)
+
+    # 메모리 매니저 초기화
+    memory_manager = UserSessionMemoryManager(db, session_id, user_id)
+    memory = memory_manager.get_memory()
+
+    # 첫 인사 처리
+    if not memory.chat_memory.messages:
+        welcome = "안녕하세요! 저는 최신 뉴스로 영어를 자연스럽게 가르쳐주는 AI 튜터입니다. 모드를 선택해서 영어를 효과적으로 배울 수 있어요!"
+        memory_manager.save_message("bot", welcome)
+        return {"answer": welcome, "source": ""}
+
+    # 뉴스 기반 모드 확인
+    use_news = mode in ["summary", "vocab_quiz", "grammar_quiz", "dialogue"]
+    
+    # default 모드에서는 뉴스 사용 여부를 판단
+    # if mode == "default":
+    #     use_news = should_use_news(question)
+
+    # default 모드에서는 news 사용 안 함
+    news_text, source_url = "", ""
+    if use_news:
+        docs = vectorstore.similarity_search(question, k=1)
+        if docs:
+            news_text = docs[0].page_content
+            source_url = docs[0].metadata.get("url", "")
+
+    # 프롬프트 준비
+    prompt = PROMPTS.get(mode, PROMPTS["default"])
+    # 사용자 프로필 불러오기
+    profile_obj = UserProfile.get(db, user_id)
+    if profile_obj:
+        profile_dict = {
+            "level": profile_obj.profile_level,
+            "interests": profile_obj.interests,
+            "weaknesses": profile_obj.weaknesses,
+            "summary": profile_obj.summary,
+        }
+        # 기존 PROMPTS.get(...) 결과와 결합
+        base_prompt = PROMPTS.get(mode, PROMPTS["default"])
+        prompt = inject_profile_into_prompt(profile_dict, base_prompt)
     else:
-        summary = "관련 문서를 찾을 수 없습니다"
-        source = "출처 없음"
+        prompt = PROMPTS.get(mode, PROMPTS["default"])
+    
+    inputs = {}
+    if "input" in prompt.input_variables:
+        inputs["input"] = question
+    if "news" in prompt.input_variables:
+        inputs["news"] = news_text
 
-    final_answer = clean_text(summary)
+    # 모든 모드에서 memory 사용 (follow-up 대응 가능)
+    chain = LLMChain(llm=llm, prompt=prompt, memory=memory)
+    result = chain.invoke(inputs)
+    response = clean_text(result["text"])
 
-    followup_type = detect_followup_type(raw_input)
-    base_q = last_question["question"] if followup_type in ["more", "similar"] else None
+    # 대화 저장
+    memory_manager.save_message("user", question)
+    memory_manager.save_message("bot", response)
 
-    log_interaction(raw_input, final_answer, [source], base_question=base_q)
+    log_interaction(question, response, source_url)
 
-    return {
-        "answer": final_answer,
-        "source": source
-    }
+    return {"answer": response, "source": source_url}

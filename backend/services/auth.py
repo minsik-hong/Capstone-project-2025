@@ -5,17 +5,17 @@ from jose import JWTError, jwt
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
 from db.session import SessionLocal
-from models.user import User
-from models.login_attempt import LoginAttempt  # LoginAttempt 모델 임포트
+from db.models.user import User
+from db.models.login_attempt import LoginAttempt  # LoginAttempt 모델 임포트
 from db.schemas.user import UserCreate, UserLogin
-import os  # ✅ 추가: 환경 변수 사용
-from dotenv import load_dotenv  # ✅ dotenv 로드
-from uuid import UUID  # ✅ UUID 임포트
+import os  #  추가: 환경 변수 사용
+from dotenv import load_dotenv  #  dotenv 로드
+from uuid import UUID  #  UUID 임포트
 
-# ✅ .env 파일에서 환경 변수 로드
+#  .env 파일에서 환경 변수 로드
 load_dotenv()
 
-# ✅ 환경 변수에서 JWT 시크릿 키 불러오기
+#  환경 변수에서 JWT 시크릿 키 불러오기
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
 if not SECRET_KEY:
     raise ValueError("JWT_SECRET_KEY is not set in the .env file")
@@ -33,7 +33,7 @@ def hash_password(password: str):
 def verify_password(plain_password, hashed_password):
     return pwd_context.verify(plain_password, hashed_password)
 
-# ✅login_attempt 관련 변경 사항: 로그인 시도 기록을 위한 함수
+# login_attempt 관련 변경 사항: 로그인 시도 기록을 위한 함수
 def record_login_attempt(db: Session, user_id: UUID, success: bool):
     attempt = LoginAttempt(
         user_id=user_id,
@@ -46,13 +46,13 @@ def record_login_attempt(db: Session, user_id: UUID, success: bool):
     return attempt
 
 
-# ✅ 변경: JWT 토큰 생성 - issuer, subject, issued-at, audience 추가 가능
+#  변경: JWT 토큰 생성 - issuer, subject, issued-at, audience 추가 가능
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode = data.copy()
     now = datetime.utcnow()
     expire = now + (expires_delta or timedelta(minutes=15))
 
-    # ✅ 토큰에 보안 관련 클레임 추가
+    #  토큰에 보안 관련 클레임 추가
     to_encode.update({
         "exp": expire,
         "iat": now,                 # 토큰 발급 시간
@@ -77,7 +77,7 @@ def register_user(db: Session, email: str, password: str):
     db.refresh(db_user)
     return db_user
 
-# ✅login_attempt 관련 변경사항: 로그인 (사용자 인증)
+# login_attempt 관련 변경사항: 로그인 (사용자 인증)
 def authenticate_user(db: Session, email: str, password: str):
     user = get_user_by_email(db, email)
     if not user:

@@ -1,9 +1,10 @@
-from dotenv import load_dotenv
-load_dotenv()  # .env 파일에서 환경 변수 로드
+
 from fastapi import FastAPI,Request
-from api import users, chat  # chat 라우터 추가
-from db.session import Base, engine
 from fastapi.middleware.cors import CORSMiddleware
+
+from api import users, chat, quiz  # 라우터 추가
+from db.session import Base, engine
+
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
@@ -66,6 +67,7 @@ app.add_middleware(
 # API 라우터 등록
 app.include_router(users.router, prefix="/api")  # 회원 관련 엔드포인트: /api/users/...
 app.include_router(chat.router, prefix="/api")   # 챗봇 관련 엔드포인트: /api/chat
+app.include_router(quiz.router, prefix="/api")   # 퀴즈 관련 엔드포인트: /api/quiz
 
 @app.get("/")
 def root():
