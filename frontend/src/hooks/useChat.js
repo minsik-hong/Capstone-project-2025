@@ -22,11 +22,23 @@ const useChat = () => {
 
   const sendMessage = async (text, currentMode) => {
     if (text.trim()) {
-      const userId = localStorage.getItem('user_id');  // 로그인 시 저장된 user_id 사용
+      const userId = localStorage.getItem('user_id');
 
       const userMsg = { id: Date.now(), text, sender: 'user' };
       setMessages((msgs) => [...msgs, userMsg]);
       setUserInput('');
+
+      // 로딩 메시지 추가 (특정 모드에만)
+      const loadingId = Date.now() + 0.5;
+      const loadingModes = ["summary", "vocab", "grammar", "dialogue"];
+      if (loadingModes.includes(currentMode)) {
+        setMessages((msgs) => [...msgs, {
+          id: loadingId,
+          sender: 'assistant',
+          type: 'loading',
+          text: '답변을 생성 중입니다...'
+        }]);
+      }
 
       const botReply = await askQuestion(userId, sessionId, text, currentMode);
 
@@ -36,10 +48,14 @@ const useChat = () => {
         type: 'canvas',
         text: botReply.answer,
         source: botReply.source,
-        mode: currentMode,  //  모드 정보 전달
+        mode: currentMode,
       };
 
-      setMessages((msgs) => [...msgs, canvasMsg]);
+      setMessages((msgs) => [
+        ...msgs.filter((m) => m.id !== loadingId),
+        canvasMsg
+      ]);
+
       messageEndRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -61,8 +77,8 @@ const useChat = () => {
     setMessages,
     setSource,
     setMode,
-    startNewChat,       //  추가
-    sessionId,          //  추가
+    startNewChat, // 추가
+    sessionId,    // 추가
   };
 };
 

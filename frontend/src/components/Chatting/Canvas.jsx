@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Canvas.css";
 import MarkdownMessage from "../common/MarkdownMessage";
@@ -13,6 +13,8 @@ function Canvas({
   updateQuizState = () => {}
 }) {
   const imageSrc = "/assets/document-icon.svg";
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const isQuiz = (mode === "vocab" || mode === "grammar") &&
     text?.match(/\d+\..*?\n[A-D]\)/);
@@ -37,7 +39,7 @@ function Canvas({
   const questions = isQuiz ? extractQuestions() : [];
 
   const handleChoice = (index, choice) => {
-    if (quizState.submitted) return;
+    if (quizState.submitted || isLoading) return;
     const updated = [...quizState.selectedAnswers];
     updated[index] = choice;
     updateQuizState({ selectedAnswers: updated });
@@ -48,11 +50,11 @@ function Canvas({
       alert("모든 문제에 답해주세요.");
       return;
     }
+    setIsLoading(true);
     updateQuizState({ submitted: true });
 
-    //  콘솔 로그 추가 (중요)
     const userId = localStorage.getItem("user_id");
-    const sessionId = localStorage.getItem("session_id"); // 또는 props에서 전달된 sessionId
+    const sessionId = localStorage.getItem("session_id");
 
      console.log("전송 데이터 확인", {
       user_id: userId,
@@ -67,6 +69,8 @@ function Canvas({
     } catch (err) {
       console.error("퀴즈 제출 실패", err);
       alert("제출 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -102,7 +106,8 @@ function Canvas({
                     e.stopPropagation();
                     handleChoice(idx, opt);
                   }}
-                >
+                  disabled={isLoading}
+              >
                   {opt}
                 </motion.button>
               ))}
@@ -113,7 +118,13 @@ function Canvas({
           <div className="canvas-submit">
             <AnimatePresence mode="wait">
               {!quizState.submitted ? (
-                <motion.button
+              isLoading ? (
+                <div className="spinner-container">
+                  <div className="spinner" />
+                  <p>제출 중입니다...</p>
+                </div>
+              ) : (
+                  <motion.button
                   key="submit"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -124,8 +135,9 @@ function Canvas({
                     handleSubmit();
                   }}
                 >
-                  제출하기
-                </motion.button>
+                    제출하기
+                  </motion.button>
+              )
               ) : (
                 <motion.div
                   key="done"
@@ -142,7 +154,6 @@ function Canvas({
           </div>
         )}
 
-        {/* 피드백 출력 */}
         {quizState.feedback && (
           <motion.div
             className="quiz-feedback"
