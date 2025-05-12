@@ -57,8 +57,8 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
         "exp": expire,
         "iat": now,                 # 토큰 발급 시간
         "nbf": now,                 # 이 시간 이전에는 유효하지 않음
-        "iss": "your-service-name", # 발급자
-        "aud": "your-frontend",     # 대상자 (검증 시 사용 가능)
+        #"iss": "", # 발급자
+        #"aud": "",     # 대상자 (검증 시 사용 가능)
     })
 
     encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)

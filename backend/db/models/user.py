@@ -1,13 +1,13 @@
-#데이터베이스 users 테이블을 정의하는 파일
-from sqlalchemy import Column, String, Boolean, DateTime, Enum, ForeignKey, ARRAY
-from sqlalchemy.orm import relationship, Session
-from datetime import datetime
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.sql import func
-import uuid
-from db import Base
-import enum
+# backend/db/models/user.py
 
+from sqlalchemy import Column, String, Boolean, DateTime, Enum, ForeignKey, ARRAY
+from sqlalchemy.dialects.postgresql import UUID
+from datetime import datetime
+from db.base import Base
+from sqlalchemy.orm import relationship, Session
+from sqlalchemy.sql import func
+import enum
+import uuid
 
 # 사용자 레벨 열거형
 class UserLevel(enum.Enum):
@@ -23,14 +23,13 @@ class User(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     password = Column(String, nullable=False)
     is_active = Column(Boolean, default=True)
-    provider = Column(String(20), default="local")  # local, google 등
-    refresh_token = Column(String, nullable=True)  # 추가됨
+    provider = Column(String(20), default="local") # 로그인 확장
     level = Column(Enum(UserLevel), default=UserLevel.beginner)
     created_at = Column(DateTime, default=datetime.utcnow)
 
     # 관계 설정
-    login_attempts = relationship("LoginAttempt", back_populates="user")
     profile = relationship("UserProfile", back_populates="user", uselist=False)
+    login_attempts = relationship("LoginAttempt", back_populates="user")
 
     def __repr__(self):
         return f"<User(username='{self.username}', email='{self.email}', level='{self.level.value}')>"

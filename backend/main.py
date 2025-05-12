@@ -10,49 +10,10 @@ from pydantic import ValidationError
 
 app = FastAPI()
 
-# 예외 처리기 추가
-@app.exception_handler(ValidationError)
-async def validation_exception_handler(request: Request, exc: ValidationError):
-   
-    custom_errors = []
-
-    for error in exc.errors():
-        loc = error.get("loc")  # 오류가 발생한 위치
-        msg = error.get("msg")  # 오류 메시지
-        field = loc[-1] if loc else "Unknown field"  # 오류가 발생한 필드 이름
-
-        # 각 오류에 대해 커스터마이즈된 메시지를 작성
-        if "username" in field:
-            if "length" in msg:
-                msg = "사용자명은 3자 이상 20자 이내여야 합니다."
-            elif "regex" in msg:
-                msg = "사용자명은 알파벳, 숫자, 공백만 포함할 수 있습니다."
-
-        elif "password" in field:
-            if "length" in msg:
-                msg = "비밀번호는 최소 8자, 최대 128자여야 합니다."
-            elif "regex" in msg:
-                msg = "비밀번호는 숫자, 대소문자, 특수문자를 포함해야 합니다."
-
-        elif "email" in field:
-            if "email" in msg:
-                msg = "이메일 주소가 잘못되었습니다."
-
-        # 커스터마이즈된 메시지를 추가
-        custom_errors.append({
-            "field": field,
-            "message": msg,
-        })
-
-    return JSONResponse(
-        status_code=422,
-        content={"detail": custom_errors},
-    )
-
-
 # 앱 시작 시 PostgreSQL에 테이블 자동 생성
 @app.on_event("startup")
 def startup():
+    #Base.metadata.drop_all(bind=engine) # 모든 테이블 삭제 후 재생성 
     Base.metadata.create_all(bind=engine)
 
 # CORS 설정 (프론트엔드와 통신 가능하도록)

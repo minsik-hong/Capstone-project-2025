@@ -89,30 +89,28 @@ def login(user: UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid username or password")
 
 
-# ✅ 토큰 재발급 API
+# token refresh API
 @router.post("/users/refresh")
-def refresh_token(request: Request):
-    """
-    Authorization 헤더로 전달된 JWT 토큰을 디코딩하여 유저 정보가 유효하면 새 토큰 발급
-    """
+def refresh_token(request: Request, db: Session = Depends(get_db)):
     auth_header = request.headers.get("Authorization")
     if not auth_header or not auth_header.startswith("Bearer "):
         raise HTTPException(status_code=401, detail="Missing or invalid Authorization header")
 
     token = auth_header.split(" ")[1]
-
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username: str = payload.get("sub")
+        username = payload.get("sub")
         if username is None:
-            raise HTTPException(status_code=401, detail="Invalid token: no subject")
+            raise HTTPException(status_code=401, detail="Invalid token")
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
 
-    # 새 토큰 생성
-    new_token = create_access_token({"sub": username}, expires_delta=timedelta(minutes=30))
-    return {"access_token": new_token, "token_type": "bearer"}
+    db_user = db.query(User).filter(User.username == username).first()
+    if not db_user or db_user.refresh_token != token:
+        raise HTTPException(status_code=401, detail="Refresh token mismatch")
 
+    new_access_token = create_access_token({"sub": username}, expires_delta=timedelta(minutes=30))
+    return {"access_token": new_access_token, "token_type": "bearer"}
 
 # 카카오 로그인 API
 KAKAO_CLIENT_ID = os.getenv("KAKAO_REST_KEY")
