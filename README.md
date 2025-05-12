@@ -9,7 +9,7 @@
 
 ## 프로젝트 개요 | Project Overview
 
-뉴스 기반 영어 학습을 위해 **LangChain + RAG 구조**를 활용하여, 사용자의 입력에 따라 적절한 뉴스 기사 요약과 함께 단어 및 문법 퀴즈를 제공하는 지능형 챗봇 시스템입니다.
+뉴스 기반 영어 학습을 위해 **LangChain + RAG 구조**를 활용하여, 사용자의 입력에 따라 적절한 뉴스 기사 요약과 함께 단어 및 문법 퀴즈를 제공하는 지능형 챗봇 시스템입니다.  
 We use **LangChain + RAG architecture** to summarize news articles and generate vocabulary/grammar quizzes in response to user inputs.
 
 * 최신 뉴스 요약 제공 | Provides up-to-date news summaries
