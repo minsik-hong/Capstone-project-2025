@@ -142,3 +142,22 @@
     margin: 8px 16px;
     display: inline-block;
 }
+
+/* ChatWindow.css 또는 global */
+.loading-container {
+  text-align: center;
+  margin: 16px 0;
+}
+.spinner {
+  border: 4px solid #eee;
+  border-top: 4px solid #555;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

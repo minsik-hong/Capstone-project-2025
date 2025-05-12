@@ -1,5 +1,5 @@
 // frontend/src/components/Chatting/Canvas.jsx
-import React from "react";
+import React, { useState } from "react";
 import "./Canvas.css";
 import MarkdownMessage from "../common/MarkdownMessage";
 import { submitQuizAnswers } from '../../services/api';
@@ -13,6 +13,8 @@ function Canvas({
   updateQuizState = () => {}
 }) {
   const imageSrc = "/assets/document-icon.svg";
+
+  const [isLoading, setIsLoading] = useState(false);
 
   const isQuiz = (mode === "vocab" || mode === "grammar") &&
     text?.match(/\d+\..*?\n[A-D]\)/);
@@ -38,7 +40,7 @@ function Canvas({
   const questions = isQuiz ? extractQuestions() : [];
 
   const handleChoice = (index, choice) => {
-    if (quizState.submitted) return;
+    if (quizState.submitted || isLoading) return;
     const updated = [...quizState.selectedAnswers];
     updated[index] = choice;
     updateQuizState({ selectedAnswers: updated });
@@ -49,11 +51,11 @@ function Canvas({
       alert("모든 문제에 답해주세요.");
       return;
     }
+    setIsLoading(true);
     updateQuizState({ submitted: true });
 
-    //  콘솔 로그 추가 (중요)
     const userId = localStorage.getItem("user_id");
-    const sessionId = localStorage.getItem("session_id"); // 또는 props에서 전달된 sessionId
+    const sessionId = localStorage.getItem("session_id");
 
     console.log("전송 데이터 확인", {
       user_id: userId,
@@ -68,6 +70,8 @@ function Canvas({
     } catch (err) {
       console.error("퀴즈 제출 실패", err);
       alert("제출 중 오류가 발생했습니다.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -87,6 +91,7 @@ function Canvas({
                   e.stopPropagation();
                   handleChoice(idx, opt);
                 }}
+                disabled={isLoading}
               >
                 {opt}
               </button>
@@ -97,16 +102,22 @@ function Canvas({
         {isQuiz && (
           <div className="canvas-submit">
             {!quizState.submitted ? (
-              <button onClick={(e) => { e.stopPropagation(); handleSubmit(); }}>
-                제출하기
-              </button>
+              isLoading ? (
+                <div className="spinner-container">
+                  <div className="spinner" />
+                  <p>제출 중입니다...</p>
+                </div>
+              ) : (
+                <button onClick={(e) => { e.stopPropagation(); handleSubmit(); }}>
+                  제출하기
+                </button>
+              )
             ) : (
               <div className="submitted-msg">✅ 답안이 제출되었습니다.</div>
             )}
           </div>
         )}
 
-        {/* 피드백 출력 */}
         {quizState.feedback && (
           <div className="quiz-feedback">
             <MarkdownMessage text={quizState.feedback} />

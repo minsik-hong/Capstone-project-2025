@@ -24,21 +24,30 @@ function ChatWindow({
   return (
     <div className="chat-window">
       <div className={`chat-body ${isCanvasOpen ? 'reduced' : ''}`}>
-        {messages.map((msg) =>
-          msg.type === 'canvas' ? (
-            <Canvas
-              key={msg.id}
-              text={msg.text}
-              source={msg.source}
-              mode={msg.mode}
-              onOpen={() => onCanvasOpen(msg)}
-              quizState={quizStates[msg.id] || { selectedAnswers: ["", "", ""], submitted: false }}
-              updateQuizState={(updates) => updateQuizState(msg.id, updates)}
-            />
-          ) : (
-            <ChatBubble key={msg.id} message={msg.text} sender={msg.sender} />
-          )
-        )}
+        {messages.map((msg) => {
+          if (msg.type === 'canvas') {
+            return (
+              <Canvas
+                key={msg.id}
+                text={msg.text}
+                source={msg.source}
+                mode={msg.mode}
+                onOpen={() => onCanvasOpen(msg)}
+                quizState={quizStates[msg.id] || { selectedAnswers: ["", "", ""], submitted: false }}
+                updateQuizState={(updates) => updateQuizState(msg.id, updates)}
+              />
+            );
+          } else if (msg.type === 'loading') {
+            return (
+              <div key={msg.id} className="chat-loading">
+                <div className="spinner" />
+                <p>답변을 생성 중입니다...</p>
+              </div>
+            );
+          } else {
+            return <ChatBubble key={msg.id} message={msg.text} sender={msg.sender} />;
+          }
+        })}
         <div ref={messageEndRef} />
       </div>
 
