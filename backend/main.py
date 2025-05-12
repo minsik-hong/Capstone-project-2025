@@ -1,23 +1,26 @@
-# backend/main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+import time
 
-from api import users, chat, quiz  # 라우터 추가
+from api import users, chat, quiz
 from db.session import Base, engine
 
 app = FastAPI()
 
-# # 새로운 DB 파일(users.db)에 테이블 생성
-# Base.metadata.create_all(bind=engine)
+@app.middleware("http")
+async def log_request_time(request: Request, call_next):
+    start_time = time.time()
+    response = await call_next(request)
+    process_time = time.time() - start_time
+    print(f"[⏱️ 요청 시간] {request.method} {request.url.path} → {process_time:.3f}s")
+    response.headers["X-Process-Time"] = str(process_time)
+    return response
 
-# 앱 시작 시 PostgreSQL에 테이블 자동 생성
 @app.on_event("startup")
 def startup():
     Base.metadata.create_all(bind=engine)
 
-
-
-# CORS 설정 (프론트엔드와 통신 가능하도록)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -26,10 +29,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# API 라우터 등록
-app.include_router(users.router, prefix="/api")  # 회원 관련 엔드포인트: /api/users/...
-app.include_router(chat.router, prefix="/api")   # 챗봇 관련 엔드포인트: /api/chat
-app.include_router(quiz.router, prefix="/api")   # 퀴즈 관련 엔드포인트: /api/quiz
+app.include_router(users.router, prefix="/api")
+app.include_router(chat.router, prefix="/api")
+app.include_router(quiz.router, prefix="/api")
 
 @app.get("/")
 def root():
