@@ -74,7 +74,7 @@ function ChatWindow({
             onKeyDown={(e) => e.key === 'Enter' && sendMessage(userInput, mode)}
           />
           <button className="send-button" onClick={() => sendMessage(userInput, mode)}>
-            Send
+            <img className="send-icon" src="/assets/send-icon.svg" alt="Send" />
           </button>
         </div>
       </div>
