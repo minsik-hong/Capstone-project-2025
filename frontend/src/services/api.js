@@ -1,7 +1,7 @@
 // frontend/src/services/api.js
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.REACT_APP_API_URL|| 'http://localhost:8000';
 
 // 회원가입
 export const registerUser = async (userData) => {
@@ -19,7 +19,11 @@ export const registerUser = async (userData) => {
 export const loginUser = async (username, password) => {
   try {
     const response = await axios.post(`${API_URL}/api/users/login`, { username, password });
-    return response.data;
+    return {
+      success: true,
+      data: response.data // access_token 등이 담겨 있음
+    };
+  
   } catch (error) {
     if (error.response) {
       // Backend response error

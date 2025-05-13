@@ -5,6 +5,12 @@ import InputField from './common/InputField';
 import MessageDisplay from './common/MessageDisplay';
 import './LoginUI.css';
 
+// kakao 로그인 관련 상수
+const REST_API_KEY = process.env.REACT_APP_KAKAO_REST_API_KEY;
+const REDIRECT_URI = process.env.REACT_APP_KAKAO_REDIRECT_URI || "http://localhost:3000/oauth/callback/kakao";
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
+
 const LoginUI = ({ setIsAuthenticated, setIsSignup }) => {
   // 아이디/비밀번호 상태
   const [username, setUsername] = useState('');
@@ -53,6 +59,14 @@ const LoginUI = ({ setIsAuthenticated, setIsSignup }) => {
       <MessageDisplay message={error} isSuccess={false} />
 
       <button onClick={onLoginClick}>Login</button>
+
+      {/* 카카오 로그인 버튼 */}
+      <a href={KAKAO_AUTH_URL} className="kakao-login-button">
+        <img
+          src="/assets/kakao_login_medium_wide.png"
+          alt="카카오 로고"
+        />
+      </a>
 
       <div className="signup-link">
         <a onClick={() => setIsSignup(true)}>Sign up</a>

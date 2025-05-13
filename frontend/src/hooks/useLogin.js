@@ -8,9 +8,10 @@ const useLogin = () => {
   const handleLogin = async (username, password) => {
     try {
       const result = await loginUser(username, password);
-      if (result.access_token && result.user_id) {
-        localStorage.setItem("token", result.access_token);     //  토큰 저장
-        localStorage.setItem("user_id", result.user_id);        //  유저 ID 저장
+
+      // ✅ 조건 수정
+      if (result.success && result.data?.access_token) {
+        localStorage.setItem("token", result.data.access_token); // 토큰 저장
         return true;
       } else {
         setError(result.message || '로그인에 실패했습니다.');
