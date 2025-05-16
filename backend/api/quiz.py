@@ -41,7 +41,7 @@ def submit_quiz(request: QuizSubmitRequest, db: Session = Depends(get_db)):
         else:
             final_prompt = base_prompt
             
-        llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
+        llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3)
         chain = LLMChain(prompt=final_prompt, llm=llm)
 
         user_answers_str = "\n".join([f"{i+1}. {a}" for i, a in enumerate(request.user_answers)])

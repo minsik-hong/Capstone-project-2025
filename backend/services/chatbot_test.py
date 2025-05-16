@@ -37,7 +37,7 @@ WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "News_bbc")
 
 # ========== LLM 및 Vectorstore 초기화 ==========
-llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3, openai_api_key=OPENAI_API_KEY)
+llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3, openai_api_key=OPENAI_API_KEY)
 
 connection_params = ConnectionParams.from_params(
     http_host=WEAVIATE_HOST,
@@ -67,7 +67,7 @@ def log_interaction(question, answer, source_url):
         f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Source: {source_url}\n")
 
 def should_use_news(question: str) -> bool:
-    judge_llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.0, openai_api_key=OPENAI_API_KEY)
+    judge_llm = ChatOpenAI(model_name="gpt-4o", temperature=0.0, openai_api_key=OPENAI_API_KEY)
     prompt = f"""
 User input: "{question}"
 

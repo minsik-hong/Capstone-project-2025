@@ -15,7 +15,7 @@ from uuid import UUID
 from fastapi import HTTPException
 
 # ========== LLM 세팅 ==========
-llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
+llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3)
 
 # ========== 프롬프트 ==========
 profile_prompt = PromptTemplate.from_template("""

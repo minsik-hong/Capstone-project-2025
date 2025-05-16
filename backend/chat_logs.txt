@@ -1,0 +1,68 @@
+2025-05-16 08:07:26.075574 | Q: hi | A: **[English]**
+"Hello! How are you today?"
+
+**[한국어]**
+"안녕하세요! 오늘 기분이 어떠세요?" | Source: 
+2025-05-16 08:07:33.931851 | Q: ai news | A: **[English]**
+
+1. What does "dabbling" most likely mean in this news?  
+   A) ignoring  
+   B) experimenting  
+   C) mastering  
+   D) avoiding
+
+2. What is a synonym of "trend"?  
+   A) tradition  
+   B) pattern  
+   C) fad  
+   D) history
+
+3. People are ______ to try the new AI tools despite concerns.  
+   A) hesitant  
+   B) eager  
+   C) afraid  
+   D) indifferent
+
+If you need help with any words or want more quizzes, feel free to ask! | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-16 08:07:42.752245 | Q: ai news | A: **[English]**
+
+1. What does "trend" most likely mean in this news?  
+A) a type of clothing  
+B) a new style or activity that many people like  
+C) a computer program  
+D) a place to visit
+
+2. What is a synonym of "generate"?  
+A) destroy  
+B) create  
+C) ignore  
+D) hide
+
+3. People upload a picture of themselves to a tool like ChatGPT, along with written ______ that explain how they want the final picture to look.  
+A) questions  
+B) prompts  
+C) answers  
+D) problems
+
+If you have any questions about the quiz or need help with the answers, feel free to ask! | Source: https://www.bbc.co.uk/news/articles/c5yg690e9eno
+2025-05-16 08:07:53.154919 | Q: k neww | A: **[English]**
+
+1. What does "breach" most likely mean in this news?  
+A) follow  
+B) break  
+C) create  
+D) support
+
+2. What is a synonym of "dispute"?  
+A) agreement  
+B) argument  
+C) celebration  
+D) decision
+
+3. The court's ruling casts some ______ around the release of the group's new song.  
+A) clarity  
+B) certainty  
+C) uncertainty  
+D) simplicity
+
+If you have any questions about the quiz or need help with the answers, feel free to ask! | Source: https://www.bbc.co.uk/news/articles/ckgzd2e2pkro

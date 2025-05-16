@@ -24,7 +24,7 @@ class UserSessionMemoryManager:
         self.session = session
 
         # GPT 요약 메모리로 변경
-        self.llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
+        self.llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3)
         self.memory = ConversationSummaryBufferMemory(
             llm=self.llm,
             memory_key="chat_history",
