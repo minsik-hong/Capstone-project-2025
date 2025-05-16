@@ -1,6 +1,4 @@
-# Capstone Project 2025: 뉴스 기반 영어 학습 챗봇
-
-**Capstone Project 2025: News-Based English Learning Chatbot**
+# Capstone Project 2025: 뉴스 기반 영어 학습 챗봇 <br> (Capstone Project 2025: News-Based English Learning Chatbot)
 
 **영어 뉴스로 배우는 맞춤형 영어 학습 챗봇 시스템**  
 **A personalized English learning chatbot powered by news content**
