@@ -28,7 +28,8 @@ class UserSessionMemoryManager:
         self.memory = ConversationSummaryBufferMemory(
             llm=self.llm,
             memory_key="chat_history",
-            return_messages=True
+            return_messages=True,
+            input_key="input"  # 여러 입력 키가 있을 때 어떤 키를 대화로 저장할지 지정
         )
 
         self._load_history()

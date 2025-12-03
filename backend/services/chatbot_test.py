@@ -34,7 +34,8 @@ if _langchain_api_key:
     os.environ["LANGCHAIN_TRACING_V2"] = "true" 
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "localhost")
+# Docker 환경에서는 기본값을 'weaviate'로 설정, 로컬에서는 'localhost'
+WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "weaviate")
 WEAVIATE_PORT = int(os.getenv("WEAVIATE_PORT", "8080"))
 WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "News_bbc")
@@ -104,18 +105,28 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
 
     # 뉴스 기반 모드 확인
     use_news = mode in ["summary", "vocab_quiz", "grammar_quiz", "dialogue"]
+    show_news_link = False  # 뉴스 링크 표시 여부
     
-    # default 모드에서는 뉴스 사용 여부를 판단
-    # if mode == "default":
-    #     use_news = should_use_news(question)
+    # default 모드에서는 뉴스 사용 여부를 LLM이 판단
+    if mode == "default":
+        try:
+            use_news = should_use_news(question)
+        except Exception as e:
+            print(f"Error in should_use_news: {e}")
+            use_news = False
 
-    # default 모드에서는 news 사용 안 함
+    # 뉴스 검색
     news_text, source_url = "", ""
     if use_news:
-        docs = vectorstore.similarity_search(question, k=1)
-        if docs:
-            news_text = docs[0].page_content
-            source_url = docs[0].metadata.get("url", "")
+        try:
+            docs = vectorstore.similarity_search(question, k=1)
+            if docs:
+                news_text = docs[0].page_content
+                source_url = docs[0].metadata.get("url", "")
+                show_news_link = True  # 뉴스를 사용하면 링크 표시
+        except Exception as e:
+            print(f"Error accessing vectorstore: {e}")
+            use_news = False
 
     # 프롬프트 준비
     prompt = PROMPTS.get(mode, PROMPTS["default"])
@@ -154,6 +165,9 @@ def run_chatbot_personalized(user_id: str, session_id: str, user_input: str, mod
     memory_manager.save_message("user", question)
     memory_manager.save_message("bot", response)
 
-    log_interaction(question, response, source_url)
+    # 뉴스 링크는 관련성이 있을 때만 표시
+    final_source = source_url if show_news_link else ""
+    
+    log_interaction(question, response, final_source)
 
-    return {"answer": response, "source": source_url}
+    return {"answer": response, "source": final_source}

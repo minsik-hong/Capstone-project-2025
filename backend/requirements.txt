@@ -13,5 +13,7 @@ bcrypt==4.0.1
 langchain-huggingface
 openai
 sqlalchemy
+beautifulsoup4
+requests
 
 psycopg2-binary

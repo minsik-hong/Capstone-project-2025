@@ -58,7 +58,8 @@ Tutor:
 """),
 
     "summary": ChatPromptTemplate.from_template("""
-You are an English tutor helping Korean students. 
+You are a friendly and casual English tutor for Korean students. 
+Your job is to help them improve English naturally through conversation.
 Your task is to summarize news articles in very simple and easy English.
 
 **Important Rules**
@@ -66,40 +67,43 @@ Your task is to summarize news articles in very simple and easy English.
 - Only use safe, neutral, and educational content.
 - If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
 - You remember previous messages and can elaborate if the user wants more detail.
+- ALWAYS provide your response in two parts: **[English]** and **[한국어]**
 
 Provide answers in two parts:
 
 **[English]**
-(Summary)
+(Summary in simple English)
 
 **[한국어]**
 (Summary in Korean)
 
 ---
 
-News:
+News Article:
 {news}
 
-Summary:
+User Input:
+{input}
+
+Now provide a summary in both English and Korean:
 """),
 
     "vocab_quiz": ChatPromptTemplate.from_template("""
-You are an English tutor helping Korean students.
-Your job is to make vocabulary quizzes from news articles using the words from the article.
+You are a friendly and casual English tutor for Korean students. 
+Your job is to help them improve English naturally through conversation.
+Your task is to make vocabulary quizzes from news articles using the words from the article.
 
 **Important Rules**
 - Do not include or explain harmful, violent, sexual, or inappropriate content.
 - Only use safe, neutral, and educational content.
 - If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
 - You remember previous messages and can elaborate if the user wants more detail.
+- ALWAYS provide your response in two parts: **[English]** and **[한국어]**
 
 Create 3 vocabulary questions:
 - Focus on words from the news article.
 - Mix question types: meaning guess (context), synonym, antonym, and fill-in-the-blank.
 - Provide 4 options (A, B, C, D).
-
-**[English]**
-(Quiz)
 
 ---
 
@@ -131,30 +135,52 @@ B) recover
 C) increase  
 D) avoid
 
+**[한국어]**
+
+1. 이 뉴스에서 "recovering"의 의미는 무엇일까요?  
+A) 더 나빠지다  
+B) 나아지다  
+C) 그대로 유지되다  
+D) 돌아가다
+
+2. "inflation"의 동의어는 무엇일까요?  
+A) 물가 상승  
+B) 휴가  
+C) 오염  
+D) 교육
+
+3. 그는 곧 병에서 ______ 할 것입니다.  
+A) become  
+B) recover  
+C) increase  
+D) avoid
+
 ---
 
-News:
+News Article:
 {news}
 
-Vocabulary Quiz:
+User Input:
+{input}
+
+Now create a vocabulary quiz in both English and Korean:
 """),
 
 "grammar_quiz": ChatPromptTemplate.from_template("""
-You are an English tutor helping Korean students.
-Your job is to make grammar and sentence pattern quizzes from news articles.
+You are a friendly and casual English tutor for Korean students. 
+Your job is to help them improve English naturally through conversation.
+Your task is to make grammar and sentence pattern quizzes from news articles.
 
 **Important Rules**
 - Do not include or explain harmful, violent, sexual, or inappropriate content.
 - Only use safe, neutral, and educational content.
 - If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
 - You remember previous messages and can elaborate if the user wants more detail.
+- ALWAYS provide your response in two parts: **[English]** and **[한국어]**
 
 Create 3 multiple-choice grammar questions:
 - Focus on sentence patterns, tense, articles, prepositions, modals, etc.
 - Provide 3 or 4 options (A, B, C, D).
-
-**[English]**
-(Quiz)
 
 ---
 
@@ -179,22 +205,42 @@ A) Scientists expected to announce results next month.
 B) Scientists are expected to announce the results next month.  
 C) Scientists are expecting the results next month.
 
-
 3. What does "are expected to" mean?  
 A) Something will likely happen  
 B) Something already happened  
 C) Something impossible
 
+**[한국어]**
+
+1. 미래 예상을 나타내는 올바른 패턴은 무엇일까요?  
+A) are expecting to  
+B) are expected to  
+C) were expected to  
+D) are expect
+
+2. 올바른 문장을 선택하세요.  
+A) Scientists expected to announce results next month.  
+B) Scientists are expected to announce the results next month.  
+C) Scientists are expecting the results next month.
+
+3. "are expected to"의 의미는 무엇일까요?  
+A) 무언가가 일어날 가능성이 높다  
+B) 무언가가 이미 일어났다  
+C) 불가능한 일
 
 ---
 
-News:
+News Article:
 {news}
 
-Grammar Quiz:
+User Input:
+{input}
+
+Now create a grammar quiz in both English and Korean:
 """),
 "dialogue": ChatPromptTemplate.from_template("""
-You are an English tutor helping Korean students.
+You are a friendly and casual English tutor for Korean students. 
+Your job is to help them improve English naturally through conversation.
 Your task is to create a short and natural dialogue based on news articles.
 
 **Important Rules**
@@ -205,14 +251,7 @@ Your task is to create a short and natural dialogue based on news articles.
 - Add small expressions for natural flow (e.g. "Oh really?", "That's nice", "I see", etc.)
 - If the user asks a follow-up question about a previous quiz, explanation, or answer, continue the conversation naturally and provide detailed clarification.
 - You remember previous messages and can elaborate if the user wants more detail.
-
-Provide answers in two parts:
-
-**[English]**
-(Dialogue)
-
-**[한국어]**
-(Dialogue in Korean)
+- ALWAYS provide your response in two parts: **[English]** and **[한국어]**
 
 ---
 
@@ -229,7 +268,7 @@ Tutor:
 A: Did you hear about the new law?  
 B: No, what is it?  
 A: Supermarkets will stop giving plastic bags from next year.  
-B: Oh really? That’s good for the environment.  
+B: Oh really? That's good for the environment.  
 A: Yeah, we should bring our own bags when we shop.
 
 **[한국어]**
@@ -242,10 +281,13 @@ A: 응, 이제 장볼 때 에코백 가져가야겠네.
 
 ---
 
-News:
+News Article:
 {news}
 
-Dialogue:
+User Input:
+{input}
+
+Now create a dialogue in both English and Korean:
 """),
 
     "answer_reveal": ChatPromptTemplate.from_template("""

@@ -12,57 +12,74 @@ from langchain.schema import Document
 from weaviate import WeaviateClient
 from weaviate.connect import ConnectionParams
 
-load_dotenv()
-NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+# ========== 환경 변수 설정 ==========
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+load_dotenv(dotenv_path=os.path.join(ROOT_DIR, ".env"))
 
-# connection_params = ConnectionParams.from_params(
-#     http_host="54.252.156.14",
-#     http_port=8080,
-#     http_secure=False,
-#     grpc_host="54.252.156.14",
-#     grpc_port=50051,
-#     grpc_secure=False
-# )
+NEWS_API_KEY = os.getenv("NEWS_API_KEY")
+WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "localhost")
+WEAVIATE_PORT = int(os.getenv("WEAVIATE_PORT", "8080"))
+WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
+
+print(f"Connecting to Weaviate at {WEAVIATE_HOST}:{WEAVIATE_PORT}")
 
 connection_params = ConnectionParams.from_params(
-    http_host="54.252.156.14",
-    http_port=8080,
+    http_host=WEAVIATE_HOST,
+    http_port=WEAVIATE_PORT,
     http_secure=False,
-    grpc_host="54.252.156.14",     # 이건 http_host 와 같게 하면 됨
-    grpc_port=50051,               # 일반적인 grpc 포트
-    grpc_secure=False              # http 인데 grpc_secure True면 안 됨 → False
+    grpc_host=WEAVIATE_HOST,
+    grpc_port=WEAVIATE_GRPC_PORT,
+    grpc_secure=False
 )
 
 client = weaviate.WeaviateClient(connection_params=connection_params)
-client.connect()
+try:
+    client.connect()
+    print(f"Successfully connected to Weaviate at {WEAVIATE_HOST}:{WEAVIATE_PORT}")
+except Exception as e:
+    print(f"Failed to connect to Weaviate at {WEAVIATE_HOST}:{WEAVIATE_PORT}")
+    print(f"Error: {e}")
+    print("\nTip: If running locally, make sure:")
+    print("  1. Weaviate is running (docker-compose up weaviate)")
+    print("  2. WEAVIATE_HOST is set to 'localhost' in .env file")
+    print("  3. If using Docker, set WEAVIATE_HOST to 'weaviate'")
+    raise
 
 # Check if URL exists in Weaviate (중복 체크)
 def is_url_in_weaviate(url, index_name):
     try:
+        from weaviate.classes.query import Filter
+        
         collection = client.collections.get(index_name)
-
         result = collection.query.fetch_objects(
-            filters={
-                "operator": "Equal",
-                "path": ["url"],
-                "valueText": url
-            },
+            filters=Filter.by_property("url").equal(url),
             limit=1
         )
-
         return len(result.objects) > 0
     except Exception as e:
+        # 컬렉션이 없거나 에러 발생 시 중복 아님으로 처리
+        if "does not exist" in str(e).lower():
+            return False
         print("Weaviate 중복 확인 실패:", e)
         return False
 
 
 # 기사 유효성 필터
-def is_valid_news_article(article) -> bool:
+def is_valid_news_article(article, source: str = "") -> bool:
     url = article.get("url", "").lower()
     title = article.get("title", "").strip().lower()
-    description = article.get("description", "")
-    if "articles" not in url:
-        return False
+    description = article.get("description", "") or ""
+    
+    # BBC는 articles 경로 확인, CNN은 다른 URL 구조 허용
+    if source == "bbc-news":
+        if "articles" not in url:
+            return False
+    elif source == "cnn":
+        # CNN URL 패턴: cnn.com/2025/... 형식
+        if "cnn.com" not in url:
+            return False
+    
+    # 제외할 키워드 (뉴스 요약, 오디오 등)
     repetitive_keywords = [
         "five minute news bulletin", "bbc world service", "news summary",
         "news update", "listen to the latest news", "bulletin",
@@ -131,7 +148,7 @@ def fetch_news_from_to(query: str, start_date: str, end_date: str, source: str):
             continue
 
         for article in articles:
-            if not is_valid_news_article(article):
+            if not is_valid_news_article(article, source):
                 continue
 
             full_content = scrape_full_content(article["url"])
@@ -262,27 +279,27 @@ def load_and_vectorize_from_file(source_name, start_date, end_date):
 
 # 실행
 if __name__ == "__main__":
-    start_date = "2025-03-10"
-    end_date = "2025-03-26"
+    start_date = "2025-11-04"
+    end_date = "2025-12-01"
     sources = [
         {"api_name": "bbc-news", "name": "bbc"},
         {"api_name": "cnn", "name": "cnn"}
     ]
 
-    # for source in sources:
-    #     print(f"\n {source['name'].upper()} 뉴스 수집 중...")
-    #     articles = fetch_news_from_to(
-    #         query="",
-    #         start_date=start_date,
-    #         end_date=end_date,
-    #         source=source["api_name"]
-    #     )
-    #     save_and_vectorize_langchain(
-    #         articles,
-    #         source_name=source["name"],
-    #         start_date=start_date,
-    #         end_date=end_date
-    #     )
+    for source in sources:
+        print(f"\n {source['name'].upper()} 뉴스 수집 중...")
+        articles = fetch_news_from_to(
+            query="",
+            start_date=start_date,
+            end_date=end_date,
+            source=source["api_name"]
+        )
+        save_and_vectorize_langchain(
+            articles,
+            source_name=source["name"],
+            start_date=start_date,
+            end_date=end_date
+        )
 
     for source in sources:
         print(f"\n {source['name'].upper()} 벡터화 실행 중...")
