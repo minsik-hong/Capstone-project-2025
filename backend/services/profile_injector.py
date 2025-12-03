@@ -1,7 +1,7 @@
 # backend/services/profile_injector.py
 # 요약된 profile -> system prompt 삽입
 
-from langchain.prompts import SystemMessagePromptTemplate, HumanMessagePromptTemplate, ChatPromptTemplate
+from langchain_core.prompts import SystemMessagePromptTemplate, HumanMessagePromptTemplate, ChatPromptTemplate
 
 def build_system_prompt(profile: dict) -> str:
     """

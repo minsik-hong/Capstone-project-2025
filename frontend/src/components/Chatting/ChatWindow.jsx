@@ -71,7 +71,12 @@ function ChatWindow({
             placeholder="Write your message"
             value={userInput}
             onChange={(e) => setUserInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && sendMessage(userInput, mode)}
+            onKeyDown={(e) => {
+              // 한글 IME 조합 중이 아닐 때만 전송 (중복 방지)
+              if (e.key === 'Enter' && !e.nativeEvent.isComposing) {
+                sendMessage(userInput, mode);
+              }
+            }}
           />
           <button className="send-button" onClick={() => sendMessage(userInput, mode)}>
             <img className="send-icon" src="/assets/send-icon.svg" alt="Send" />

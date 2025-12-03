@@ -26,9 +26,12 @@ from langchain_core.runnables import RunnableSequence
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
 load_dotenv(dotenv_path=os.path.join(ROOT_DIR, ".env"))
 
-os.environ["LANGSMITH_API_KEY"] = os.getenv("LANGCHAIN_API_KEY")
-os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT", "news-chatbot")
-os.environ["LANGCHAIN_TRACING_V2"] = "true" 
+# LangSmith 트레이싱 설정 (선택적)
+_langchain_api_key = os.getenv("LANGCHAIN_API_KEY")
+if _langchain_api_key:
+    os.environ["LANGSMITH_API_KEY"] = _langchain_api_key
+    os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGCHAIN_PROJECT", "news-chatbot")
+    os.environ["LANGCHAIN_TRACING_V2"] = "true" 
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 WEAVIATE_HOST = os.getenv("WEAVIATE_HOST", "localhost")
@@ -37,7 +40,7 @@ WEAVIATE_GRPC_PORT = int(os.getenv("WEAVIATE_GRPC_PORT", "50051"))
 WEAVIATE_INDEX_NAME = os.getenv("WEAVIATE_INDEX_NAME", "News_bbc")
 
 # ========== LLM 및 Vectorstore 초기화 ==========
-llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3, openai_api_key=OPENAI_API_KEY)
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3, openai_api_key=OPENAI_API_KEY)
 
 connection_params = ConnectionParams.from_params(
     http_host=WEAVIATE_HOST,
@@ -67,7 +70,7 @@ def log_interaction(question, answer, source_url):
         f.write(f"{datetime.now()} | Q: {question} | A: {answer} | Source: {source_url}\n")
 
 def should_use_news(question: str) -> bool:
-    judge_llm = ChatOpenAI(model_name="gpt-4o", temperature=0.0, openai_api_key=OPENAI_API_KEY)
+    judge_llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.0, openai_api_key=OPENAI_API_KEY)
     prompt = f"""
 User input: "{question}"
 

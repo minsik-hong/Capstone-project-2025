@@ -1,14 +1,17 @@
 fastapi
 uvicorn
 python-dotenv
-langchain
-langchain-community
-langchain-openai
+langchain==0.2.16
+langchain-core==0.2.41
+langchain-community==0.2.17
+langchain-openai==0.1.25
 langchain-weaviate
 weaviate-client
 python-jose[cryptography]
 passlib[bcrypt]
+bcrypt==4.0.1
 langchain-huggingface
 openai
+sqlalchemy
 
 psycopg2-binary

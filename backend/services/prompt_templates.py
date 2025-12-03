@@ -1,6 +1,6 @@
 # backend/services/prompt_templates.py
 
-from langchain.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate
 
 PROMPTS = {
     "default": ChatPromptTemplate.from_template("""

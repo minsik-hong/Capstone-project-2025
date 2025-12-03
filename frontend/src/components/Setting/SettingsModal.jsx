@@ -73,12 +73,56 @@ export default function SettingsModal({ trigger, currentEmail = "user@example.co
 
                   {/* 분석 결과 표시 */}
                   {profileSummary && (
-                    <div className="profile-summary-box">
-                      <h4>📊 분석 요약 (Analysis Summary)</h4>
-                      <p><strong>레벨(Level):</strong> {profileSummary.level}</p>
-                      <p><strong>관심사(Interests):</strong> {profileSummary.interests.join(", ")}</p>
-                      <p><strong>약점(Weaknesses):</strong> {profileSummary.weaknesses.join(", ")}</p>
-                      <p><strong>요약(Summary):</strong> {profileSummary.summary}</p>
+                    <div className="profile-summary-card">
+                      <div className="summary-header">
+                        <span className="summary-icon">📊</span>
+                        <h4>학습 성향 분석 결과</h4>
+                      </div>
+                      
+                      <div className="summary-grid">
+                        <div className="summary-item level-item">
+                          <div className="item-label">🎯 영어 레벨</div>
+                          <div className="item-value level-badge">{profileSummary.level}</div>
+                          <div className="item-desc">
+                            {profileSummary.level === 'A1' && '입문 단계 - 기초적인 표현을 이해하고 사용할 수 있어요'}
+                            {profileSummary.level === 'A2' && '초급 단계 - 간단한 일상 대화가 가능해요'}
+                            {profileSummary.level === 'B1' && '중급 단계 - 일상적인 주제에 대해 대화할 수 있어요'}
+                            {profileSummary.level === 'B2' && '중상급 단계 - 복잡한 주제도 다룰 수 있어요'}
+                            {profileSummary.level === 'C1' && '고급 단계 - 유창하게 의사소통할 수 있어요'}
+                            {profileSummary.level === 'C2' && '원어민 수준 - 거의 모든 상황에서 완벽하게 소통해요'}
+                          </div>
+                        </div>
+
+                        <div className="summary-item">
+                          <div className="item-label">💡 관심 분야</div>
+                          <div className="item-tags">
+                            {profileSummary.interests.map((interest, i) => (
+                              <span key={i} className="tag interest-tag">{interest}</span>
+                            ))}
+                          </div>
+                          <div className="item-desc">이 주제들로 학습하면 더 효과적이에요!</div>
+                        </div>
+
+                        <div className="summary-item">
+                          <div className="item-label">📝 보완이 필요한 부분</div>
+                          <div className="item-tags">
+                            {profileSummary.weaknesses.map((weakness, i) => (
+                              <span key={i} className="tag weakness-tag">{weakness}</span>
+                            ))}
+                          </div>
+                          <div className="item-desc">이 부분을 집중적으로 연습해보세요!</div>
+                        </div>
+                      </div>
+
+                      <div className="summary-detail">
+                        <div className="detail-label">🔍 상세 분석</div>
+                        <div className="detail-bilingual">
+                          <p className="detail-text-en">{profileSummary.summary}</p>
+                          {profileSummary.summary_ko && (
+                            <p className="detail-text-ko">{profileSummary.summary_ko}</p>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

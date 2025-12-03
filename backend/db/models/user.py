@@ -41,19 +41,21 @@ class UserProfile(Base):
     interests = Column(ARRAY(String), nullable=True)
     weaknesses = Column(ARRAY(String), nullable=True)
     summary = Column(String, nullable=True)
+    summary_ko = Column(String, nullable=True)  # 한글 요약
     updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
 
     # 관계 설정
     user = relationship("User", back_populates="profile")
 
     @classmethod
-    def upsert(cls, db: Session, user_id: UUID, profile_level: str, interests: list[str], weaknesses: list[str], summary: str):
+    def upsert(cls, db: Session, user_id: UUID, profile_level: str, interests: list[str], weaknesses: list[str], summary: str, summary_ko: str = None):
         profile = db.query(cls).filter(cls.user_id == user_id).first()
         if profile:
-            profile.level = profile_level
+            profile.profile_level = profile_level
             profile.interests = interests
             profile.weaknesses = weaknesses
             profile.summary = summary
+            profile.summary_ko = summary_ko
         else:
             profile = cls(
                 user_id=user_id,
@@ -61,6 +63,7 @@ class UserProfile(Base):
                 interests=interests,
                 weaknesses=weaknesses,
                 summary=summary,
+                summary_ko=summary_ko,
             )
             db.add(profile)
         db.commit()

@@ -66,3 +66,62 @@ C) uncertainty
 D) simplicity
 
 If you have any questions about the quiz or need help with the answers, feel free to ask! | Source: https://www.bbc.co.uk/news/articles/ckgzd2e2pkro
+2025-12-03 03:33:07.580086 | Q: 넌 뭐야 | A: **[English]**
+"I'm an English tutor here to help you practice and improve your English skills! What would you like to talk about today?"
+
+**[한국어]**
+"저는 당신이 영어 실력을 연습하고 향상시키도록 도와주는 영어 튜터예요! 오늘 어떤 이야기를 나누고 싶으세요?" | Source: 
+2025-12-03 03:33:10.881445 | Q: 알려줘 퀴즈 | A: **[English]**
+
+**News:** The recent advancements in technology have significantly improved communication, making it easier for people to connect across the globe.
+
+**Vocabulary Quiz:**
+
+1. What does "advancements" most likely mean in this news?  
+A) improvements  
+B) setbacks  
+C) delays  
+D) problems
+
+2. What is a synonym of "significantly"?  
+A) slightly  
+B) greatly  
+C) hardly  
+D) rarely
+
+3. Communication has ______ in recent years due to new technologies.  
+A) declined  
+B) improved  
+C) confused  
+D) disappeared | Source: 
+2025-12-03 03:40:05.449028 | Q: 안녕 | A: **[English]**
+"Hi there! How's your day going?"
+
+**[한국어]**
+"안녕하세요! 오늘 하루는 어때요?" | Source: 
+2025-12-03 03:40:07.260802 | Q: 뭐하지 | A: Sure! Please provide the news article you'd like me to create a dialogue about. | Source: 
+2025-12-03 03:40:14.707090 | Q: 아무거나 | A: **[English]**
+
+**News:** The local community is organizing a charity event to support families in need.
+
+---
+
+**Grammar Quiz:**
+
+1. What is the correct form of the verb to indicate an ongoing action in the present?  
+A) organizes  
+B) organizing  
+C) organized  
+D) organize
+
+2. Choose the correct sentence.  
+A) The local community is organize a charity event.  
+B) The local community are organizing a charity event.  
+C) The local community is organizing a charity event.  
+D) The local community were organizing a charity event.
+
+3. What does "to support" indicate in this sentence?  
+A) A completed action  
+B) A purpose or intention  
+C) A past action  
+D) A future action | Source: 

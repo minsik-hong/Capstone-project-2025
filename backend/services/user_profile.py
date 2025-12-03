@@ -2,7 +2,7 @@
 # 사용자 대화 요약/분석 함수
 
 from langchain_openai import ChatOpenAI
-from langchain.prompts import PromptTemplate
+from langchain_core.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from sqlalchemy.orm import Session
 from db.models.chat import ChatSession, ChatSessionMessage
@@ -15,7 +15,7 @@ from uuid import UUID
 from fastapi import HTTPException
 
 # ========== LLM 세팅 ==========
-llm = ChatOpenAI(model_name="gpt-4o", temperature=0.3)
+llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.3)
 
 # ========== 프롬프트 ==========
 profile_prompt = PromptTemplate.from_template("""
@@ -25,12 +25,13 @@ Given the messages and session summaries below, analyze and classify the user's 
 Messages:
 {messages}
 
-Respond in JSON:
+Respond in JSON with both English and Korean summaries:
 {{
-  "level": "A1, A2, A3, B1, B2, B3, C1, C2",
+  "level": "A1, A2, B1, B2, C1, or C2",
   "interests": ["topic1", "topic2"],
   "weaknesses": ["grammar issue", "vocabulary gap"],
-  "summary": "short summary of the user's style or pattern"
+  "summary": "Short summary in English about user's learning style and patterns",
+  "summary_ko": "사용자의 학습 스타일과 패턴에 대한 한국어 요약"
 }}
 """)
 
@@ -89,7 +90,8 @@ def summarize_user_profile(user_id: str, db: Session, max_messages: int = 100) -
             profile_level=profile_data.get("level"),
             interests=profile_data.get("interests", []),
             weaknesses=profile_data.get("weaknesses", []),
-            summary=profile_data.get("summary")
+            summary=profile_data.get("summary"),
+            summary_ko=profile_data.get("summary_ko")
         )
         return profile_data
 
